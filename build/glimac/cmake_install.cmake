@@ -1,4 +1,4 @@
-# Install script for directory: /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac
+# Install script for directory: /home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

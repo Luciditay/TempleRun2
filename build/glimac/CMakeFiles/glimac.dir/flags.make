@@ -6,5 +6,5 @@ CXX_FLAGS =
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/usr/include/SDL -I/home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/$(SDL_TTF_INCLUDE_DIR) -I/home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/include -I/home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/lib/include 
+CXX_INCLUDES = -I/usr/include/SDL -I"/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/$(SDL_TTF_INCLUDE_DIR)" -I"/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/include" -I"/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/lib/include" 
 

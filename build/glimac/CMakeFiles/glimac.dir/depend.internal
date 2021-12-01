@@ -98,7 +98,7 @@ glimac/CMakeFiles/glimac.dir/src/Cameras.cpp.o
  ../lib/include/glm/vec3.hpp
  ../lib/include/glm/vec4.hpp
  ../lib/include/glm/vector_relational.hpp
- /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/Cameras.cpp
+ /home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/Cameras.cpp
 glimac/CMakeFiles/glimac.dir/src/Cone.cpp.o
  ../glimac/include/glimac/Cone.hpp
  ../glimac/include/glimac/common.hpp
@@ -193,7 +193,7 @@ glimac/CMakeFiles/glimac.dir/src/Cone.cpp.o
  ../lib/include/glm/vec3.hpp
  ../lib/include/glm/vec4.hpp
  ../lib/include/glm/vector_relational.hpp
- /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/Cone.cpp
+ /home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/Cone.cpp
 glimac/CMakeFiles/glimac.dir/src/FreeflyCamera.cpp.o
  ../glimac/include/glimac/FreeflyCamera.hpp
  ../glimac/include/glimac/glm.hpp
@@ -288,7 +288,7 @@ glimac/CMakeFiles/glimac.dir/src/FreeflyCamera.cpp.o
  ../lib/include/glm/vec3.hpp
  ../lib/include/glm/vec4.hpp
  ../lib/include/glm/vector_relational.hpp
- /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/FreeflyCamera.cpp
+ /home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/FreeflyCamera.cpp
 glimac/CMakeFiles/glimac.dir/src/Geometry.cpp.o
  ../glimac/include/glimac/BBox.hpp
  ../glimac/include/glimac/FilePath.hpp
@@ -387,11 +387,11 @@ glimac/CMakeFiles/glimac.dir/src/Geometry.cpp.o
  ../lib/include/glm/vec3.hpp
  ../lib/include/glm/vec4.hpp
  ../lib/include/glm/vector_relational.hpp
- /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/Geometry.cpp
+ /home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/Geometry.cpp
 glimac/CMakeFiles/glimac.dir/src/HighScores.cpp.o
  ../glimac/include/glimac/FilePath.hpp
  ../glimac/include/glimac/HighScores.hpp
- /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/HighScores.cpp
+ /home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/HighScores.cpp
 glimac/CMakeFiles/glimac.dir/src/Image.cpp.o
  ../glimac/include/glimac/FilePath.hpp
  ../glimac/include/glimac/Image.hpp
@@ -487,8 +487,8 @@ glimac/CMakeFiles/glimac.dir/src/Image.cpp.o
  ../lib/include/glm/vec3.hpp
  ../lib/include/glm/vec4.hpp
  ../lib/include/glm/vector_relational.hpp
- /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/Image.cpp
- /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/stb_image.h
+ /home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/Image.cpp
+ /home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/stb_image.h
 glimac/CMakeFiles/glimac.dir/src/Light.cpp.o
  ../glimac/include/glimac/Cameras.hpp
  ../glimac/include/glimac/FilePath.hpp
@@ -595,7 +595,7 @@ glimac/CMakeFiles/glimac.dir/src/Light.cpp.o
  ../lib/include/glm/vec3.hpp
  ../lib/include/glm/vec4.hpp
  ../lib/include/glm/vector_relational.hpp
- /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/Light.cpp
+ /home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/Light.cpp
 glimac/CMakeFiles/glimac.dir/src/Mesh.cpp.o
  ../glimac/include/glimac/FilePath.hpp
  ../glimac/include/glimac/Mesh.hpp
@@ -693,7 +693,7 @@ glimac/CMakeFiles/glimac.dir/src/Mesh.cpp.o
  ../lib/include/glm/vec3.hpp
  ../lib/include/glm/vec4.hpp
  ../lib/include/glm/vector_relational.hpp
- /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/Mesh.cpp
+ /home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/Mesh.cpp
 glimac/CMakeFiles/glimac.dir/src/Model.cpp.o
  ../glimac/include/glimac/FilePath.hpp
  ../glimac/include/glimac/Mesh.hpp
@@ -792,7 +792,7 @@ glimac/CMakeFiles/glimac.dir/src/Model.cpp.o
  ../lib/include/glm/vec3.hpp
  ../lib/include/glm/vec4.hpp
  ../lib/include/glm/vector_relational.hpp
- /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/Model.cpp
+ /home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/Model.cpp
 glimac/CMakeFiles/glimac.dir/src/MoveMatrix.cpp.o
  ../glimac/include/glimac/Cameras.hpp
  ../glimac/include/glimac/FreeflyCamera.hpp
@@ -895,15 +895,15 @@ glimac/CMakeFiles/glimac.dir/src/MoveMatrix.cpp.o
  ../lib/include/glm/vec3.hpp
  ../lib/include/glm/vec4.hpp
  ../lib/include/glm/vector_relational.hpp
- /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/MoveMatrix.cpp
+ /home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/MoveMatrix.cpp
 glimac/CMakeFiles/glimac.dir/src/Observer.cpp.o
  ../glimac/include/glimac/Observer.hpp
- /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/Observer.cpp
+ /home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/Observer.cpp
 glimac/CMakeFiles/glimac.dir/src/Program.cpp.o
  ../glimac/include/glimac/FilePath.hpp
  ../glimac/include/glimac/Program.hpp
  ../glimac/include/glimac/Shader.hpp
- /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/Program.cpp
+ /home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/Program.cpp
 glimac/CMakeFiles/glimac.dir/src/SDLWindowManager.cpp.o
  ../glimac/include/glimac/SDLWindowManager.hpp
  ../glimac/include/glimac/glm.hpp
@@ -998,11 +998,11 @@ glimac/CMakeFiles/glimac.dir/src/SDLWindowManager.cpp.o
  ../lib/include/glm/vec3.hpp
  ../lib/include/glm/vec4.hpp
  ../lib/include/glm/vector_relational.hpp
- /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/SDLWindowManager.cpp
+ /home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/SDLWindowManager.cpp
 glimac/CMakeFiles/glimac.dir/src/Shader.cpp.o
  ../glimac/include/glimac/FilePath.hpp
  ../glimac/include/glimac/Shader.hpp
- /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/Shader.cpp
+ /home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/Shader.cpp
 glimac/CMakeFiles/glimac.dir/src/Sphere.cpp.o
  ../glimac/include/glimac/Sphere.hpp
  ../glimac/include/glimac/common.hpp
@@ -1097,7 +1097,7 @@ glimac/CMakeFiles/glimac.dir/src/Sphere.cpp.o
  ../lib/include/glm/vec3.hpp
  ../lib/include/glm/vec4.hpp
  ../lib/include/glm/vector_relational.hpp
- /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/Sphere.cpp
+ /home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/Sphere.cpp
 glimac/CMakeFiles/glimac.dir/src/TTFtext.cpp.o
  ../glimac/include/glimac/FilePath.hpp
  ../glimac/include/glimac/Program.hpp
@@ -1197,7 +1197,7 @@ glimac/CMakeFiles/glimac.dir/src/TTFtext.cpp.o
  ../lib/include/glm/vec3.hpp
  ../lib/include/glm/vec4.hpp
  ../lib/include/glm/vector_relational.hpp
- /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/TTFtext.cpp
+ /home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/TTFtext.cpp
 glimac/CMakeFiles/glimac.dir/src/TrackballCamera.cpp.o
  ../glimac/include/glimac/TrackballCamera.hpp
  ../glimac/include/glimac/glm.hpp
@@ -1292,7 +1292,7 @@ glimac/CMakeFiles/glimac.dir/src/TrackballCamera.cpp.o
  ../lib/include/glm/vec3.hpp
  ../lib/include/glm/vec4.hpp
  ../lib/include/glm/vector_relational.hpp
- /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/TrackballCamera.cpp
+ /home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/TrackballCamera.cpp
 glimac/CMakeFiles/glimac.dir/src/UI.cpp.o
  ../glimac/include/glimac/FilePath.hpp
  ../glimac/include/glimac/HighScores.hpp
@@ -1397,7 +1397,7 @@ glimac/CMakeFiles/glimac.dir/src/UI.cpp.o
  ../lib/include/glm/vec3.hpp
  ../lib/include/glm/vec4.hpp
  ../lib/include/glm/vector_relational.hpp
- /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/UI.cpp
+ /home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/UI.cpp
 glimac/CMakeFiles/glimac.dir/src/UIScreens.cpp.o
  ../glimac/include/glimac/FilePath.hpp
  ../glimac/include/glimac/HighScores.hpp
@@ -1502,7 +1502,7 @@ glimac/CMakeFiles/glimac.dir/src/UIScreens.cpp.o
  ../lib/include/glm/vec3.hpp
  ../lib/include/glm/vec4.hpp
  ../lib/include/glm/vector_relational.hpp
- /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/UIScreens.cpp
+ /home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/UIScreens.cpp
 glimac/CMakeFiles/glimac.dir/src/rectangle2D.cpp.o
  ../glimac/include/glimac/FilePath.hpp
  ../glimac/include/glimac/Program.hpp
@@ -1601,7 +1601,7 @@ glimac/CMakeFiles/glimac.dir/src/rectangle2D.cpp.o
  ../lib/include/glm/vec3.hpp
  ../lib/include/glm/vec4.hpp
  ../lib/include/glm/vector_relational.hpp
- /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/rectangle2D.cpp
+ /home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/rectangle2D.cpp
 glimac/CMakeFiles/glimac.dir/src/tiny_obj_loader.cpp.o
  ../glimac/include/glimac/tiny_obj_loader.h
- /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/tiny_obj_loader.cpp
+ /home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/tiny_obj_loader.cpp

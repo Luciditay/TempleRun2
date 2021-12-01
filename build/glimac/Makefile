@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET
+CMAKE_SOURCE_DIR = "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2"
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build
+CMAKE_BINARY_DIR = "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build"
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,14 +80,14 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build/CMakeFiles /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build/glimac/CMakeFiles/progress.marks
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f CMakeFiles/Makefile2 glimac/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build/CMakeFiles 0
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(CMAKE_COMMAND) -E cmake_progress_start "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build/CMakeFiles" "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build/glimac/CMakeFiles/progress.marks"
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f CMakeFiles/Makefile2 glimac/all
+	$(CMAKE_COMMAND) -E cmake_progress_start "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build/CMakeFiles" 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f CMakeFiles/Makefile2 glimac/clean
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f CMakeFiles/Makefile2 glimac/clean
 .PHONY : clean
 
 # The main clean target
@@ -97,22 +97,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f CMakeFiles/Makefile2 glimac/preinstall
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f CMakeFiles/Makefile2 glimac/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f CMakeFiles/Makefile2 glimac/preinstall
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f CMakeFiles/Makefile2 glimac/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 glimac/CMakeFiles/glimac.dir/rule:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f CMakeFiles/Makefile2 glimac/CMakeFiles/glimac.dir/rule
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f CMakeFiles/Makefile2 glimac/CMakeFiles/glimac.dir/rule
 .PHONY : glimac/CMakeFiles/glimac.dir/rule
 
 # Convenience name for target.
@@ -122,7 +122,7 @@ glimac: glimac/CMakeFiles/glimac.dir/rule
 
 # fast build rule for target.
 glimac/fast:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/build
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/build
 .PHONY : glimac/fast
 
 src/Cameras.o: src/Cameras.cpp.o
@@ -131,7 +131,7 @@ src/Cameras.o: src/Cameras.cpp.o
 
 # target to build an object file
 src/Cameras.cpp.o:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Cameras.cpp.o
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Cameras.cpp.o
 .PHONY : src/Cameras.cpp.o
 
 src/Cameras.i: src/Cameras.cpp.i
@@ -140,7 +140,7 @@ src/Cameras.i: src/Cameras.cpp.i
 
 # target to preprocess a source file
 src/Cameras.cpp.i:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Cameras.cpp.i
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Cameras.cpp.i
 .PHONY : src/Cameras.cpp.i
 
 src/Cameras.s: src/Cameras.cpp.s
@@ -149,7 +149,7 @@ src/Cameras.s: src/Cameras.cpp.s
 
 # target to generate assembly for a file
 src/Cameras.cpp.s:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Cameras.cpp.s
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Cameras.cpp.s
 .PHONY : src/Cameras.cpp.s
 
 src/Cone.o: src/Cone.cpp.o
@@ -158,7 +158,7 @@ src/Cone.o: src/Cone.cpp.o
 
 # target to build an object file
 src/Cone.cpp.o:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Cone.cpp.o
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Cone.cpp.o
 .PHONY : src/Cone.cpp.o
 
 src/Cone.i: src/Cone.cpp.i
@@ -167,7 +167,7 @@ src/Cone.i: src/Cone.cpp.i
 
 # target to preprocess a source file
 src/Cone.cpp.i:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Cone.cpp.i
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Cone.cpp.i
 .PHONY : src/Cone.cpp.i
 
 src/Cone.s: src/Cone.cpp.s
@@ -176,7 +176,7 @@ src/Cone.s: src/Cone.cpp.s
 
 # target to generate assembly for a file
 src/Cone.cpp.s:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Cone.cpp.s
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Cone.cpp.s
 .PHONY : src/Cone.cpp.s
 
 src/FreeflyCamera.o: src/FreeflyCamera.cpp.o
@@ -185,7 +185,7 @@ src/FreeflyCamera.o: src/FreeflyCamera.cpp.o
 
 # target to build an object file
 src/FreeflyCamera.cpp.o:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/FreeflyCamera.cpp.o
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/FreeflyCamera.cpp.o
 .PHONY : src/FreeflyCamera.cpp.o
 
 src/FreeflyCamera.i: src/FreeflyCamera.cpp.i
@@ -194,7 +194,7 @@ src/FreeflyCamera.i: src/FreeflyCamera.cpp.i
 
 # target to preprocess a source file
 src/FreeflyCamera.cpp.i:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/FreeflyCamera.cpp.i
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/FreeflyCamera.cpp.i
 .PHONY : src/FreeflyCamera.cpp.i
 
 src/FreeflyCamera.s: src/FreeflyCamera.cpp.s
@@ -203,7 +203,7 @@ src/FreeflyCamera.s: src/FreeflyCamera.cpp.s
 
 # target to generate assembly for a file
 src/FreeflyCamera.cpp.s:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/FreeflyCamera.cpp.s
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/FreeflyCamera.cpp.s
 .PHONY : src/FreeflyCamera.cpp.s
 
 src/Geometry.o: src/Geometry.cpp.o
@@ -212,7 +212,7 @@ src/Geometry.o: src/Geometry.cpp.o
 
 # target to build an object file
 src/Geometry.cpp.o:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Geometry.cpp.o
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Geometry.cpp.o
 .PHONY : src/Geometry.cpp.o
 
 src/Geometry.i: src/Geometry.cpp.i
@@ -221,7 +221,7 @@ src/Geometry.i: src/Geometry.cpp.i
 
 # target to preprocess a source file
 src/Geometry.cpp.i:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Geometry.cpp.i
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Geometry.cpp.i
 .PHONY : src/Geometry.cpp.i
 
 src/Geometry.s: src/Geometry.cpp.s
@@ -230,7 +230,7 @@ src/Geometry.s: src/Geometry.cpp.s
 
 # target to generate assembly for a file
 src/Geometry.cpp.s:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Geometry.cpp.s
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Geometry.cpp.s
 .PHONY : src/Geometry.cpp.s
 
 src/HighScores.o: src/HighScores.cpp.o
@@ -239,7 +239,7 @@ src/HighScores.o: src/HighScores.cpp.o
 
 # target to build an object file
 src/HighScores.cpp.o:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/HighScores.cpp.o
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/HighScores.cpp.o
 .PHONY : src/HighScores.cpp.o
 
 src/HighScores.i: src/HighScores.cpp.i
@@ -248,7 +248,7 @@ src/HighScores.i: src/HighScores.cpp.i
 
 # target to preprocess a source file
 src/HighScores.cpp.i:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/HighScores.cpp.i
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/HighScores.cpp.i
 .PHONY : src/HighScores.cpp.i
 
 src/HighScores.s: src/HighScores.cpp.s
@@ -257,7 +257,7 @@ src/HighScores.s: src/HighScores.cpp.s
 
 # target to generate assembly for a file
 src/HighScores.cpp.s:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/HighScores.cpp.s
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/HighScores.cpp.s
 .PHONY : src/HighScores.cpp.s
 
 src/Image.o: src/Image.cpp.o
@@ -266,7 +266,7 @@ src/Image.o: src/Image.cpp.o
 
 # target to build an object file
 src/Image.cpp.o:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Image.cpp.o
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Image.cpp.o
 .PHONY : src/Image.cpp.o
 
 src/Image.i: src/Image.cpp.i
@@ -275,7 +275,7 @@ src/Image.i: src/Image.cpp.i
 
 # target to preprocess a source file
 src/Image.cpp.i:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Image.cpp.i
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Image.cpp.i
 .PHONY : src/Image.cpp.i
 
 src/Image.s: src/Image.cpp.s
@@ -284,7 +284,7 @@ src/Image.s: src/Image.cpp.s
 
 # target to generate assembly for a file
 src/Image.cpp.s:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Image.cpp.s
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Image.cpp.s
 .PHONY : src/Image.cpp.s
 
 src/Light.o: src/Light.cpp.o
@@ -293,7 +293,7 @@ src/Light.o: src/Light.cpp.o
 
 # target to build an object file
 src/Light.cpp.o:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Light.cpp.o
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Light.cpp.o
 .PHONY : src/Light.cpp.o
 
 src/Light.i: src/Light.cpp.i
@@ -302,7 +302,7 @@ src/Light.i: src/Light.cpp.i
 
 # target to preprocess a source file
 src/Light.cpp.i:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Light.cpp.i
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Light.cpp.i
 .PHONY : src/Light.cpp.i
 
 src/Light.s: src/Light.cpp.s
@@ -311,7 +311,7 @@ src/Light.s: src/Light.cpp.s
 
 # target to generate assembly for a file
 src/Light.cpp.s:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Light.cpp.s
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Light.cpp.s
 .PHONY : src/Light.cpp.s
 
 src/Mesh.o: src/Mesh.cpp.o
@@ -320,7 +320,7 @@ src/Mesh.o: src/Mesh.cpp.o
 
 # target to build an object file
 src/Mesh.cpp.o:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Mesh.cpp.o
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Mesh.cpp.o
 .PHONY : src/Mesh.cpp.o
 
 src/Mesh.i: src/Mesh.cpp.i
@@ -329,7 +329,7 @@ src/Mesh.i: src/Mesh.cpp.i
 
 # target to preprocess a source file
 src/Mesh.cpp.i:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Mesh.cpp.i
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Mesh.cpp.i
 .PHONY : src/Mesh.cpp.i
 
 src/Mesh.s: src/Mesh.cpp.s
@@ -338,7 +338,7 @@ src/Mesh.s: src/Mesh.cpp.s
 
 # target to generate assembly for a file
 src/Mesh.cpp.s:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Mesh.cpp.s
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Mesh.cpp.s
 .PHONY : src/Mesh.cpp.s
 
 src/Model.o: src/Model.cpp.o
@@ -347,7 +347,7 @@ src/Model.o: src/Model.cpp.o
 
 # target to build an object file
 src/Model.cpp.o:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Model.cpp.o
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Model.cpp.o
 .PHONY : src/Model.cpp.o
 
 src/Model.i: src/Model.cpp.i
@@ -356,7 +356,7 @@ src/Model.i: src/Model.cpp.i
 
 # target to preprocess a source file
 src/Model.cpp.i:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Model.cpp.i
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Model.cpp.i
 .PHONY : src/Model.cpp.i
 
 src/Model.s: src/Model.cpp.s
@@ -365,7 +365,7 @@ src/Model.s: src/Model.cpp.s
 
 # target to generate assembly for a file
 src/Model.cpp.s:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Model.cpp.s
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Model.cpp.s
 .PHONY : src/Model.cpp.s
 
 src/MoveMatrix.o: src/MoveMatrix.cpp.o
@@ -374,7 +374,7 @@ src/MoveMatrix.o: src/MoveMatrix.cpp.o
 
 # target to build an object file
 src/MoveMatrix.cpp.o:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/MoveMatrix.cpp.o
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/MoveMatrix.cpp.o
 .PHONY : src/MoveMatrix.cpp.o
 
 src/MoveMatrix.i: src/MoveMatrix.cpp.i
@@ -383,7 +383,7 @@ src/MoveMatrix.i: src/MoveMatrix.cpp.i
 
 # target to preprocess a source file
 src/MoveMatrix.cpp.i:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/MoveMatrix.cpp.i
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/MoveMatrix.cpp.i
 .PHONY : src/MoveMatrix.cpp.i
 
 src/MoveMatrix.s: src/MoveMatrix.cpp.s
@@ -392,7 +392,7 @@ src/MoveMatrix.s: src/MoveMatrix.cpp.s
 
 # target to generate assembly for a file
 src/MoveMatrix.cpp.s:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/MoveMatrix.cpp.s
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/MoveMatrix.cpp.s
 .PHONY : src/MoveMatrix.cpp.s
 
 src/Observer.o: src/Observer.cpp.o
@@ -401,7 +401,7 @@ src/Observer.o: src/Observer.cpp.o
 
 # target to build an object file
 src/Observer.cpp.o:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Observer.cpp.o
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Observer.cpp.o
 .PHONY : src/Observer.cpp.o
 
 src/Observer.i: src/Observer.cpp.i
@@ -410,7 +410,7 @@ src/Observer.i: src/Observer.cpp.i
 
 # target to preprocess a source file
 src/Observer.cpp.i:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Observer.cpp.i
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Observer.cpp.i
 .PHONY : src/Observer.cpp.i
 
 src/Observer.s: src/Observer.cpp.s
@@ -419,7 +419,7 @@ src/Observer.s: src/Observer.cpp.s
 
 # target to generate assembly for a file
 src/Observer.cpp.s:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Observer.cpp.s
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Observer.cpp.s
 .PHONY : src/Observer.cpp.s
 
 src/Program.o: src/Program.cpp.o
@@ -428,7 +428,7 @@ src/Program.o: src/Program.cpp.o
 
 # target to build an object file
 src/Program.cpp.o:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Program.cpp.o
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Program.cpp.o
 .PHONY : src/Program.cpp.o
 
 src/Program.i: src/Program.cpp.i
@@ -437,7 +437,7 @@ src/Program.i: src/Program.cpp.i
 
 # target to preprocess a source file
 src/Program.cpp.i:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Program.cpp.i
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Program.cpp.i
 .PHONY : src/Program.cpp.i
 
 src/Program.s: src/Program.cpp.s
@@ -446,7 +446,7 @@ src/Program.s: src/Program.cpp.s
 
 # target to generate assembly for a file
 src/Program.cpp.s:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Program.cpp.s
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Program.cpp.s
 .PHONY : src/Program.cpp.s
 
 src/SDLWindowManager.o: src/SDLWindowManager.cpp.o
@@ -455,7 +455,7 @@ src/SDLWindowManager.o: src/SDLWindowManager.cpp.o
 
 # target to build an object file
 src/SDLWindowManager.cpp.o:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/SDLWindowManager.cpp.o
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/SDLWindowManager.cpp.o
 .PHONY : src/SDLWindowManager.cpp.o
 
 src/SDLWindowManager.i: src/SDLWindowManager.cpp.i
@@ -464,7 +464,7 @@ src/SDLWindowManager.i: src/SDLWindowManager.cpp.i
 
 # target to preprocess a source file
 src/SDLWindowManager.cpp.i:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/SDLWindowManager.cpp.i
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/SDLWindowManager.cpp.i
 .PHONY : src/SDLWindowManager.cpp.i
 
 src/SDLWindowManager.s: src/SDLWindowManager.cpp.s
@@ -473,7 +473,7 @@ src/SDLWindowManager.s: src/SDLWindowManager.cpp.s
 
 # target to generate assembly for a file
 src/SDLWindowManager.cpp.s:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/SDLWindowManager.cpp.s
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/SDLWindowManager.cpp.s
 .PHONY : src/SDLWindowManager.cpp.s
 
 src/Shader.o: src/Shader.cpp.o
@@ -482,7 +482,7 @@ src/Shader.o: src/Shader.cpp.o
 
 # target to build an object file
 src/Shader.cpp.o:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Shader.cpp.o
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Shader.cpp.o
 .PHONY : src/Shader.cpp.o
 
 src/Shader.i: src/Shader.cpp.i
@@ -491,7 +491,7 @@ src/Shader.i: src/Shader.cpp.i
 
 # target to preprocess a source file
 src/Shader.cpp.i:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Shader.cpp.i
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Shader.cpp.i
 .PHONY : src/Shader.cpp.i
 
 src/Shader.s: src/Shader.cpp.s
@@ -500,7 +500,7 @@ src/Shader.s: src/Shader.cpp.s
 
 # target to generate assembly for a file
 src/Shader.cpp.s:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Shader.cpp.s
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Shader.cpp.s
 .PHONY : src/Shader.cpp.s
 
 src/Sphere.o: src/Sphere.cpp.o
@@ -509,7 +509,7 @@ src/Sphere.o: src/Sphere.cpp.o
 
 # target to build an object file
 src/Sphere.cpp.o:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Sphere.cpp.o
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Sphere.cpp.o
 .PHONY : src/Sphere.cpp.o
 
 src/Sphere.i: src/Sphere.cpp.i
@@ -518,7 +518,7 @@ src/Sphere.i: src/Sphere.cpp.i
 
 # target to preprocess a source file
 src/Sphere.cpp.i:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Sphere.cpp.i
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Sphere.cpp.i
 .PHONY : src/Sphere.cpp.i
 
 src/Sphere.s: src/Sphere.cpp.s
@@ -527,7 +527,7 @@ src/Sphere.s: src/Sphere.cpp.s
 
 # target to generate assembly for a file
 src/Sphere.cpp.s:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Sphere.cpp.s
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/Sphere.cpp.s
 .PHONY : src/Sphere.cpp.s
 
 src/TTFtext.o: src/TTFtext.cpp.o
@@ -536,7 +536,7 @@ src/TTFtext.o: src/TTFtext.cpp.o
 
 # target to build an object file
 src/TTFtext.cpp.o:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/TTFtext.cpp.o
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/TTFtext.cpp.o
 .PHONY : src/TTFtext.cpp.o
 
 src/TTFtext.i: src/TTFtext.cpp.i
@@ -545,7 +545,7 @@ src/TTFtext.i: src/TTFtext.cpp.i
 
 # target to preprocess a source file
 src/TTFtext.cpp.i:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/TTFtext.cpp.i
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/TTFtext.cpp.i
 .PHONY : src/TTFtext.cpp.i
 
 src/TTFtext.s: src/TTFtext.cpp.s
@@ -554,7 +554,7 @@ src/TTFtext.s: src/TTFtext.cpp.s
 
 # target to generate assembly for a file
 src/TTFtext.cpp.s:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/TTFtext.cpp.s
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/TTFtext.cpp.s
 .PHONY : src/TTFtext.cpp.s
 
 src/TrackballCamera.o: src/TrackballCamera.cpp.o
@@ -563,7 +563,7 @@ src/TrackballCamera.o: src/TrackballCamera.cpp.o
 
 # target to build an object file
 src/TrackballCamera.cpp.o:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/TrackballCamera.cpp.o
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/TrackballCamera.cpp.o
 .PHONY : src/TrackballCamera.cpp.o
 
 src/TrackballCamera.i: src/TrackballCamera.cpp.i
@@ -572,7 +572,7 @@ src/TrackballCamera.i: src/TrackballCamera.cpp.i
 
 # target to preprocess a source file
 src/TrackballCamera.cpp.i:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/TrackballCamera.cpp.i
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/TrackballCamera.cpp.i
 .PHONY : src/TrackballCamera.cpp.i
 
 src/TrackballCamera.s: src/TrackballCamera.cpp.s
@@ -581,7 +581,7 @@ src/TrackballCamera.s: src/TrackballCamera.cpp.s
 
 # target to generate assembly for a file
 src/TrackballCamera.cpp.s:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/TrackballCamera.cpp.s
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/TrackballCamera.cpp.s
 .PHONY : src/TrackballCamera.cpp.s
 
 src/UI.o: src/UI.cpp.o
@@ -590,7 +590,7 @@ src/UI.o: src/UI.cpp.o
 
 # target to build an object file
 src/UI.cpp.o:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/UI.cpp.o
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/UI.cpp.o
 .PHONY : src/UI.cpp.o
 
 src/UI.i: src/UI.cpp.i
@@ -599,7 +599,7 @@ src/UI.i: src/UI.cpp.i
 
 # target to preprocess a source file
 src/UI.cpp.i:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/UI.cpp.i
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/UI.cpp.i
 .PHONY : src/UI.cpp.i
 
 src/UI.s: src/UI.cpp.s
@@ -608,7 +608,7 @@ src/UI.s: src/UI.cpp.s
 
 # target to generate assembly for a file
 src/UI.cpp.s:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/UI.cpp.s
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/UI.cpp.s
 .PHONY : src/UI.cpp.s
 
 src/UIScreens.o: src/UIScreens.cpp.o
@@ -617,7 +617,7 @@ src/UIScreens.o: src/UIScreens.cpp.o
 
 # target to build an object file
 src/UIScreens.cpp.o:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/UIScreens.cpp.o
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/UIScreens.cpp.o
 .PHONY : src/UIScreens.cpp.o
 
 src/UIScreens.i: src/UIScreens.cpp.i
@@ -626,7 +626,7 @@ src/UIScreens.i: src/UIScreens.cpp.i
 
 # target to preprocess a source file
 src/UIScreens.cpp.i:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/UIScreens.cpp.i
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/UIScreens.cpp.i
 .PHONY : src/UIScreens.cpp.i
 
 src/UIScreens.s: src/UIScreens.cpp.s
@@ -635,7 +635,7 @@ src/UIScreens.s: src/UIScreens.cpp.s
 
 # target to generate assembly for a file
 src/UIScreens.cpp.s:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/UIScreens.cpp.s
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/UIScreens.cpp.s
 .PHONY : src/UIScreens.cpp.s
 
 src/rectangle2D.o: src/rectangle2D.cpp.o
@@ -644,7 +644,7 @@ src/rectangle2D.o: src/rectangle2D.cpp.o
 
 # target to build an object file
 src/rectangle2D.cpp.o:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/rectangle2D.cpp.o
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/rectangle2D.cpp.o
 .PHONY : src/rectangle2D.cpp.o
 
 src/rectangle2D.i: src/rectangle2D.cpp.i
@@ -653,7 +653,7 @@ src/rectangle2D.i: src/rectangle2D.cpp.i
 
 # target to preprocess a source file
 src/rectangle2D.cpp.i:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/rectangle2D.cpp.i
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/rectangle2D.cpp.i
 .PHONY : src/rectangle2D.cpp.i
 
 src/rectangle2D.s: src/rectangle2D.cpp.s
@@ -662,7 +662,7 @@ src/rectangle2D.s: src/rectangle2D.cpp.s
 
 # target to generate assembly for a file
 src/rectangle2D.cpp.s:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/rectangle2D.cpp.s
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/rectangle2D.cpp.s
 .PHONY : src/rectangle2D.cpp.s
 
 src/tiny_obj_loader.o: src/tiny_obj_loader.cpp.o
@@ -671,7 +671,7 @@ src/tiny_obj_loader.o: src/tiny_obj_loader.cpp.o
 
 # target to build an object file
 src/tiny_obj_loader.cpp.o:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/tiny_obj_loader.cpp.o
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/tiny_obj_loader.cpp.o
 .PHONY : src/tiny_obj_loader.cpp.o
 
 src/tiny_obj_loader.i: src/tiny_obj_loader.cpp.i
@@ -680,7 +680,7 @@ src/tiny_obj_loader.i: src/tiny_obj_loader.cpp.i
 
 # target to preprocess a source file
 src/tiny_obj_loader.cpp.i:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/tiny_obj_loader.cpp.i
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/tiny_obj_loader.cpp.i
 .PHONY : src/tiny_obj_loader.cpp.i
 
 src/tiny_obj_loader.s: src/tiny_obj_loader.cpp.s
@@ -689,7 +689,7 @@ src/tiny_obj_loader.s: src/tiny_obj_loader.cpp.s
 
 # target to generate assembly for a file
 src/tiny_obj_loader.cpp.s:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/tiny_obj_loader.cpp.s
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(MAKE) -f glimac/CMakeFiles/glimac.dir/build.make glimac/CMakeFiles/glimac.dir/src/tiny_obj_loader.cpp.s
 .PHONY : src/tiny_obj_loader.cpp.s
 
 # Help Target
@@ -775,6 +775,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd "/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/build" && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

@@ -1,4 +1,4 @@
-# Install script for directory: /home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/src
+# Install script for directory: /home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

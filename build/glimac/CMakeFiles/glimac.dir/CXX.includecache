@@ -1008,13 +1008,13 @@ detail/type_vec4.hpp
 detail/func_vector_relational.hpp
 ../lib/include/glm/detail/func_vector_relational.hpp
 
-/home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/Cameras.cpp
+/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/Cameras.cpp
 iostream
 -
 glimac/Cameras.hpp
-/home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/glimac/Cameras.hpp
+/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/glimac/Cameras.hpp
 
-/home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/Cone.cpp
+/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/Cone.cpp
 cmath
 -
 vector
@@ -1022,77 +1022,77 @@ vector
 iostream
 -
 glimac/common.hpp
-/home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/glimac/common.hpp
+/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/glimac/common.hpp
 glimac/Cone.hpp
-/home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/glimac/Cone.hpp
+/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/glimac/Cone.hpp
 
-/home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/FreeflyCamera.cpp
+/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/FreeflyCamera.cpp
 iostream
 -
 glimac/FreeflyCamera.hpp
-/home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/glimac/FreeflyCamera.hpp
+/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/glimac/FreeflyCamera.hpp
 
-/home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/Geometry.cpp
+/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/Geometry.cpp
 glimac/Geometry.hpp
-/home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/glimac/Geometry.hpp
+/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/glimac/Geometry.hpp
 glimac/tiny_obj_loader.h
-/home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/glimac/tiny_obj_loader.h
+/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/glimac/tiny_obj_loader.h
 iostream
 -
 algorithm
 -
 
-/home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/HighScores.cpp
+/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/HighScores.cpp
 glimac/HighScores.hpp
-/home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/glimac/HighScores.hpp
+/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/glimac/HighScores.hpp
 
-/home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/Image.cpp
+/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/Image.cpp
 glimac/Image.hpp
-/home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/glimac/Image.hpp
+/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/glimac/Image.hpp
 stb_image.h
-/home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/stb_image.h
+/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/stb_image.h
 iostream
 -
 
-/home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/Light.cpp
+/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/Light.cpp
 glimac/Light.hpp
-/home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/glimac/Light.hpp
+/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/glimac/Light.hpp
 
-/home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/Mesh.cpp
+/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/Mesh.cpp
 glimac/Mesh.hpp
-/home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/glimac/Mesh.hpp
+/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/glimac/Mesh.hpp
 
-/home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/Model.cpp
+/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/Model.cpp
 glimac/Model.hpp
-/home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/glimac/Model.hpp
+/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/glimac/Model.hpp
 
-/home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/MoveMatrix.cpp
+/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/MoveMatrix.cpp
 iostream
 -
 glimac/MoveMatrix.hpp
-/home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/glimac/MoveMatrix.hpp
+/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/glimac/MoveMatrix.hpp
 
-/home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/Observer.cpp
+/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/Observer.cpp
 glimac/Observer.hpp
-/home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/glimac/Observer.hpp
+/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/glimac/Observer.hpp
 iostream
 -
 
-/home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/Program.cpp
+/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/Program.cpp
 glimac/Program.hpp
-/home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/glimac/Program.hpp
+/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/glimac/Program.hpp
 stdexcept
 -
 
-/home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/SDLWindowManager.cpp
+/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/SDLWindowManager.cpp
 glimac/SDLWindowManager.hpp
-/home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/glimac/SDLWindowManager.hpp
+/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/glimac/SDLWindowManager.hpp
 iostream
 -
 
-/home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/Shader.cpp
+/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/Shader.cpp
 glimac/Shader.hpp
-/home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/glimac/Shader.hpp
+/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/glimac/Shader.hpp
 fstream
 -
 stdexcept
@@ -1102,7 +1102,7 @@ string
 sstream
 -
 
-/home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/Sphere.cpp
+/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/Sphere.cpp
 cmath
 -
 vector
@@ -1110,37 +1110,37 @@ vector
 iostream
 -
 glimac/common.hpp
-/home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/glimac/common.hpp
+/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/glimac/common.hpp
 glimac/Sphere.hpp
-/home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/glimac/Sphere.hpp
+/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/glimac/Sphere.hpp
 
-/home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/TTFtext.cpp
+/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/TTFtext.cpp
 glimac/TTFtext.hpp
-/home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/glimac/TTFtext.hpp
+/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/glimac/TTFtext.hpp
 
-/home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/TrackballCamera.cpp
+/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/TrackballCamera.cpp
 iostream
 -
 glimac/TrackballCamera.hpp
-/home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/glimac/TrackballCamera.hpp
+/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/glimac/TrackballCamera.hpp
 
-/home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/UI.cpp
+/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/UI.cpp
 glimac/UI.hpp
-/home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/glimac/UI.hpp
+/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/glimac/UI.hpp
 glimac/UIScreens.hpp
-/home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/glimac/UIScreens.hpp
+/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/glimac/UIScreens.hpp
 iostream
 -
 
-/home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/UIScreens.cpp
+/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/UIScreens.cpp
 glimac/UIScreens.hpp
-/home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/glimac/UIScreens.hpp
+/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/glimac/UIScreens.hpp
 
-/home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/rectangle2D.cpp
+/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/rectangle2D.cpp
 glimac/rectangle2D.hpp
 -
 
-/home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/stb_image.h
+/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/stb_image.h
 stdio.h
 -
 math.h
@@ -1162,7 +1162,7 @@ stddef.h
 stdint.h
 -
 
-/home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/tiny_obj_loader.cpp
+/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/tiny_obj_loader.cpp
 cstdlib
 -
 cstring
@@ -1180,5 +1180,5 @@ fstream
 sstream
 -
 glimac/tiny_obj_loader.h
-/home/luciditay/Documents/IMAC2/OPENGL/PROJET/PROJET/glimac/src/glimac/tiny_obj_loader.h
+/home/marie/Documents/IMAC2/Synthese d'images/Projet/TempleRun2/glimac/src/glimac/tiny_obj_loader.h
 
