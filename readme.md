@@ -7,7 +7,7 @@
 5. Lancer en terminal `./run.sh`, lancera le programme
 6. Enjoy !
 
-P.S : Si les fichiers .sh, ne se lance pas c'est probablement qu'ils ne sont pas executables. Lancer `chmod u+x configure.sh build.sh run.sh`
+P.S : Si les fichiers .sh, ne se lancent pas c'est probablement qu'ils ne sont pas executables. Lancer `chmod u+x configure.sh build.sh run.sh`
 et revenir à l'étape 3.
 
 BONJOUR TEST
