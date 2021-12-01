@@ -9,3 +9,5 @@
 
 P.S : Si les fichiers .sh, ne se lance pas c'est probablement qu'ils ne sont pas executables. Lancer `chmod u+x configure.sh build.sh run.sh`
 et revenir à l'étape 3.
+
+BONJOUR TEST
