@@ -5,7 +5,7 @@
 //Score
 
 ScoreCounter::ScoreCounter(const glimac::FilePath& filePath, const uint& windowWidth, const uint& windowHeight) :
-    _distance(0), _items(0), _message("0", {255,255,255}, "/home/luciditay/Documents/IMAC2/OPENGL/PROJET/TempleRun/GLImac-Template/TPMain/Roboto.ttf", 
+    _distance(0), _items(0), _message("0", {255,255,255}, "assets/font/Roboto.ttf", 
                                     20, filePath, windowWidth, windowHeight, 10,10, false) {
 }
 
