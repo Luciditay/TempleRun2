@@ -42,7 +42,7 @@ vec3 blinnPhongDir(vec3 direction, vec3 intensity) {
 }
 
 vec3 blinnPhongPos() {
-  if (dot(uLightPos_vs, vViewNormal)>0) { //On essaie de ne pas éclairer la face cachée de l'objet. 
+  if (dot((uLightPos_vs-vViewPosition), vViewNormal)<0) { //On essaie de ne pas éclairer la face cachée de l'objet. 
     return vec3(0.,0.,0.);
   } else {
     vec3 wi = normalize(uLightPos_vs-vViewPosition); //dir incidente
@@ -60,5 +60,8 @@ vec3 blinnPhongPos() {
 }
 
 void main() {
-  fFragColor = (vec4(blinnPhongDir(uLightVecDirectional1, uLightIntensityDirectional1),1.)+ vec4(blinnPhongDir(uLightVecDirectional0, uLightIntensityDirectional0),1.) +vec4(blinnPhongPos(),1.))*texture(texture_diffuse1, vTexCoords);
+  fFragColor = vec4(blinnPhongDir(uLightVecDirectional1, uLightIntensityDirectional1),1.);
+  fFragColor += vec4(blinnPhongDir(uLightVecDirectional0, uLightIntensityDirectional0),1.);
+  fFragColor += vec4(blinnPhongPos(),1.);
+  fFragColor *= texture(texture_diffuse1, vTexCoords);
 };
