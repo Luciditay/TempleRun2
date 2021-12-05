@@ -1,4 +1,4 @@
-#include "glimac/Observer.hpp"
+#include "Observer.hpp"
 #include <iostream>
 
 void Subject::attach(Observer &o) {

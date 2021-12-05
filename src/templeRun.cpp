@@ -1,4 +1,4 @@
-#include <glimac/includes.hpp>
+#include <includes.hpp>
 
 
 using namespace glimac;

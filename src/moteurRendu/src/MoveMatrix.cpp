@@ -1,5 +1,5 @@
 #include <iostream>
-#include "glimac/MoveMatrix.hpp"
+#include "MoveMatrix.hpp"
 
 float jumpHight(float x) {
     return -50*x*x+10;

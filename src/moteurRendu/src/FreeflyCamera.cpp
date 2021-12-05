@@ -1,5 +1,5 @@
 #include <iostream>
-#include "glimac/FreeflyCamera.hpp"
+#include "FreeflyCamera.hpp"
 # define PI 3.14159265358979323846  
 
 FreeflyCamera::FreeflyCamera() : m_Position(glm::vec3(0.,0.6,-1.)), m_fPhi(PI), m_fTheta(0)

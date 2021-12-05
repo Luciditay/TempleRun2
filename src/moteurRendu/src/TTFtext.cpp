@@ -1,4 +1,4 @@
-#include "glimac/TTFtext.hpp"
+#include "TTFtext.hpp"
 
 Message::Message(const char* text, SDL_Color color, const char* fontPath, const int size, 
                 const glimac::FilePath &filePath, uint windowWidth, uint windowHeight,

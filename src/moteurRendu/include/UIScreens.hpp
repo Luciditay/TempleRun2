@@ -1,6 +1,6 @@
 #pragma once
-#include "glimac/UI.hpp"
-#include "glimac/HighScores.hpp"
+#include "UI.hpp"
+#include "HighScores.hpp"
 #include <vector>
 #include <string>
 

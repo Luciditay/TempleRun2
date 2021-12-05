@@ -8,7 +8,7 @@
 #include <assimp/Importer.hpp>      // C++ importer interface
 #include <assimp/scene.h>           // Output data structure
 #include <assimp/postprocess.h>     // Post processing flags
-#include <glimac/Mesh.hpp>
+#include <Mesh.hpp>
 #include <stb/stb_image.h>
 
 class Model 

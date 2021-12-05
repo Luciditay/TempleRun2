@@ -1,4 +1,4 @@
-#include <glimac/rectangle2D.hpp>
+#include <rectangle2D.hpp>
 
 Rectangle2D::Rectangle2D(const glimac::FilePath& filePath) {
     fillBuffers();

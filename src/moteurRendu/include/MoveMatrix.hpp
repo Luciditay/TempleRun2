@@ -1,7 +1,7 @@
 #pragma once
 #include <glimac/glm.hpp>
 #include <glm/gtx/rotate_vector.hpp> 
-#include "glimac/Cameras.hpp"
+#include "Cameras.hpp"
 
 class MoveMatrix {
     private:

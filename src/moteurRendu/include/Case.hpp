@@ -1,10 +1,13 @@
-#include <glm> 
+#pragma once
+
+#include <glm/glm.hpp>
+#include <includes.hpp>
 
 class Case
 {
 public:
-    virtual void dessinerCase() const = 0; //Méthode virtuelle pure
-
+    virtual void loadCase() const = 0;
+    virtual void drawCase() const = 0; //Méthode virtuelle pure
 };
 
 class CaseTerrain : protected Case //Case de base, sans saut ni trou
@@ -17,24 +20,28 @@ public:
       m_VertexBD(VertexBD)  {}
 
     ~CaseTerrain();
-    void dessinerCase();
+    void loadCase();
+    void drawCase();
 
 private:
     glm::vec4 m_VertexHG = {0, 0, 0, 1}; //Les quatres coins de la case
     glm::vec4 m_VertexHD = {0, 0, 0, 1};
     glm::vec4 m_VertexBG = {0, 0, 0, 1};
     glm::vec4 m_VertexBD = {0, 0, 0, 1};
+    GLuint vbo;
+    GLuint vao;
+    GLuint ibo;
 
 };
 
 class CaseMur : protected Case
 {
 public:
-    CaseMur()
+    CaseMur();
     ~CaseMur();
-    void dessinerCase();
+    void drawCase();
 
 private:
     float hauteurMur;
 
-}
+};

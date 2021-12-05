@@ -1,10 +1,10 @@
 
 #pragma once
 
-#include <glimac/TTFtext.hpp>
+#include <TTFtext.hpp>
 #include <string>
 #include <glimac/Image.hpp>
-#include "glimac/Observer.hpp"
+#include "Observer.hpp"
 
 
 class ScoreCounter {

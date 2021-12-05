@@ -1,4 +1,4 @@
-#include "glimac/Model.hpp"
+#include "Model.hpp"
 
 void Model::Draw(glimac::Program& program)
 {

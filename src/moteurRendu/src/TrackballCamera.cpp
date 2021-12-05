@@ -1,5 +1,5 @@
 #include <iostream>
-#include "glimac/TrackballCamera.hpp"
+#include "TrackballCamera.hpp"
 
 TrackballCamera::TrackballCamera(const float distance, const float angleX, const float angleY) :
 m_fDistance(distance), m_fAngleX(angleX), m_fAngleY(angleY),

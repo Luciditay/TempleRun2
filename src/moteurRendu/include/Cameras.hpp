@@ -1,7 +1,8 @@
 #pragma once
+
 #include <glimac/glm.hpp>
-#include "glimac/FreeflyCamera.hpp"
-#include "glimac/TrackballCamera.hpp"
+#include "FreeflyCamera.hpp"
+#include "TrackballCamera.hpp"
 #include <glimac/SDLWindowManager.hpp>
 
 class Camera {

@@ -1,4 +1,4 @@
-#include "glimac/HighScores.hpp"
+#include "HighScores.hpp"
 
 HighScores::HighScores(const glimac::FilePath filePath) : _scoresFilePath(filePath.dirPath() + "scores/highscores.txt") {
 	load();

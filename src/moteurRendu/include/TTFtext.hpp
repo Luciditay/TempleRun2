@@ -11,7 +11,7 @@ Et tous les fragments shaders doivent bien renvoyer des "vec4" comme fFragColor 
 #include <SDL/SDL_ttf.h>
 #include <iostream>
 #include <glimac/glm.hpp>
-#include <glimac/rectangle2D.hpp>
+#include <rectangle2D.hpp>
 #include <glimac/Program.hpp>
 #include <glimac/FilePath.hpp>
 #include <glimac/glpp.hpp>

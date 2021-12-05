@@ -1,4 +1,4 @@
-#include "glimac/Light.hpp"
+#include "Light.hpp"
 
 Light::Light(std::string type, int id, glimac::Program& program, MoveMatrix* moveMatrix) : m_type(type), m_id(id), m_moveMatrix(moveMatrix),
     m_uLightVec(glGetUniformLocation(program.getGLId(), ("uLightVec"+type+std::to_string(id)).c_str())),

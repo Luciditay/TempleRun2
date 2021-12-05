@@ -1,5 +1,5 @@
 #include <iostream>
-#include "glimac/Cameras.hpp"
+#include "Cameras.hpp"
 
 Camera::Camera(const float distance, const float angleX, const float angleY) :
     m_freeflycamera(),

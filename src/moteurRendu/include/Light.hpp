@@ -2,7 +2,7 @@
 #include <string>
 #include <iostream>
 #include <glimac/Program.hpp>
-#include <glimac/MoveMatrix.hpp>
+#include <MoveMatrix.hpp>
 #include <glimac/glm.hpp>
 #include <cstring> 
 

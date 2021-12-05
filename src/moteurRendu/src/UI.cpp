@@ -1,5 +1,5 @@
-#include "glimac/UI.hpp"
-#include "glimac/UIScreens.hpp"
+#include "UI.hpp"
+#include "UIScreens.hpp"
 #include <iostream>
 
 //Score
