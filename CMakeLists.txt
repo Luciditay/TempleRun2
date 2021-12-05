@@ -11,7 +11,7 @@ find_package(assimp REQUIRED)
 find_package(SDL_ttf REQUIRED)
 find_package(StbImage REQUIRED)
 
-include_directories(${SDL_INCLUDE_DIR} ${OPENGL_INCLUDE_DIR} ${GLEW_INCLUDE_DIR} ${assimp_INCLUDE_DIR} $(SDL_TTF_INCLUDE_DIR) ${StbImage_INCLUDE_DIR} glimac/include lib/include src/moteurRendu/include)
+include_directories(${SDL_INCLUDE_DIR} ${OPENGL_INCLUDE_DIR} ${GLEW_INCLUDE_DIR} ${assimp_INCLUDE_DIR} $(SDL_TTF_INCLUDE_DIR) ${StbImage_INCLUDE_DIR} glimac/include lib/include src src/UI/include src/Render/include src/Game/include)
 
 set(ALL_LIBRARIES glimac ${SDL_LIBRARY} ${OPENGL_LIBRARIES} ${GLEW_LIBRARY} ${SDLTTF_LIBRARY} ${assimp_LIBRARIES} ${StbImage_LIBRARY} )
 
