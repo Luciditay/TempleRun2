@@ -14,7 +14,9 @@ MoveMatrix::MoveMatrix(Camera* camera) :
     m_moveChar(0.,0.,0.), m_jumping(false), m_jumpIndex(-0.4),
     m_scaleChar(1.,1.,1.), m_moveCharwithoutCam(0.,0.,0.), m_squating(false), m_squatIndex(-0.3),
     m_turn(false), m_turningLeft(false), m_turningRight(false), m_angle(0), m_variationAngle(0),
-    m_moveWorld(0.,0.,0.), m_stepRight(), m_up(0.,1.,0.), m_front({0.,0.,0.1}) {
+    m_moveWorld(0.,0.,0.), m_stepRight(), m_up(0.,1.,0.), m_front({0.,0.,0.1}),
+    m_lateralStepRight(false), m_lateralStepLeft(false),
+    m_currentTime(0), m_previousTime(0) {
 }
 
 void MoveMatrix::handleSDLEvent(const SDL_Event& e) {
@@ -29,8 +31,7 @@ void MoveMatrix::handleSDLEvent(const SDL_Event& e) {
         //Key Q : LEFT
         if(e.key.keysym.sym == SDLK_q) {
             if (!m_turn) { //Lateral Mode
-                m_stepRight = glm::normalize(glm::cross(m_front, m_up));
-                m_moveWorld -= m_stepRight;
+                m_lateralStepLeft = true;
             } else { //Rotation 90°
                 if (m_turningRight == false) {
                     m_turningLeft = true;
@@ -40,8 +41,7 @@ void MoveMatrix::handleSDLEvent(const SDL_Event& e) {
         //Key D : RIGHT
         else if(e.key.keysym.sym == SDLK_d) {
             if (!m_turn) { //Lateral move
-                m_stepRight = glm::normalize(glm::cross(m_front, m_up));
-                m_moveWorld += m_stepRight;
+            m_lateralStepRight = true;
             } else { //Rotation 90°
                 if (m_turningLeft == false) {
                     m_turningRight = true;
@@ -64,44 +64,64 @@ void MoveMatrix::handleSDLEvent(const SDL_Event& e) {
 }
 
 void MoveMatrix::reactToInputs() {
-        //Go front
-        m_front = glm::rotate(glm::vec3(0.,0.,0.1), glm::radians(float(m_angle)), glm::vec3(0.,1.,0.));
-        m_moveWorld += m_front;
+        //update current time
+        m_currentTime = SDL_GetTicks();
 
-        //Jump
-        if (m_jumping == true && m_moveChar.y >= 1) {
-            m_moveChar.y = 1+jumpHight(m_jumpIndex);
-            m_jumpIndex+=0.008;
-        } else {
-            m_jumping = false;
-            m_moveChar.y = 1;
-            m_jumpIndex = -0.4;
-        }
+        if(m_currentTime - m_previousTime > 15) {
+            //Go front
+            m_front = glm::normalize(glm::rotate(glm::vec3(0.,0.,1.), glm::radians(float(m_angle)), glm::vec3(0.,1.,0.)))*glm::vec3(0.3,0.3,0.3);
+            m_moveWorld += m_front;
+            
+            //Go to left or right
+            if (m_lateralStepRight == true) {
+                m_stepRight = glm::normalize(glm::cross(m_front, m_up))*glm::vec3(0.5,0.5,0.5);
+                m_moveWorld += m_stepRight;
+                m_lateralStepRight = false;
+            }
+            if (m_lateralStepLeft == true) {
+                m_stepRight = glm::normalize(glm::cross(m_front, m_up))*glm::vec3(0.5,0.5,0.5);
+                m_moveWorld -= m_stepRight;
+                m_lateralStepLeft = false;
+            }
 
-        //Squat
-        if (m_squating == true && m_scaleChar.y <= 1) {
-            m_scaleChar.y = squatScale(m_squatIndex);
-            m_moveCharwithoutCam.y = -1+squatScale(m_squatIndex);
-            m_squatIndex+=0.01;
-        } else {
-            m_squating = false;
-            m_scaleChar.y = 1;
-            m_moveCharwithoutCam.y = 0;
-            m_squatIndex = -0.3;
-        }
+            //Jump
+            if (m_jumping == true && m_moveChar.y >= 1) {
+                m_moveChar.y = 1+jumpHight(m_jumpIndex);
+                m_jumpIndex+=0.008;
+            } else {
+                m_jumping = false;
+                m_moveChar.y = 1;
+                m_jumpIndex = -0.4;
+            }
 
-        //Turn left or Right
-        if (m_turningLeft == true && m_variationAngle <= 90) {
-            m_angle++;
-            m_variationAngle++;
-        } else if (m_turningRight == true && m_variationAngle >= -90) {
-            m_angle--;
-            m_variationAngle--;
-        } else {
-            m_variationAngle = 0;
-            m_turningLeft = false;
-            m_turningRight = false;
+            //Squat
+            if (m_squating == true && m_scaleChar.y <= 1) {
+                m_scaleChar.y = squatScale(m_squatIndex);
+                m_moveCharwithoutCam.y = -1+squatScale(m_squatIndex);
+                m_squatIndex+=0.01;
+            } else {
+                m_squating = false;
+                m_scaleChar.y = 1;
+                m_moveCharwithoutCam.y = 0;
+                m_squatIndex = -0.3;
+            }
+
+            //Turn left or Right
+            if (m_turningLeft == true && m_variationAngle <= 90) {
+                m_angle++;
+                m_variationAngle++;
+            } else if (m_turningRight == true && m_variationAngle >= -90) {
+                m_angle--;
+                m_variationAngle--;
+            } else {
+                m_variationAngle = 0;
+                m_turningLeft = false;
+                m_turningRight = false;
+            }
+        //update previous time
+        m_previousTime = m_currentTime;
         }
+        
 }
 
 void MoveMatrix::computeViewMatrix() {

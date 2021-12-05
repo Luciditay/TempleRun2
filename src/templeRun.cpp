@@ -389,7 +389,7 @@ int main(int argc, char** argv) {
         
         ourModel.Draw(objProgram.m_Program);
 
-        //Objet2 
+        //Objet2 (celui qui reste fixe au début, mais il a une light ponctuelle rouge sur lui)
         MVMatrixObj = glm::translate(moveMatrix.getWorldMVMatrix(), glm::vec3(0.,0.02,0.));
         MVMatrixObj = glm::scale(MVMatrixObj, glm::vec3(0.01,0.01,0.01));
         MVPMatrixObj = ProjMatrix*MVMatrixObj;

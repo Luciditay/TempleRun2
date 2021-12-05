@@ -10,6 +10,9 @@ class MoveMatrix {
     glm::mat4 m_ViewMatrix;
     glm::mat4 m_MVMatrixLight;
 
+    int m_currentTime;
+    int m_previousTime;
+
     Camera* m_camera;
 
     //Jump
@@ -32,6 +35,8 @@ class MoveMatrix {
 
     //Run
     glm::vec3 m_moveWorld;
+    bool m_lateralStepRight;
+    bool m_lateralStepLeft;
     glm::vec3 m_stepRight;
     glm::vec3 m_up;
     glm::vec3 m_front;
