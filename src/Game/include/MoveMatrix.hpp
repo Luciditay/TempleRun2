@@ -9,20 +9,23 @@ class MoveMatrix {
     glm::mat4 m_MVMatrixWorld;
     glm::mat4 m_ViewMatrix;
     glm::mat4 m_MVMatrixLight;
+    glm::mat4 m_MVMatrixEnemy;
 
-    int m_currentTime;
-    int m_previousTime;
+    float m_distanceEnemy;
 
     Camera* m_camera;
 
+    glm::vec3 m_posChar;
+    glm::vec3 m_upChar;
+    glm::vec3 m_frontChar;
+    glm::vec3 m_scaleChar;
+    glm::vec3 m_compenseScale;
+
     //Jump
-    glm::vec3 m_moveChar;
     bool m_jumping;
     float m_jumpIndex;
 
     //Squat
-    glm::vec3 m_scaleChar;
-    glm::vec3 m_moveCharwithoutCam;
     bool m_squating;
     float m_squatIndex;
     
@@ -34,12 +37,8 @@ class MoveMatrix {
     int m_variationAngle;
 
     //Run
-    glm::vec3 m_moveWorld;
     bool m_lateralStepRight;
     bool m_lateralStepLeft;
-    glm::vec3 m_stepRight;
-    glm::vec3 m_up;
-    glm::vec3 m_front;
 
     public:
     MoveMatrix(Camera* camera);
@@ -50,11 +49,13 @@ class MoveMatrix {
     void computeMVCharacter();
     void computeMVWorld();
     void computeMVLight();
+    void computeMVEnemy();
     void computeAllMatrix();
-    
+    void setDistanceEnemy(const float distance);
 
     glm::mat4 getViewMatrix();
     glm::mat4 getCharMVMatrix();
     glm::mat4 getWorldMVMatrix();
     glm::mat4 getLightMVMatrix();
+    glm::mat4 getEnemyMVMatrix();
 };

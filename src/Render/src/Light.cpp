@@ -7,8 +7,7 @@ Light::Light(std::string type, int id, glimac::Program& program, MoveMatrix* mov
 }
 
 void Light::sendUniformIntensity(glm::vec3 intensity) {
-   glm::vec4 newIntensity = glm::vec4(intensity, 0.);
-   glUniform3f(m_uLightIntensity, newIntensity.x, newIntensity.y, newIntensity.z);
+   glUniform3f(m_uLightIntensity, intensity.x, intensity.y, intensity.z);
 }
 
 void Light::sendUniformVec(glm::vec3 vector) {
