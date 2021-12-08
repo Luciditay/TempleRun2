@@ -22,4 +22,5 @@
 #include "Model.hpp"
 #include <Light.hpp>
 #include <Case.hpp>
+#include "ObjProgram.hpp"
 // #include <Character.hpp>

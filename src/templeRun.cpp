@@ -32,37 +32,6 @@ struct Vertex3DUV{
     }
     };
 
-    struct ObjProgram {
-    Program m_Program;
-
-    GLint uMVPMatrix;
-    GLint uMVMatrix;
-    GLint uNormalMatrix;
-
-    GLint uKd;
-    GLint uKs;
-    GLint uShininess;
-    GLint uLightDir_vs; //vs=view space => on doit recevoir direction*viewmatrix
-    GLint uLightIntensity;
-    GLint uLightPos_vs;
-    GLint uLightIntensityPos;
-
-    ObjProgram(const FilePath& applicationPath):
-        m_Program(loadProgram(applicationPath.dirPath() + "shaders/obj.vs.glsl",
-                              applicationPath.dirPath() + "shaders/obj.fs.glsl")) {
-        uMVPMatrix = glGetUniformLocation(m_Program.getGLId(), "uMVPMatrix");
-        uMVMatrix = glGetUniformLocation(m_Program.getGLId(), "uMVMatrix");
-        uNormalMatrix = glGetUniformLocation(m_Program.getGLId(), "uNormalMatrix");
-        uKd = glGetUniformLocation(m_Program.getGLId(), "uKd");
-        uKs = glGetUniformLocation(m_Program.getGLId(), "uKs");
-        uShininess = glGetUniformLocation(m_Program.getGLId(), "uShininess");
-        uLightDir_vs = glGetUniformLocation(m_Program.getGLId(), "uLightDir_vs");
-        uLightPos_vs = glGetUniformLocation(m_Program.getGLId(), "uLightPos_vs");
-        uLightIntensity = glGetUniformLocation(m_Program.getGLId(), "uLightIntensity");
-        uLightIntensityPos = glGetUniformLocation(m_Program.getGLId(), "uLightIntensityPos");
-    }
-    };
-
 int main(int argc, char** argv) {
     
     // Initialize SDL and open a window
@@ -186,9 +155,6 @@ int main(int argc, char** argv) {
     glBindVertexArray(vaoSOL);
     //Bind du ibo
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, iboSOL);
-    // //Activation attributs vertex
-    // const GLuint VERTEX_ATTR_POSITION = 0;
-    // const GLuint VERTEX_ATTR_COULEUR = 1;
     glEnableVertexAttribArray(VERTEX_ATTR_POSITION);
     glEnableVertexAttribArray(VERTEX_ATTR_TEXTURE);
     //Spécification des attributs de vertex (bind et débind vbo)
@@ -240,6 +206,7 @@ int main(int argc, char** argv) {
              * HERE SHOULD COME THE RENDERING CODE
              *********************************/
             glm::mat4 ProjMatrix = glm::perspective(glm::radians(70.f), float(largeur)/float(hauteur), 0.1f, 1000.f);
+            objProgram.setProjMatrix(ProjMatrix);
             moveMatrix.computeAllMatrix();
             glm::mat4 MVMatrix = moveMatrix.getViewMatrix();
             glm::mat4 MVPMatrix = ProjMatrix*MVMatrix;
@@ -285,36 +252,16 @@ int main(int argc, char** argv) {
             glUniform3f(objProgram.uKs, 1.,1.,1.);
             glUniform1f(objProgram.uShininess, 50.);
             //Matrices        
-            glm::mat4 MVMatrixObj = glm::translate(moveMatrix.getCharMVMatrix(), glm::vec3(0.,10.,0.));
-            MVMatrixObj = glm::scale(MVMatrixObj, glm::vec3(4.,4.,4.));
-            glm::mat4 MVPMatrixObj = ProjMatrix*MVMatrixObj;
-            glm::mat4 NormalMatrixObj = glm::transpose(glm::inverse(MVMatrixObj));
-            glUniformMatrix4fv(objProgram.uMVPMatrix, 1, GL_FALSE, glm::value_ptr(MVPMatrixObj));
-            glUniformMatrix4fv(objProgram.uMVMatrix, 1, GL_FALSE, glm::value_ptr(MVMatrixObj));
-            glUniformMatrix4fv(objProgram.uNormalMatrix, 1, GL_FALSE, glm::value_ptr(NormalMatrixObj));
-            
+            objProgram.sendMatrix(moveMatrix.getCharMVMatrix(), glm::vec3(4.,4.,4.), glm::vec3(0.,10.,0.));
             ourModel.Draw(objProgram.m_Program);
 
             //Objet2 (celui qui reste fixe au début, mais il a une light ponctuelle rouge sur lui)
-            MVMatrixObj = glm::translate(moveMatrix.getWorldMVMatrix(), glm::vec3(0.,0.02,0.));
-            MVMatrixObj = glm::scale(MVMatrixObj, glm::vec3(0.01,0.01,0.01));
-            MVPMatrixObj = ProjMatrix*MVMatrixObj;
-            NormalMatrixObj = glm::transpose(glm::inverse(MVMatrixObj));
-            glUniformMatrix4fv(objProgram.uMVPMatrix, 1, GL_FALSE, glm::value_ptr(MVPMatrixObj));
-            glUniformMatrix4fv(objProgram.uMVMatrix, 1, GL_FALSE, glm::value_ptr(MVMatrixObj));
-            glUniformMatrix4fv(objProgram.uNormalMatrix, 1, GL_FALSE, glm::value_ptr(NormalMatrixObj));
-            
+            objProgram.sendMatrix(moveMatrix.getWorldMVMatrix(), glm::vec3(0.01,0.01,0.01), glm::vec3(0.,0.02,0.));
             ourModel.Draw(objProgram.m_Program);
 
             //Objet3 (on va dire c'est le méchant mouahaha)
             moveMatrix.setDistanceEnemy(distanceEnemy);
-            MVMatrixObj = moveMatrix.getEnemyMVMatrix();
-            MVMatrixObj = glm::scale(MVMatrixObj, glm::vec3(4.,4.,4.));
-            MVPMatrixObj = ProjMatrix*MVMatrixObj;
-            NormalMatrixObj = glm::transpose(glm::inverse(MVMatrixObj));
-            glUniformMatrix4fv(objProgram.uMVPMatrix, 1, GL_FALSE, glm::value_ptr(MVPMatrixObj));
-            glUniformMatrix4fv(objProgram.uMVMatrix, 1, GL_FALSE, glm::value_ptr(MVMatrixObj));
-            glUniformMatrix4fv(objProgram.uNormalMatrix, 1, GL_FALSE, glm::value_ptr(NormalMatrixObj));
+            objProgram.sendMatrix(moveMatrix.getEnemyMVMatrix(), glm::vec3(4.,4.,4.), glm::vec3(1,1,1));
             
             ourModel.Draw(objProgram.m_Program);  
             
