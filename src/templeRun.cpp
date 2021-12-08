@@ -99,7 +99,8 @@ int main(int argc, char** argv) {
     //Camera
     Camera maCamera(-30., M_PI/6.,0.);
     //Movements
-    MoveMatrix moveMatrix(&maCamera);
+    Character character;
+    MoveMatrix moveMatrix(&maCamera, &character);
 
     //Chargement modèle
     stbi_set_flip_vertically_on_load(true);
@@ -180,7 +181,7 @@ int main(int argc, char** argv) {
             while(windowManager.pollEvent(e)) {
 
             maCamera.handleSDLEvent(e);
-            moveMatrix.handleSDLEvent(e);
+            character.handleSDLEvent(e);
             menu.handleSDLEvent(e, gameStart);
         
             if(e.type == SDL_MOUSEBUTTONUP) {
@@ -207,6 +208,7 @@ int main(int argc, char** argv) {
              *********************************/
             glm::mat4 ProjMatrix = glm::perspective(glm::radians(70.f), float(largeur)/float(hauteur), 0.1f, 1000.f);
             objProgram.setProjMatrix(ProjMatrix);
+            character.reactToInputs();
             moveMatrix.computeAllMatrix();
             glm::mat4 MVMatrix = moveMatrix.getViewMatrix();
             glm::mat4 MVPMatrix = ProjMatrix*MVMatrix;

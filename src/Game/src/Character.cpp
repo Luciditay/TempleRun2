@@ -1,5 +1,5 @@
 #include <iostream>
-#include "MoveMatrix.hpp"
+#include "Character.hpp"
 
 float jumpHight(float x) {
     return -50*x*x+10;
@@ -9,8 +9,7 @@ float squatScale(float x) {
     return 1-(-5*x*x+0.5);
 }
 
-MoveMatrix::MoveMatrix(Camera* camera) : 
-    m_camera(camera),
+Character::Character() : 
     m_posChar(0.,0.,0.), m_jumping(false), m_jumpIndex(-0.4),
     m_scaleChar(1.,1.,1.), m_compenseScale(0.,0.,0.), m_squating(false), m_squatIndex(-0.3),
     m_turn(false), m_turningLeft(false), m_turningRight(false), m_angle(0), m_variationAngle(0),
@@ -18,7 +17,7 @@ MoveMatrix::MoveMatrix(Camera* camera) :
     m_lateralStepRight(false), m_lateralStepLeft(false){
 }
 
-void MoveMatrix::handleSDLEvent(const SDL_Event& e) {
+void Character::handleSDLEvent(const SDL_Event& e) {
     if(e.type == SDL_KEYDOWN) {
         //Key T or Y : Enable Turn or Rotation 
         if(e.key.keysym.sym == SDLK_t) {
@@ -62,7 +61,7 @@ void MoveMatrix::handleSDLEvent(const SDL_Event& e) {
     }
 }
 
-void MoveMatrix::reactToInputs() {
+void Character::reactToInputs() {
             //Go front
             m_frontChar = glm::normalize(glm::rotate(glm::vec3(0.,0.,1.), glm::radians(float(m_angle)), glm::vec3(0.,1.,0.)));
             m_posChar-= m_frontChar;
@@ -70,19 +69,19 @@ void MoveMatrix::reactToInputs() {
             //Go to left or right
             if (m_lateralStepRight == true) {
                 glm::vec3 m_stepRight = glm::normalize(glm::cross(m_frontChar, m_upChar));
-                m_posChar += m_stepRight;
+                m_posChar -= m_stepRight;
                 m_lateralStepRight = false;
             }
             if (m_lateralStepLeft == true) {
                  glm::vec3 m_stepRight = glm::normalize(glm::cross(m_frontChar, m_upChar));
-                m_posChar -= m_stepRight;
+                m_posChar += m_stepRight;
                 m_lateralStepLeft = false;
             }
 
             //Jump
             if (m_jumping == true && m_posChar.y >= 1) {
                 m_posChar.y = 1+jumpHight(m_jumpIndex);
-                m_jumpIndex+=0.008;
+                m_jumpIndex+=0.02;
             } else {
                 m_jumping = false;
                 m_posChar.y = 1;
@@ -115,61 +114,20 @@ void MoveMatrix::reactToInputs() {
             }
 }
 
-void MoveMatrix::computeViewMatrix() {
-    m_ViewMatrix = glm::translate(m_camera->getViewMatrix(), glm::vec3(0.,-m_posChar.y,0.));
+int Character::getAngle() {
+    return m_angle;
 }
 
-void MoveMatrix::computeMVCharacter() {
-    glm::mat4 VChar = glm::translate(glm::mat4(), glm::vec3(0.,m_posChar.y,0.)+m_compenseScale);
-    VChar = glm::scale(VChar, m_scaleChar);
-    m_MVMatrixCharacter = m_ViewMatrix * VChar;
+glm::vec3 Character::getScale() {
+    return m_scaleChar;
 }
 
-void MoveMatrix::computeMVWorld() {
-    glm::mat4 VWorld =  glm::rotate(glm::mat4(), glm::radians(float(-m_angle)), glm::vec3(0.,1.,0.));
-    VWorld = glm::translate(VWorld, glm::vec3(-m_posChar.x, 0, -m_posChar.z));
-    VWorld = glm::scale(VWorld, glm::vec3(250.,250.,250.));
-    m_MVMatrixWorld = m_ViewMatrix * VWorld;
+glm::vec3 Character::getCompenseScale() {
+    return m_compenseScale;
 }
 
-void MoveMatrix::computeMVLight() {
-    glm::mat4 VLight = glm::rotate(glm::mat4(), glm::radians(float(-m_angle)), glm::vec3(0.,1.,0.));
-    m_MVMatrixLight = m_ViewMatrix * VLight;
+glm::vec3 Character::getPos() {
+    return m_posChar;
 }
 
-void MoveMatrix::setDistanceEnemy(const float distance) {
-    m_distanceEnemy = distance;
-}
 
-void MoveMatrix::computeMVEnemy() {
-    m_MVMatrixEnemy = glm::translate(getCharMVMatrix(), glm::vec3(0.,1.,m_distanceEnemy));
-}
-
-void MoveMatrix::computeAllMatrix() {
-    reactToInputs();
-    computeViewMatrix();
-    computeMVCharacter();
-    computeMVWorld();
-    computeMVLight();
-    computeMVEnemy();
-}
-
-glm::mat4 MoveMatrix::getViewMatrix() {
-    return m_ViewMatrix;
-}
-
-glm::mat4 MoveMatrix::getCharMVMatrix() {
-    return m_MVMatrixCharacter;
-}
-
-glm::mat4 MoveMatrix::getWorldMVMatrix(){
-    return m_MVMatrixWorld;
-}
-
-glm::mat4 MoveMatrix::getLightMVMatrix(){
-    return m_MVMatrixLight;
-}
-
-glm::mat4 MoveMatrix::getEnemyMVMatrix(){
-    return m_MVMatrixEnemy;
-}
