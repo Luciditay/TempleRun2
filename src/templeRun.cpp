@@ -61,6 +61,10 @@ int main(int argc, char** argv) {
     MoonProgram moonProgram(applicationPath);
     ObjProgram objProgram(applicationPath);
 
+    //skybox1
+    Skybox ourSkybox(applicationPath);
+
+
     //Chargement image
     std::vector<std::unique_ptr<Image>> ptrImages;
     ptrImages.push_back(loadImage("assets/textures/pacmanskin.jpg"));
@@ -166,6 +170,10 @@ int main(int argc, char** argv) {
     //débind vbo
     glBindVertexArray(0);
 
+    //skybox 
+    ourSkybox.fillSkyVao();
+    ourSkybox.mapTexture();
+
     bool done = false; 
     bool gameStart = false;
     menu.setStop(&done);
@@ -266,6 +274,9 @@ int main(int argc, char** argv) {
             objProgram.sendMatrix(moveMatrix.getEnemyMVMatrix(), glm::vec3(4.,4.,4.), glm::vec3(1,1,1));
             
             ourModel.Draw(objProgram.m_Program);  
+
+            ourSkybox.draw(moveMatrix,ProjMatrix);
+
             
             if (distanceEnemy > 0) {
             distanceEnemy = distanceEnemy-enemySpeed; 
