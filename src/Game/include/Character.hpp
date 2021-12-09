@@ -14,6 +14,7 @@ class Character {
 
     float m_speed;
     float m_distanceEnemy;
+    float m_enemySpeed;
 
     //Jump
     bool m_jumping;
@@ -45,4 +46,8 @@ class Character {
     glm::vec3 getScale();
     glm::vec3 getCompenseScale();
     glm::vec3 getPos();
+    float getDistanceEnemy();
+    bool isDead();
+    void reset();
+    
 };

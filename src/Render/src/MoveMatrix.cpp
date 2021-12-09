@@ -32,7 +32,7 @@ void MoveMatrix::setDistanceEnemy(const float distance) {
 }
 
 void MoveMatrix::computeMVEnemy() {
-    m_MVMatrixEnemy = glm::translate(m_ViewMatrix, glm::vec3(0.,1.,m_distanceEnemy));
+    m_MVMatrixEnemy = glm::translate(m_ViewMatrix, glm::vec3(0.,1.,m_char->getDistanceEnemy()));
 }
 
 void MoveMatrix::computeAllMatrix() {

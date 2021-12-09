@@ -197,8 +197,7 @@ int main(int argc, char** argv) {
                 pause = false;
                 if (looser) {
                     deadScreen.close();
-                    distanceEnemy = 100;
-                    enemySpeed = 0.1;
+                    character.reset();
                     looser = false;
                     pause = false;
                     compteur = 0;
@@ -270,7 +269,6 @@ int main(int argc, char** argv) {
             ourModel.Draw(objProgram.m_Program);
 
             //Objet3 (on va dire c'est le méchant mouahaha)
-            moveMatrix.setDistanceEnemy(distanceEnemy);
             objProgram.sendMatrix(moveMatrix.getEnemyMVMatrix(), glm::vec3(4.,4.,4.), glm::vec3(1,1,1));
             
             ourModel.Draw(objProgram.m_Program);  
@@ -278,9 +276,7 @@ int main(int argc, char** argv) {
             ourSkybox.draw(moveMatrix,ProjMatrix);
 
             
-            if (distanceEnemy > 0) {
-            distanceEnemy = distanceEnemy-enemySpeed; 
-            } else {
+            if (character.isDead()) {
                 //perdu
                 deadScreen.open();
                 deadScreen.draw();

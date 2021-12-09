@@ -3,14 +3,14 @@
 
 float jumpHight(float x) {
     return -50*x*x+10;
-};
+}; 
 
 float squatScale(float x) {
     return 1-(-5*x*x+0.5);
 }
 
 Character::Character() : 
-    m_posChar(0.,0.,0.), m_jumping(false), m_jumpIndex(-0.4), m_speed(1.), m_distanceEnemy(100),
+    m_posChar(0.,0.,0.), m_jumping(false), m_jumpIndex(-0.4), m_speed(1.), m_distanceEnemy(100), m_enemySpeed(0.1),
     m_scaleChar(1.,1.,1.), m_compenseScale(0.,0.,0.), m_squating(false), m_squatIndex(-0.3),
     m_turn(false), m_turningLeft(false), m_turningRight(false), m_angle(0), m_variationAngle(0),
     m_upChar(0.,1.,0.), m_frontChar({0.,0.,0.1}), m_dead(false),
@@ -73,6 +73,13 @@ void Character::reactToInputs() {
             //Go front
             m_frontChar = m_speed*glm::normalize(glm::rotate(glm::vec3(0.,0.,1.), glm::radians(float(m_angle)), glm::vec3(0.,1.,0.)));
             m_posChar-= m_frontChar;
+
+            //Enemy is coming...
+            if (m_distanceEnemy > 0) {
+                m_distanceEnemy = m_distanceEnemy-m_enemySpeed; 
+            } else {
+                m_dead = true;
+            }
             
             //Go to left or right
             if (m_lateralStepRight == true) {
@@ -125,6 +132,9 @@ void Character::reactToInputs() {
             if(m_fall) {
                 m_fallDistance++;
                 m_posChar.y-=m_fallDistance;
+                if(m_fallDistance >20) {
+                    m_dead = true;
+                }
             }
 }
 
@@ -144,4 +154,21 @@ glm::vec3 Character::getPos() {
     return m_posChar;
 }
 
+float Character::getDistanceEnemy() {
+    return m_distanceEnemy;
+}
 
+bool Character::isDead() {
+    return m_dead;
+}
+
+void Character::reset() {
+    m_enemySpeed = 0.1;
+    m_distanceEnemy = 100;
+    m_posChar = glm::vec3(0.,0.,0.);
+    m_frontChar = glm::vec3(0.,0.,0.1);
+    m_fallDistance = 0;
+    m_fall = false;
+    m_dead = false;
+    m_angle = 0;
+}
