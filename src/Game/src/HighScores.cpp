@@ -18,7 +18,7 @@ const void HighScores::load() {
 			file >> data[i];
 		}
 		_highScores = data;
-		std::cout << "Meilleurs Scores chargés" << std::endl;
+		// std::cout << "Meilleurs Scores chargés" << std::endl;
 	} else {
 		std::cout << "Problème de chargement des Meilleurs Scores"<< std::endl;
 	}

@@ -217,6 +217,13 @@ HighScoresMenu::HighScoresMenu(const char* imagePath, const char* fontPath, cons
 const void HighScoresMenu::updateScore(const int valueScore) {
     _highscores.newScore(valueScore);
     _highscores.save();
+    _highscores.load();    
+    
+    int i = 0;
+    for (auto it = _messages.begin()+1; it != _messages.end(); ++it) {
+        it->update(std::to_string(_highscores.getValue(i)).c_str());
+        i++;
+    }
 }
 
 const void HighScoresMenu::draw() {

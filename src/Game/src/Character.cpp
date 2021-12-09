@@ -10,11 +10,11 @@ float squatScale(float x) {
 }
 
 Character::Character() : 
-    m_posChar(0.,0.,0.), m_jumping(false), m_jumpIndex(-0.4),
+    m_posChar(0.,0.,0.), m_jumping(false), m_jumpIndex(-0.4), m_speed(1.), m_distanceEnemy(100),
     m_scaleChar(1.,1.,1.), m_compenseScale(0.,0.,0.), m_squating(false), m_squatIndex(-0.3),
     m_turn(false), m_turningLeft(false), m_turningRight(false), m_angle(0), m_variationAngle(0),
-    m_upChar(0.,1.,0.), m_frontChar({0.,0.,0.1}),
-    m_lateralStepRight(false), m_lateralStepLeft(false){
+    m_upChar(0.,1.,0.), m_frontChar({0.,0.,0.1}), m_dead(false),
+    m_lateralStepRight(false), m_lateralStepLeft(false), m_fall(false), m_fallDistance(0){
 }
 
 void Character::handleSDLEvent(const SDL_Event& e) {
@@ -52,6 +52,14 @@ void Character::handleSDLEvent(const SDL_Event& e) {
                 m_jumping = true;
             }
         }
+        
+        //Key F : FALL
+        if(e.key.keysym.sym == SDLK_f) { 
+            if (m_jumping == false) {
+                m_fall = true;
+            }
+        }
+        
         //Key S : SQUAT
         else if(e.key.keysym.sym == SDLK_s) {
             if (m_jumping == false) {
@@ -63,7 +71,7 @@ void Character::handleSDLEvent(const SDL_Event& e) {
 
 void Character::reactToInputs() {
             //Go front
-            m_frontChar = glm::normalize(glm::rotate(glm::vec3(0.,0.,1.), glm::radians(float(m_angle)), glm::vec3(0.,1.,0.)));
+            m_frontChar = m_speed*glm::normalize(glm::rotate(glm::vec3(0.,0.,1.), glm::radians(float(m_angle)), glm::vec3(0.,1.,0.)));
             m_posChar-= m_frontChar;
             
             //Go to left or right
@@ -111,6 +119,12 @@ void Character::reactToInputs() {
                 m_variationAngle = 0;
                 m_turningLeft = false;
                 m_turningRight = false;
+            }
+
+            //Fall
+            if(m_fall) {
+                m_fallDistance++;
+                m_posChar.y-=m_fallDistance;
             }
 }
 

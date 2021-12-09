@@ -5,11 +5,15 @@
 
 class Character {
     private:
+    //Position and movements
     glm::vec3 m_posChar;
     glm::vec3 m_upChar;
     glm::vec3 m_frontChar;
     glm::vec3 m_scaleChar;
     glm::vec3 m_compenseScale;
+
+    float m_speed;
+    float m_distanceEnemy;
 
     //Jump
     bool m_jumping;
@@ -26,6 +30,12 @@ class Character {
     //Run
     bool m_lateralStepRight;
     bool m_lateralStepLeft;
+    //Fall
+    bool m_fall;
+    int m_fallDistance;
+
+    //State
+    bool m_dead;
 
     public:
     Character();
