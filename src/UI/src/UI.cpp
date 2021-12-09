@@ -126,6 +126,7 @@ ButtonContinue::ButtonContinue(const char* fontPath, const int& size,
 void ButtonStartAgain::update() {
     if(isHover() && _enable) {
         std::cout << "On recommence!" << std::endl;
+        _menu->startAgainTrue();
         _menu->close();
     } 
 }

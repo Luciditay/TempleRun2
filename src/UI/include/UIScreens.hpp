@@ -88,8 +88,11 @@ class Menu {
     const void SubMenuOpen(const std::string& subMenuType);
     const void allSubMenusClose();
     const bool isOpen() const;
+    const bool someMenuIsOpen() const;
     void handleSDLEvent(const SDL_Event& e, bool gameStart);
     const void updateHighScores(const int valueScore);
+    void startAgainTrue();
+    const bool shouldStartAgain();
 
     private:
     ButtonContinue _continue;
@@ -101,6 +104,7 @@ class Menu {
     Subject _clickListener;
     const Background _background;
     bool _open;
+    bool _startGameAgain;
 
     HighScoresMenu _highScoresMenu;
     SaveOrLoadMenu _saveMenu;

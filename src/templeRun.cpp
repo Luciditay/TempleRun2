@@ -95,7 +95,7 @@ int main(int argc, char** argv) {
     ScoreCounter score(applicationPath, largeur, hauteur);
     int compteur = 0;
     //Menus
-    const char* imagePath = "assets/textures/background.png";
+    const char* imagePath = "assets/textures/background.jpg";
     const char* imagePath2 = "assets/textures/pacman.jpg";
     Menu menu(imagePath, fontPath, 30, applicationPath, largeur, hauteur);
     TitleScreen titleScreen(imagePath2, fontPath, 100, applicationPath, largeur, hauteur);
@@ -188,13 +188,15 @@ int main(int argc, char** argv) {
             SDL_Event e;
             while(windowManager.pollEvent(e)) {
 
-            maCamera.handleSDLEvent(e);
-            character.handleSDLEvent(e);
+            
+            if (!pause) {
+                maCamera.handleSDLEvent(e);
+                character.handleSDLEvent(e);
+            }
             menu.handleSDLEvent(e, gameStart);
         
             if(e.type == SDL_MOUSEBUTTONUP) {
                 gameStart = titleScreen.close();
-                pause = false;
                 if (looser) {
                     deadScreen.close();
                     character.reset();
@@ -213,68 +215,71 @@ int main(int argc, char** argv) {
             /*********************************
              * HERE SHOULD COME THE RENDERING CODE
              *********************************/
-            glm::mat4 ProjMatrix = glm::perspective(glm::radians(70.f), float(largeur)/float(hauteur), 0.1f, 1000.f);
-            objProgram.setProjMatrix(ProjMatrix);
-            character.reactToInputs();
-            moveMatrix.computeAllMatrix();
-            glm::mat4 MVMatrix = moveMatrix.getViewMatrix();
-            glm::mat4 MVPMatrix = ProjMatrix*MVMatrix;
-            glm::mat4 NormalMatrix = glm::transpose(glm::inverse(MVMatrix));
+            if(!pause) {
+                glm::mat4 ProjMatrix = glm::perspective(glm::radians(70.f), float(largeur)/float(hauteur), 0.1f, 1000.f);
+                objProgram.setProjMatrix(ProjMatrix);
+                
+                character.reactToInputs();
+                
+                moveMatrix.computeAllMatrix();
+                glm::mat4 MVMatrix = moveMatrix.getViewMatrix();
+                glm::mat4 MVPMatrix = ProjMatrix*MVMatrix;
+                glm::mat4 NormalMatrix = glm::transpose(glm::inverse(MVMatrix));
 
-            //Nettoyage de la fenêtre
-            glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+                //Nettoyage de la fenêtre
+                glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 
-            //Dessin sol
-            moonProgram.m_Program.use();
-            glBindVertexArray(vaoSOL);
-            glActiveTexture(GL_TEXTURE0);
-            glBindTexture(GL_TEXTURE_2D, to[1]);
-            glUniform1i(moonProgram.uMoonTexture, 0);
-            glm::mat4 MVMatrixLune = moveMatrix.getWorldMVMatrix();
-            glm::mat4 MVPMatrixLune = ProjMatrix*MVMatrixLune;
-                //Envoi des matrices
-            glUniformMatrix4fv(moonProgram.uMVPMatrix, 1, GL_FALSE, glm::value_ptr(MVPMatrixLune));
-            glUniformMatrix4fv(moonProgram.uMVMatrix, 1, GL_FALSE, glm::value_ptr(MVMatrixLune));
-            glUniformMatrix4fv(moonProgram.uNormalMatrix, 1, GL_FALSE, glm::value_ptr(NormalMatrix));
-            
-            glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-            glBindVertexArray(0);
-            glBindTexture(GL_TEXTURE_2D, 0);
+                //Dessin sol
+                moonProgram.m_Program.use();
+                glBindVertexArray(vaoSOL);
+                glActiveTexture(GL_TEXTURE0);
+                glBindTexture(GL_TEXTURE_2D, to[1]);
+                glUniform1i(moonProgram.uMoonTexture, 0);
+                glm::mat4 MVMatrixLune = moveMatrix.getWorldMVMatrix();
+                glm::mat4 MVPMatrixLune = ProjMatrix*MVMatrixLune;
+                    //Envoi des matrices
+                glUniformMatrix4fv(moonProgram.uMVPMatrix, 1, GL_FALSE, glm::value_ptr(MVPMatrixLune));
+                glUniformMatrix4fv(moonProgram.uMVMatrix, 1, GL_FALSE, glm::value_ptr(MVMatrixLune));
+                glUniformMatrix4fv(moonProgram.uNormalMatrix, 1, GL_FALSE, glm::value_ptr(NormalMatrix));
+                
+                glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+                glBindVertexArray(0);
+                glBindTexture(GL_TEXTURE_2D, 0);
 
 
-            //Objet 1 (char)
-            objProgram.m_Program.use();
-            //lumière
-            lumiereVerte.sendUniformIntensity(glm::vec3(1.,1.,0.));
-            lumiereVerte.sendUniformVec(glm::vec3(0.,1.,-1.));
-            lumiereBlanche.sendUniformIntensity(glm::vec3(1.,1.,1.));
-            lumiereBlanche.sendUniformVec(glm::vec3(0.,-1.,1.));
-            // glm::vec4 dirLight = glm::rotate(moveMatrix.getLightMVMatrix(), float(M_PI/4.), glm::vec3(0.,0.,1.))*glm::vec4(1.,1.,1.,0.);
-            // glm::vec4 dirLight = moveMatrix.getLightMVMatrix() * glm::vec4(0.,0.,1.,0.);
-            // glUniform3f(objProgram.uLightDir_vs, dirLight.x, dirLight.y, dirLight.z);
-            // glUniform3f(objProgram.uLightIntensity, 1.,1., 1.);
-            glm::vec4 posLight = moveMatrix.getWorldMVMatrix()*glm::vec4(0.,0.02,0.,1.);
-            glUniform3f(objProgram.uLightPos_vs, posLight.x, posLight.y, posLight.z);
-            glUniform3f(objProgram.uLightIntensityPos, 1.,0., 0.);
-            // matériaux
-            glUniform3f(objProgram.uKd, 2.,2.,2.);
-            glUniform3f(objProgram.uKs, 1.,1.,1.);
-            glUniform1f(objProgram.uShininess, 50.);
-            //Matrices        
-            objProgram.sendMatrix(moveMatrix.getCharMVMatrix(), glm::vec3(4.,4.,4.), glm::vec3(0.,10.,0.));
-            ourModel.Draw(objProgram.m_Program);
+                //Objet 1 (char)
+                objProgram.m_Program.use();
+                //lumière
+                lumiereVerte.sendUniformIntensity(glm::vec3(1.,1.,0.));
+                lumiereVerte.sendUniformVec(glm::vec3(0.,1.,-1.));
+                lumiereBlanche.sendUniformIntensity(glm::vec3(1.,1.,1.));
+                lumiereBlanche.sendUniformVec(glm::vec3(0.,-1.,1.));
+                // glm::vec4 dirLight = glm::rotate(moveMatrix.getLightMVMatrix(), float(M_PI/4.), glm::vec3(0.,0.,1.))*glm::vec4(1.,1.,1.,0.);
+                // glm::vec4 dirLight = moveMatrix.getLightMVMatrix() * glm::vec4(0.,0.,1.,0.);
+                // glUniform3f(objProgram.uLightDir_vs, dirLight.x, dirLight.y, dirLight.z);
+                // glUniform3f(objProgram.uLightIntensity, 1.,1., 1.);
+                glm::vec4 posLight = moveMatrix.getWorldMVMatrix()*glm::vec4(0.,0.02,0.,1.);
+                glUniform3f(objProgram.uLightPos_vs, posLight.x, posLight.y, posLight.z);
+                glUniform3f(objProgram.uLightIntensityPos, 1.,0., 0.);
+                // matériaux
+                glUniform3f(objProgram.uKd, 2.,2.,2.);
+                glUniform3f(objProgram.uKs, 1.,1.,1.);
+                glUniform1f(objProgram.uShininess, 50.);
+                //Matrices        
+                objProgram.sendMatrix(moveMatrix.getCharMVMatrix(), glm::vec3(4.,4.,4.), glm::vec3(0.,10.,0.));
+                ourModel.Draw(objProgram.m_Program);
 
-            //Objet2 (celui qui reste fixe au début, mais il a une light ponctuelle rouge sur lui)
-            objProgram.sendMatrix(moveMatrix.getWorldMVMatrix(), glm::vec3(0.01,0.01,0.01), glm::vec3(0.,0.02,0.));
-            ourModel.Draw(objProgram.m_Program);
+                //Objet2 (celui qui reste fixe au début, mais il a une light ponctuelle rouge sur lui)
+                objProgram.sendMatrix(moveMatrix.getWorldMVMatrix(), glm::vec3(0.01,0.01,0.01), glm::vec3(0.,0.02,0.));
+                ourModel.Draw(objProgram.m_Program);
 
-            //Objet3 (on va dire c'est le méchant mouahaha)
-            objProgram.sendMatrix(moveMatrix.getEnemyMVMatrix(), glm::vec3(4.,4.,4.), glm::vec3(1,1,1));
-            
-            ourModel.Draw(objProgram.m_Program);  
+                //Objet3 (on va dire c'est le méchant mouahaha)
+                objProgram.sendMatrix(moveMatrix.getEnemyMVMatrix(), glm::vec3(4.,4.,4.), glm::vec3(1,1,1));
+                
+                ourModel.Draw(objProgram.m_Program);  
 
-            ourSkybox.draw(moveMatrix,ProjMatrix);
-
+                ourSkybox.draw(moveMatrix,ProjMatrix);
+            }
             
             if (character.isDead()) {
                 //perdu
@@ -295,6 +300,17 @@ int main(int argc, char** argv) {
                 menu.draw();
             }
             titleScreen.draw();
+
+            if (menu.someMenuIsOpen()) {
+                pause=true;
+            } else {
+                pause = false;
+            }
+            if (menu.shouldStartAgain()) {
+                character.reset();
+                compteur = 0;
+                score.update(0, 0);
+            }
 
             // Update the display
             windowManager.swapBuffers();

@@ -62,6 +62,7 @@ Menu::Menu(const char* imagePath, const char* fontPath, const int& size, const g
     _quit(fontPath, size, filePath, windowWidth, windowHeight, windowWidth/2., (windowHeight/7.)*6, true, this),
     _background(imagePath, filePath),
     _open(false),
+    _startGameAgain(false),
     _highScoresMenu(imagePath, fontPath, size, filePath, windowWidth, windowHeight, _clickListener, this),
     _saveMenu(imagePath, fontPath, size, filePath, windowWidth, windowHeight, _clickListener, this, "Save"),
     _loadMenu(imagePath, fontPath, size, filePath, windowWidth, windowHeight, _clickListener, this, "Load")
@@ -127,6 +128,10 @@ const bool Menu::isOpen() const {
     return _open;
 }
 
+const bool Menu::someMenuIsOpen() const {
+    return (_open||_highScoresMenu.isOpen()||_saveMenu.isOpen()||_loadMenu.isOpen());
+}
+
 const void Menu::SubMenuOpen(const std::string& subMenuType) {
     if (subMenuType == "Highscores") {
         _highScoresMenu.open();
@@ -164,6 +169,16 @@ void Menu::handleSDLEvent(const SDL_Event& e, bool gameStart) {
 
 const void Menu::updateHighScores(const int valueScore) {
     _highScoresMenu.updateScore(valueScore);
+}
+
+void Menu::startAgainTrue() {
+    _startGameAgain = true;
+}
+
+const bool Menu::shouldStartAgain() {
+    bool tmp = _startGameAgain;
+    _startGameAgain = false;
+    return tmp;
 }
 
 SubMenu::SubMenu(const char* imagePath, const char* fontPath, const int& size, const glimac::FilePath& filePath, 
