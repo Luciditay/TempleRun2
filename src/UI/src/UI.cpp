@@ -9,21 +9,32 @@ ScoreCounter::ScoreCounter(const glimac::FilePath& filePath, const uint& windowW
                                     20, filePath, windowWidth, windowHeight, 10,10, false) {
 }
 
-void ScoreCounter::update(const int& valueDistance, const int& valueItems) {
-    _distance = valueDistance;
-    _items = valueItems;
-     std::string distance = std::to_string(valueDistance);
-     std::string items = std::to_string(valueItems);
+void ScoreCounter::update() {
+     std::string distance = std::to_string(_distance);
+     std::string items = std::to_string(_items);
     _message.update(("Distance : " + distance + " Items : " + items).c_str());
+}
+
+void ScoreCounter::increaseDistance() {
+    _distance++;
+}
+
+void ScoreCounter::increaseItems() {
+    _items++;
+}
+
+void ScoreCounter::resetItemsAndDistance() {
+    _items = 0;
+    _distance = 0;
 }
 
 const void ScoreCounter::draw() const {
     _message.draw();
 }
-
+ 
 const int ScoreCounter::getTotalScore() {
     return _items+_distance;
-}
+} 
 
 //Image arrière plan
 

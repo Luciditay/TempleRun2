@@ -29,7 +29,7 @@ DeadScreen::DeadScreen(const char* imagePath, const char* fontPath, const int& s
     _information("Click anywhere to play again.", {180,180,180}, fontPath, size/4, filePath, windowWidth, windowHeight, 20, 20, false),
     _background(imagePath, filePath),
     _open(true){
-}
+} 
 
 const void DeadScreen::close() {
         _open = false;
@@ -47,6 +47,11 @@ const void DeadScreen::draw() const {
     _information.draw();
     }
 }
+
+const void DeadScreen::updateScore(const int valueScore) {
+    _score.update(("Score : "+std::to_string(valueScore)).c_str());
+}
+
 
 //Menu
 

@@ -162,6 +162,15 @@ bool Character::isDead() {
     return m_dead;
 }
 
+bool Character::isJumping() {
+    return m_jumping;
+}
+
+void Character::increaseSpeed() {
+    m_speed += 0.5;
+    m_enemySpeed -= 0.05;
+}
+
 void Character::reset() {
     m_enemySpeed = 0.1;
     m_distanceEnemy = 100;

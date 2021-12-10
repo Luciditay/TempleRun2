@@ -16,9 +16,13 @@ class ScoreCounter {
     /// \param windowHeight : height of the application window
     ScoreCounter(const glimac::FilePath& filePath, const uint& windowWidth, const uint& windowHeight);
     /// \brief update the score
-    /// \param valueDistance : distance ran
-    /// \param valueItems : number items collected
-    void update(const int& valueDistance, const int& valueItems);
+    void update();
+    /// \brief add 1 to distance
+    void increaseDistance();
+    /// \brief add 1 to items
+    void increaseItems();
+    /// \brief set items and distance to 0
+    void resetItemsAndDistance();
     /// \brief draw the counter
     const void draw() const;
      /// \brief give the total score (distance + items)
@@ -84,7 +88,7 @@ class Button {
     protected:
     bool _enable; /*!< true if the button is activated */
 };
-
+ 
 /// \class Button for the Menu
 class ButtonMenu : public Button {
     public:

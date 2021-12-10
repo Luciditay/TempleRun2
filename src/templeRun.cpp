@@ -109,7 +109,12 @@ int main(int argc, char** argv) {
     //Chargement modèle
     stbi_set_flip_vertically_on_load(true);
     Model ourModel("assets/assetsTestAssimp/backpack.obj");
-    // Model ourModel("../GLImac-Template/assets/obj/Handgun_obj.obj");
+
+    Collectibles collectibles(&objProgram, &moveMatrix, &character, &score);
+    collectibles.addCollectible(glm::vec2(10.,-100.), "Bonus", true);
+    collectibles.addCollectible(glm::vec2(0.,-100.), "Coin", false);
+    collectibles.addCollectible(glm::vec2(15.,10.), "Coin", true);
+
     Light lumiereVerte("Directional", 0, objProgram.m_Program, &moveMatrix);
     Light lumiereBlanche("Directional", 1, objProgram.m_Program, &moveMatrix);
     float enemySpeed = 0.1;
@@ -203,7 +208,8 @@ int main(int argc, char** argv) {
                     looser = false;
                     pause = false;
                     compteur = 0;
-                    score.update(0, 0);
+                    score.resetItemsAndDistance();
+                    score.update();
                 }
             }
 
@@ -266,17 +272,20 @@ int main(int argc, char** argv) {
                 glUniform3f(objProgram.uKs, 1.,1.,1.);
                 glUniform1f(objProgram.uShininess, 50.);
                 //Matrices        
-                objProgram.sendMatrix(moveMatrix.getCharMVMatrix(), glm::vec3(4.,4.,4.), glm::vec3(0.,10.,0.));
+                objProgram.sendMatrix(moveMatrix.getCharMVMatrix(), glm::vec3(4.,4.,4.), glm::vec3(0.,7.,0.));
                 ourModel.Draw(objProgram.m_Program);
 
                 //Objet2 (celui qui reste fixe au début, mais il a une light ponctuelle rouge sur lui)
                 objProgram.sendMatrix(moveMatrix.getWorldMVMatrix(), glm::vec3(0.01,0.01,0.01), glm::vec3(0.,0.02,0.));
                 ourModel.Draw(objProgram.m_Program);
 
+               
                 //Objet3 (on va dire c'est le méchant mouahaha)
                 objProgram.sendMatrix(moveMatrix.getEnemyMVMatrix(), glm::vec3(4.,4.,4.), glm::vec3(1,1,1));
                 
-                ourModel.Draw(objProgram.m_Program);  
+                ourModel.Draw(objProgram.m_Program); 
+
+               collectibles.draw();
 
                 ourSkybox.draw(moveMatrix,ProjMatrix);
             }
@@ -285,6 +294,7 @@ int main(int argc, char** argv) {
                 //perdu
                 deadScreen.open();
                 deadScreen.draw();
+                deadScreen.updateScore(score.getTotalScore());
                 looser = true;
                 pause = true;
                 menu.updateHighScores(score.getTotalScore());
@@ -293,7 +303,11 @@ int main(int argc, char** argv) {
             //Dessin de l'UI
             if (!pause && !looser) {
                 compteur+=1;
-                score.update(compteur/10, 0);
+                if (compteur >= 10) {
+                    score.increaseDistance();
+                    compteur = 0;
+                }
+                score.update();
                 score.draw();
             }
             if (gameStart) {
@@ -309,7 +323,8 @@ int main(int argc, char** argv) {
             if (menu.shouldStartAgain()) {
                 character.reset();
                 compteur = 0;
-                score.update(0, 0);
+                score.resetItemsAndDistance();
+                score.update();
             }
 
             // Update the display

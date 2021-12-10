@@ -21,8 +21,12 @@
 #include <stb/stb_image.h>
 #include "Model.hpp"
 #include <Light.hpp>
-#include <Case.hpp>
+
 #include "ObjProgram.hpp"
 #include "Character.hpp"
-// #include <Character.hpp>
 #include <Skybox.hpp>
+#include "Collectible.hpp"
+#include "Collectibles.hpp"
+#include "CollectibleRenderer.hpp"
+
+#include <Case.hpp>

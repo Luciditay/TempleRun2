@@ -13,6 +13,7 @@ class MoveMatrix {
     glm::mat4 m_ViewMatrix; /*!< view matrix */
     glm::mat4 m_MVMatrixLight; /*!< model view matrix of the light */
     glm::mat4 m_MVMatrixEnemy; /*!< model view matrix of the enemy */
+    glm::mat4 m_MVMatrixCollectible; /*!< model view matrix of the collectible */
 
     float m_distanceEnemy; /*!< distance between character and enemy */
 
@@ -21,7 +22,7 @@ class MoveMatrix {
 
     public:
     /// \brief constructor
-    /// \param camera : camera
+    /// \param camera : camera 
     /// \param character : character
     MoveMatrix(Camera* camera, Character* character);
 
@@ -35,6 +36,8 @@ class MoveMatrix {
     void computeMVLight();
     /// \brief compute enemy matrix : behind the character
     void computeMVEnemy();
+    /// \brief compute collectible matrix 
+    void computeMVCollectible(glm::vec3 position);
     /// \brief compute all the previous matrix
     void computeAllMatrix();
 
@@ -43,4 +46,5 @@ class MoveMatrix {
     glm::mat4 getWorldMVMatrix(); /*!< give the world model view matrix */
     glm::mat4 getLightMVMatrix(); /*!< give the light model view matrix */
     glm::mat4 getEnemyMVMatrix(); /*!< give the enemy model view matrix */
+    glm::mat4 getCollectibleMVMatrix(); /*!< give the collectible model view matrix */
 };

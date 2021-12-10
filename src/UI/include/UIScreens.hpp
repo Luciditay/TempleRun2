@@ -21,7 +21,7 @@ class TitleScreen {
     /// \return true when game is started
     const bool close(); 
 
-    /// \brief draw the title screen
+    /// \brief draw the title screen 
     const void draw() const;
 
     private:
@@ -50,6 +50,9 @@ class DeadScreen {
     const void open();
     /// \brief draw the dead screen 
     const void draw() const;
+    /// \brief show the last score when the character dies
+    /// \param valueScore : new score 
+    const void updateScore(const int valueScore);
 
     private:
     Message _title;  /*!< Death message */

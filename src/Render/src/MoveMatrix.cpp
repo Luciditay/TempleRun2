@@ -20,7 +20,7 @@ void MoveMatrix::computeMVWorld() {
     VWorld = glm::translate(VWorld, glm::vec3(-m_char->getPos().x, 0, -m_char->getPos().z));
     VWorld = glm::scale(VWorld, glm::vec3(250.,250.,250.));
     m_MVMatrixWorld = m_ViewMatrix * VWorld;
-}
+} 
 
 void MoveMatrix::computeMVLight() {
     glm::mat4 VLight = glm::rotate(glm::mat4(), glm::radians(float(-m_char->getAngle())), glm::vec3(0.,1.,0.));
@@ -29,6 +29,12 @@ void MoveMatrix::computeMVLight() {
 
 void MoveMatrix::computeMVEnemy() {
     m_MVMatrixEnemy = glm::translate(m_ViewMatrix, glm::vec3(0.,1.,m_char->getDistanceEnemy()));
+}
+
+void MoveMatrix::computeMVCollectible(glm::vec3 position) {
+    glm::mat4 VCollectible =  glm::rotate(glm::mat4(), glm::radians(float(-m_char->getAngle())), glm::vec3(0.,1.,0.));
+    VCollectible = glm::translate(VCollectible, (glm::vec3(-m_char->getPos().x, 0, -m_char->getPos().z))+position);
+    m_MVMatrixCollectible = m_ViewMatrix * VCollectible;
 }
 
 void MoveMatrix::computeAllMatrix() {
@@ -57,4 +63,8 @@ glm::mat4 MoveMatrix::getLightMVMatrix(){
 
 glm::mat4 MoveMatrix::getEnemyMVMatrix(){
     return m_MVMatrixEnemy;
+}
+
+glm::mat4 MoveMatrix::getCollectibleMVMatrix() {
+    return m_MVMatrixCollectible;
 }

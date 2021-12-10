@@ -57,8 +57,12 @@ class Character {
     glm::vec3 getPos();
     /// \brief give the distance enemy-character
     float getDistanceEnemy();
+    /// \brief increase character speed and decrease the enemy speed
+    void increaseSpeed();
     /// \brief true if the character is dead
     bool isDead();
+    /// \brief true if the character is jumping
+    bool isJumping();
     /// \brief reset character parameters (resurrection)
     void reset();
     
