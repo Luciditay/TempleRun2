@@ -27,10 +27,6 @@ void MoveMatrix::computeMVLight() {
     m_MVMatrixLight = m_ViewMatrix * VLight;
 }
 
-void MoveMatrix::setDistanceEnemy(const float distance) {
-    m_distanceEnemy = distance;
-}
-
 void MoveMatrix::computeMVEnemy() {
     m_MVMatrixEnemy = glm::translate(m_ViewMatrix, glm::vec3(0.,1.,m_char->getDistanceEnemy()));
 }

@@ -1,7 +1,6 @@
 #include "UIScreens.hpp"
 
 //Ecran titre 
-
 TitleScreen::TitleScreen(const char* imagePath, const char* fontPath, const int& size, const glimac::FilePath& filePath, const uint& windowWidth, const uint& windowHeight):
     _title("GAME", {255,255,255}, fontPath, size, filePath, windowWidth, windowHeight, windowWidth/2., windowHeight/2., true),
     _information("Click anywhere to play.", {180,180,180}, fontPath, size/4, filePath, windowWidth, windowHeight, 20, 20, false),
@@ -32,9 +31,8 @@ DeadScreen::DeadScreen(const char* imagePath, const char* fontPath, const int& s
     _open(true){
 }
 
-const bool DeadScreen::close() {
+const void DeadScreen::close() {
         _open = false;
-        return true;
 }
 
 const void DeadScreen::open() {
@@ -85,7 +83,7 @@ const void Menu::draw() {
         _load.draw();
         _quit.draw();
     }
-     else if (_highScoresMenu.isOpen()) {
+    else if (_highScoresMenu.isOpen()) {
         _highScoresMenu.draw();
     }
     else if (_saveMenu.isOpen()) {
