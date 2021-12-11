@@ -22,6 +22,13 @@
 #include "Model.hpp"
 #include <Light.hpp>
 
+#include "GlewInit.hpp"
+#include "formProgram.hpp"
+#include "Texture.hpp"
+
+
+
+
 #include "ObjProgram.hpp"
 #include "Character.hpp"
 #include <Skybox.hpp>
@@ -30,3 +37,5 @@
 #include "CollectibleRenderer.hpp"
 
 #include <Case.hpp>
+#include "Vertex3D.hpp"
+#include "Terrain.hpp"

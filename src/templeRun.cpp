@@ -1,36 +1,6 @@
 #include <includes.hpp>
 
-
 using namespace glimac;
-
-struct Vertex3DUV{
-    glm::vec3 position;
-    glm::vec2 coordonneesTexture;
-
-    Vertex3DUV(const glm::vec3 pos, const glm::vec2 texture) {
-        position = pos;
-        coordonneesTexture = texture;
-    }
-
-};
-
-    struct MoonProgram {
-    Program m_Program;
-
-    GLint uMVPMatrix;
-    GLint uMVMatrix;
-    GLint uNormalMatrix;
-    GLint uMoonTexture;
-
-    MoonProgram(const FilePath& applicationPath):
-        m_Program(loadProgram(applicationPath.dirPath() + "shaders/3D.vs.glsl",
-                              applicationPath.dirPath() + "shaders/tex3D.fs.glsl")) {
-        uMVPMatrix = glGetUniformLocation(m_Program.getGLId(), "uMVPMatrix");
-        uMVMatrix = glGetUniformLocation(m_Program.getGLId(), "uMVMatrix");
-        uNormalMatrix = glGetUniformLocation(m_Program.getGLId(), "uNormalMatrix");
-        uMoonTexture = glGetUniformLocation(m_Program.getGLId(), "uTextureMoon");
-    }
-    };
 
 int main(int argc, char** argv) {
     
@@ -40,11 +10,7 @@ int main(int argc, char** argv) {
     SDLWindowManager windowManager(largeur, hauteur, "3D stylée");
 
     // Initialize glew for OpenGL3+ support
-    GLenum glewInitError = glewInit();
-    if(GLEW_OK != glewInitError) {
-        std::cerr << glewGetErrorString(glewInitError) << std::endl;
-        return EXIT_FAILURE;
-    }
+    glewInitialization();
 
     std::cout << "OpenGL Version : " << glGetString(GL_VERSION) << std::endl;
     std::cout << "GLEW Version : " << glewGetString(GLEW_VERSION) << std::endl;
@@ -58,7 +24,7 @@ int main(int argc, char** argv) {
     //Initialisation shaders
     FilePath applicationPath(argv[0]);
     // EarthProgram earthProgram(applicationPath);
-    MoonProgram moonProgram(applicationPath);
+    FormProgram moonProgram(applicationPath, "shaders/3D.vs.glsl", "shaders/tex3D.fs.glsl");
     ObjProgram objProgram(applicationPath);
 
     //skybox1
@@ -71,21 +37,8 @@ int main(int argc, char** argv) {
     ptrImages.push_back(loadImage("assets/textures/labyrinth.png"));
     ptrImages.push_back(loadImage("assets/textures/CloudMap.jpg"));
       
-    if(ptrImages[0] && ptrImages[1] && ptrImages[2]){
-        std::cout << "ptrImages ok " << std::endl;
-    }
     //Création texture objet : tableau de textures
-    GLuint to[3];
-    glGenTextures(3, &to[0]);
-
-    //Bind texture Lune
-    glBindTexture(GL_TEXTURE_2D, to[1]);
-    //Envoie carte graphique
-    glTexImage2D(GL_TEXTURE_2D, 0,GL_RGBA,ptrImages[1]->getWidth(),ptrImages[1]->getHeight(), 0, GL_RGBA, GL_FLOAT, ptrImages[1]->getPixels());
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    //Débind texture
-    glBindTexture(GL_TEXTURE_2D, 0);
+    GLuint t1 = loadAndBindTexture(*ptrImages[1].get());
 
     glEnable(GL_DEPTH_TEST);
 
@@ -169,8 +122,8 @@ int main(int argc, char** argv) {
     glEnableVertexAttribArray(VERTEX_ATTR_TEXTURE);
     //Spécification des attributs de vertex (bind et débind vbo)
     glBindBuffer(GL_ARRAY_BUFFER, vboSOL);
-    glVertexAttribPointer(VERTEX_ATTR_POSITION, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex3DUV), (const GLvoid*) (offsetof(Vertex3DUV, position)));
-    glVertexAttribPointer(VERTEX_ATTR_TEXTURE, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex3DUV), (const GLvoid*) (offsetof(Vertex3DUV, coordonneesTexture)));
+    glVertexAttribPointer(VERTEX_ATTR_POSITION, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex3DUV), (const GLvoid*) (offsetof(Vertex3DUV, m_position)));
+    glVertexAttribPointer(VERTEX_ATTR_TEXTURE, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex3DUV), (const GLvoid*) (offsetof(Vertex3DUV, m_coordonneesTexture)));
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     //débind vbo
     glBindVertexArray(0);
@@ -239,8 +192,8 @@ int main(int argc, char** argv) {
                 moonProgram.m_Program.use();
                 glBindVertexArray(vaoSOL);
                 glActiveTexture(GL_TEXTURE0);
-                glBindTexture(GL_TEXTURE_2D, to[1]);
-                glUniform1i(moonProgram.uMoonTexture, 0);
+                glBindTexture(GL_TEXTURE_2D, t1);
+                glUniform1i(moonProgram.uTexture, 0);
                 glm::mat4 MVMatrixLune = moveMatrix.getWorldMVMatrix();
                 glm::mat4 MVPMatrixLune = ProjMatrix*MVMatrixLune;
                     //Envoi des matrices
@@ -338,7 +291,7 @@ int main(int argc, char** argv) {
     TTF_Quit();
 
     //Libération des ressources
-    glDeleteTextures(3, &to[0]);
+    glDeleteTextures(1, &t1);
 
     return EXIT_SUCCESS;
 }

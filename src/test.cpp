@@ -49,7 +49,8 @@
 //     while(!done) {
 //         // Event loop:
 //         SDL_Event e;
-//         while(windowManager.pollEvent(e)) {
+//         while(windowManager.pollEvent(e)) 
+//         {
 
 //         if(e.type == SDL_QUIT) {
 //             done = true; // Leave the loop after this iteration

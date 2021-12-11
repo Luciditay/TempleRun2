@@ -2,6 +2,7 @@
 
 #include <glm/glm.hpp>
 #include <includes.hpp>
+#include "Vertex3D.hpp"
 
 class Case
 {
@@ -13,7 +14,7 @@ public:
 class CaseTerrain : protected Case //Case de base, sans saut ni trou
 {
 public:
-    CaseTerrain(const glm::vec4 VertexHG, const glm::vec4 VertexHD, const glm::vec4 VertexBG, glm::vec4 VertexBD) 
+    CaseTerrain(const Vertex3DUV VertexHG, const Vertex3DUV VertexHD, const Vertex3DUV VertexBG, Vertex3DUV VertexBD) 
     : m_VertexHG(VertexHG), 
       m_VertexHD(VertexHD), 
       m_VertexBG(VertexBG), 
@@ -24,21 +25,20 @@ public:
     void drawCase();
 
 private:
-    glm::vec4 m_VertexHG = {0, 0, 0, 1}; //Les quatres coins de la case
-    glm::vec4 m_VertexHD = {0, 0, 0, 1};
-    glm::vec4 m_VertexBG = {0, 0, 0, 1};
-    glm::vec4 m_VertexBD = {0, 0, 0, 1};
-    GLuint vbo;
-    GLuint vao;
-    GLuint ibo;
-
+    Vertex3DUV  m_VertexHG; //Les quatres coins de la case
+    Vertex3DUV  m_VertexHD;
+    Vertex3DUV  m_VertexBG;
+    Vertex3DUV  m_VertexBD;
+    GLuint m_vbo;
+    GLuint m_vao;
+    GLuint m_ibo;
 };
 
 class CaseMur : protected Case
 {
 public:
     CaseMur();
-    ~CaseMur();
+    virtual ~CaseMur(); //Virtuel car polymorphisme
     void drawCase();
 
 private:
