@@ -114,12 +114,12 @@ const void Menu::open() {
 const void Menu::close() {
     SDL_EnableKeyRepeat(0,0);
     _open = false;
-    _continue.enable();
-    _startAgain.enable();
-    _highScores.enable();
-    _save.enable();
-    _load.enable();
-    _quit.enable();
+    _continue.disable();
+    _startAgain.disable();
+    _highScores.disable();
+    _save.disable();
+    _load.disable();
+    _quit.disable();
     SDL_EnableKeyRepeat(10,10);
 }
 
