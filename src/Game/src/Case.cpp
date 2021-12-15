@@ -1,20 +1,11 @@
 #include "Case.hpp"
 
-CaseTerrain::~CaseTerrain(){
-    glDeleteBuffers(1, &m_vbo);
-    glDeleteVertexArrays(1, &m_vao);
-    delete &m_VertexHG;
-    delete &m_VertexHD;
-    delete &m_VertexBG;
-    delete &m_VertexBD;
-}
-
 void CaseTerrain::loadCase(){
     glGenBuffers(1, &m_vbo);
     glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
     
     Vertex3DUV vertices[] = {m_VertexHG, m_VertexHD, m_VertexBG, m_VertexBD};
-    glBufferData(GL_ARRAY_BUFFER, 4*sizeof(glm::vec3), vertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, 4*sizeof(Vertex3DUV), vertices, GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
     glGenBuffers(1, &m_ibo);
@@ -33,6 +24,8 @@ void CaseTerrain::loadCase(){
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ibo);
 
     glEnableVertexAttribArray(0);
+    glEnableVertexAttribArray(2);
+
 
     glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
     glVertexAttribPointer(
@@ -40,9 +33,20 @@ void CaseTerrain::loadCase(){
     3, //Nombre de Vertex
     GL_FLOAT,
     GL_FALSE,
-    sizeof(glm::vec3),
+    sizeof(Vertex3DUV),
     0
     );
+
+    glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
+    glVertexAttribPointer(
+    2, 
+    3, //Nombre de Vertex
+    GL_FLOAT,
+    GL_FALSE,
+    sizeof(Vertex3DUV),
+    (const void*) (offsetof(Vertex3DUV, m_coordonneesTexture))
+    );
+
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);

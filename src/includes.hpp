@@ -26,7 +26,7 @@
 #include "formProgram.hpp"
 #include "Texture.hpp"
 
-
+#include "cameraDebug.hpp"
 
 
 #include "ObjProgram.hpp"

@@ -3,6 +3,10 @@
 #include "iostream"
 #include "GL/glew.h"
 
+Texture::Texture(std::string pathTexture){
+    m_ptrImage(loadIma)
+}
+
 
 GLuint loadAndBindTexture(const glimac::Image &ptrImage)
 {    

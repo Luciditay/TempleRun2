@@ -11,7 +11,7 @@ struct FormProgram {
     GLint uNormalMatrix;
     GLint uTexture;
 
-    FormProgram(const FilePath& applicationPath, const std::string pathVertexShader, const std::string pathFragShader):
+    FormProgram(const FilePath& applicationPath, const std::string &pathVertexShader, const std::string &pathFragShader):
         m_Program(loadProgram(applicationPath.dirPath() + pathVertexShader,
                               applicationPath.dirPath() + pathFragShader)) {
         uMVPMatrix = glGetUniformLocation(m_Program.getGLId(), "uMVPMatrix");
