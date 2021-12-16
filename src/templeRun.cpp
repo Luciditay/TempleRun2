@@ -1,4 +1,6 @@
 #include <includes.hpp>
+#include "Matrice.hpp"
+#include "unistd.h"
 
 using namespace glimac;
 
@@ -23,6 +25,11 @@ int main(int argc, char** argv) {
     /*********************************
      * HERE SHOULD COME THE INITIALIZATION CODE
      *********************************/
+
+    Matrice matTest("../test/fileTest.txt"); //On remonte de 1 dans l'arbo, car le .exe se trouve dans build, et que le contenu de test n'est pas copié (à modifier)
+
+    matTest.toString();
+
 
     FilePath applicationPath(argv[0]);
     FormProgram caseProgramme(applicationPath, "shaders/case3D.vs.glsl", "shaders/case3D.fs.glsl");

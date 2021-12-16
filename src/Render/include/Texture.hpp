@@ -3,14 +3,19 @@
 #include <string>
 #include "GL/glew.h" 
 
-class Texture{
-    public:
-        Texture(std::string pathTexture);
-        void getIdTexture();
+class P_Texture{
+    public:      
+        GLuint getIdTexture() const;
+        int getnomTexture() const;
+
+        P_Texture(const int nomEnumTexture, const std::string &pathTexture) 
+        : m_nomEnumTexture(nomEnumTexture),
+          m_idTexture(loadTexture(pathTexture)) {}
 
     private:
-        std::unique_ptr<Image> m_ptrImage;
+        GLuint loadTexture(const std::string &pathTexture);
+
+    private:
+        const int m_nomEnumTexture;
         GLuint m_idTexture;
 };
-
-GLuint loadAndBindTexture(const glimac::Image &ptrImage);

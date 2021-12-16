@@ -37,6 +37,8 @@ private:
     GLuint m_vbo;
     GLuint m_vao;
     GLuint m_ibo;
+
+    
 };
 
 class CaseMur : protected Case
