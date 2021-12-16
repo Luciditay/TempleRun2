@@ -24,8 +24,8 @@ void CaseTerrain::loadCase(){
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ibo);
 
     glEnableVertexAttribArray(0);
+    glEnableVertexAttribArray(1);
     glEnableVertexAttribArray(2);
-
 
     glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
     glVertexAttribPointer(
@@ -37,22 +37,31 @@ void CaseTerrain::loadCase(){
     0
     );
 
-    glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
     glVertexAttribPointer(
-    2, 
+    1, 
     3, //Nombre de Vertex
     GL_FLOAT,
     GL_FALSE,
     sizeof(Vertex3DUV),
-    (const void*) (offsetof(Vertex3DUV, m_coordonneesTexture))
+    (const void*) (offsetof(Vertex3DUV, m_color))
     );
 
+    glVertexAttribPointer(
+    2, 
+    2, //Nombre de Vertex
+    GL_FLOAT,
+    GL_FALSE,
+    sizeof(Vertex3DUV),
+    (const void*) (offsetof(Vertex3DUV, m_texturePos))
+    );
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
 }
 
 void CaseTerrain::drawCase(){
+
+    
     glBindVertexArray(m_vao);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);

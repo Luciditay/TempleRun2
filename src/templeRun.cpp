@@ -28,25 +28,16 @@ int main(int argc, char** argv) {
 
     Matrice matTest("../test/fileTest.txt"); //On remonte de 1 dans l'arbo, car le .exe se trouve dans build, et que le contenu de test n'est pas copié (à modifier)
 
-    matTest.toString();
-
 
     FilePath applicationPath(argv[0]);
-    FormProgram caseProgramme(applicationPath, "shaders/case3D.vs.glsl", "shaders/case3D.fs.glsl");
+    
+    const int TEXTURE_SOL = 0;
+    P_Texture textureSol(TEXTURE_SOL, "../assets/textures/dirt.png"); 
+    TextureManager textManager(textureSol);
 
-    CaseTerrain CaseTest1(Vertex3DUV(glm::vec3(-1., 0., 1.), glm::vec3(1., 0., 0.)), 
-                  Vertex3DUV(glm::vec3(1., 0., 1.), glm::vec3(1., 0., 0.)),
-                  Vertex3DUV(glm::vec3(-1., 0., 0.), glm::vec3(1., 0., 0.)),
-                  Vertex3DUV(glm::vec3(1., 0., 0.), glm::vec3(1., 0., 0.)));
-    
-    CaseTerrain CaseTest2(Vertex3DUV(glm::vec3(-1., 1., 0.), glm::vec3(0., 1., 0.)), 
-                  Vertex3DUV(glm::vec3(1., 1., 0.), glm::vec3(1., 1., 0.)),
-                  Vertex3DUV(glm::vec3(-1., 0., 0.), glm::vec3(0., 0., 1.)),
-                  Vertex3DUV(glm::vec3(1., 0., 0.), glm::vec3(1., 0., 1.)));
-    
+    CaseTerrain CaseTest1(applicationPath, "shaders/case3D.vs.glsl", "shaders/case3D.fs.glsl");
 
     CaseTest1.loadCase();
-    CaseTest2.loadCase();
 
     constexpr GLuint VERTEX_ATTR_POSITION = 0;
     constexpr GLuint VERTEX_ATTR_TEXTURE = 2;
@@ -88,18 +79,19 @@ int main(int argc, char** argv) {
             MVMatrix =   camDebug.getViewMatrix() *MVMatrix;
             ProjMatrix = glm::perspective(glm::radians(70.f), largeur/hauteur, 0.1f, 100.f);
 
-            caseProgramme.m_Program.use(); 
+            CaseTest1.m_drawer.m_Program.use();
+
+
             //glUniform4fv(caseProgramme.uMVMatrix, 1, glm::value_ptr(glm::mat4{1.f}));
-            glUniformMatrix4fv(caseProgramme.uMVPMatrix, 1, GL_FALSE, glm::value_ptr(ProjMatrix * MVMatrix));
+            glUniformMatrix4fv(CaseTest1.m_drawer.uMVPMatrix, 1, GL_FALSE, glm::value_ptr(ProjMatrix * MVMatrix));
 
             CaseTest1.drawCase();
-            CaseTest2.drawCase();
 
             for (int i=0; i<10; i++){
+                
                 MVMatrix = glm::translate(MVMatrix, glm::vec3(0, 0, -1));
-                 glUniformMatrix4fv(caseProgramme.uMVPMatrix, 1, GL_FALSE, glm::value_ptr(ProjMatrix * MVMatrix));
-
-            CaseTest1.drawCase();
+                glUniformMatrix4fv(CaseTest1.m_drawer.uMVPMatrix, 1, GL_FALSE, glm::value_ptr(ProjMatrix * MVMatrix));
+                CaseTest1.drawCase();
 
             }
                 

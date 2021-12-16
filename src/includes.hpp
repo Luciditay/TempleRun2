@@ -25,6 +25,9 @@
 #include "GlewInit.hpp"
 #include "formProgram.hpp"
 #include "Texture.hpp"
+#include "Terrain.hpp"
+#include "Case.hpp"
+#include "TextureManager.hpp"
 
 #include "cameraDebug.hpp"
 
