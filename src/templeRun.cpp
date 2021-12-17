@@ -1,3 +1,4 @@
+#include "Terrain.hpp"
 #include <includes.hpp>
 #include "Matrice.hpp"
 #include "unistd.h"
@@ -26,16 +27,30 @@ int main(int argc, char** argv) {
      * HERE SHOULD COME THE INITIALIZATION CODE
      *********************************/
 
-    Matrice matTest("../test/fileTest.txt"); //On remonte de 1 dans l'arbo, car le .exe se trouve dans build, et que le contenu de test n'est pas copié (à modifier)
-
+    
+    const std::string matriceFile = "../test/fileTest.txt";  //On remonte de 1 dans l'arbo, car le .exe se trouve dans build, et que le contenu de test n'est pas copié (à modifier)
+    std::vector<P_Texture> listeTexture;
 
     FilePath applicationPath(argv[0]);
-    
-    const int TEXTURE_SOL = 0;
-    P_Texture textureSol(TEXTURE_SOL, "../assets/textures/dirt.png"); 
-    TextureManager textManager(textureSol);
 
-    CaseTerrain CaseTest1(applicationPath, "shaders/case3D.vs.glsl", "shaders/case3D.fs.glsl");
+    const std::string VSPath = "shaders/case3D.vs.glsl";
+    const std::string FSPath = "shaders/case3D.fs.glsl";
+
+    const int TEXTURE_SOL = 0;
+    const int TEXTURE_SOL1 = 1;
+    const int TEXTURE_SOL2 = 2;
+
+    P_Texture textureSol(TEXTURE_SOL, "../assets/textures/dirt.png"); 
+    P_Texture textureSol1(TEXTURE_SOL1, "../assets/textures/labyrinth.png"); 
+    P_Texture textureSol2(TEXTURE_SOL2, "../assets/textures/triforce.png"); 
+    listeTexture.push_back(textureSol);
+    listeTexture.push_back(textureSol1);
+    listeTexture.push_back(textureSol2);
+
+    Terrain terrain(matriceFile, listeTexture, applicationPath, VSPath, FSPath);
+    
+    
+    CaseTerrain CaseTest1;
 
     CaseTest1.loadCase();
 
@@ -68,32 +83,34 @@ int main(int argc, char** argv) {
                     done = true; // Leave the loop after this iteration
                 }
             }
-
+            
+            terrain.drawTerrain(CaseTest1, largeur/hauteur, camDebug);
             /*********************************
              * HERE SHOULD COME THE RENDERING CODE
              *********************************/
             
-            MVMatrix = glm::translate(glm::mat4{1.f}, glm::vec3(0, 0, -5));
-            //MVMatrix = glm::scale(MVMatrix, glm::vec3(20, 20, 20));
+            //CaseTest1.drawCase();
+            // MVMatrix = glm::translate(glm::mat4{1.f}, glm::vec3(0, 0, -5));
+            // //MVMatrix = glm::scale(MVMatrix, glm::vec3(20, 20, 20));
 
-            MVMatrix =   camDebug.getViewMatrix() *MVMatrix;
-            ProjMatrix = glm::perspective(glm::radians(70.f), largeur/hauteur, 0.1f, 100.f);
+            // MVMatrix =   camDebug.getViewMatrix() *MVMatrix;
+            // ProjMatrix = glm::perspective(glm::radians(70.f), largeur/hauteur, 0.1f, 100.f);
 
-            CaseTest1.m_drawer.m_Program.use();
+            // CaseTest1.m_drawer.m_Program.use();
 
 
-            //glUniform4fv(caseProgramme.uMVMatrix, 1, glm::value_ptr(glm::mat4{1.f}));
-            glUniformMatrix4fv(CaseTest1.m_drawer.uMVPMatrix, 1, GL_FALSE, glm::value_ptr(ProjMatrix * MVMatrix));
+            // //glUniform4fv(caseProgramme.uMVMatrix, 1, glm::value_ptr(glm::mat4{1.f}));
+            // glUniformMatrix4fv(CaseTest1.m_drawer.uMVPMatrix, 1, GL_FALSE, glm::value_ptr(ProjMatrix * MVMatrix));
 
-            CaseTest1.drawCase();
+            // CaseTest1.drawCase();
 
-            for (int i=0; i<10; i++){
+            // for (int i=0; i<10; i++){
                 
-                MVMatrix = glm::translate(MVMatrix, glm::vec3(0, 0, -1));
-                glUniformMatrix4fv(CaseTest1.m_drawer.uMVPMatrix, 1, GL_FALSE, glm::value_ptr(ProjMatrix * MVMatrix));
-                CaseTest1.drawCase();
+            //     MVMatrix = glm::translate(MVMatrix, glm::vec3(0, 0, -1));
+            //     glUniformMatrix4fv(CaseTest1.m_drawer.uMVPMatrix, 1, GL_FALSE, glm::value_ptr(ProjMatrix * MVMatrix));
+            //     CaseTest1.drawCase();
 
-            }
+            // }
                 
               
             // Update the display

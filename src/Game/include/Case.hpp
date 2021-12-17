@@ -27,22 +27,16 @@ public:
     //   m_VertexBG(vertices[2]), 
     //   m_VertexBD(vertices[3])  {}
 
-    CaseTerrain(const FilePath& applicationPath, const std::string &VSPath, const std::string &FSPath) //Création d'une case de 1x1
-    : m_drawer(applicationPath, VSPath, FSPath),
-      m_VertexHG(Vertex3DUV(glm::vec3(-0.5, 0., 1.), glm::vec3(1., 0., 0.), glm::vec2(0., 0.))), //BG
+    CaseTerrain() //Création d'une case de 1x1
+    : m_VertexHG(Vertex3DUV(glm::vec3(-0.5, 0., 1.), glm::vec3(1., 0., 0.), glm::vec2(0., 0.))), //BG
       m_VertexHD(Vertex3DUV(glm::vec3(0.5, 0., 1.), glm::vec3(0., 1., 0.), glm::vec2(1., 0.))),  //BD
       m_VertexBG(Vertex3DUV(glm::vec3(-0.5, 0., 0.), glm::vec3(0., 0., 1.), glm::vec2(0., 1.))), //HG
       m_VertexBD(Vertex3DUV(glm::vec3(0.5, 0., 0.), glm::vec3(1., 0., 1.), glm::vec2(1., 1.))) {} //HD
-    
 
     void loadCase() override;
     void drawCase() override;
 
-    FormProgram m_drawer;
-
-private:
-
-    
+private:   
 
     Vertex3DUV  m_VertexHG; //Les quatres coins de la case
     Vertex3DUV  m_VertexHD;

@@ -1,3 +1,4 @@
+#pragma once
 #include "glimac/Program.hpp"
 #include <string>
 

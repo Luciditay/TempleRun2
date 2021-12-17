@@ -35,5 +35,6 @@ void Matrice::loadFromFile(const std::string &Path){
         ligneMatrice.at(i) = number;
         i++;
     }
+    m_Matrice.push_back(ligneMatrice);
 }
 

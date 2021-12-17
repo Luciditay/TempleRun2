@@ -1,3 +1,4 @@
+#pragma once
 #include "glimac/glm.hpp"
 #include <glimac/SDLWindowManager.hpp>
 
