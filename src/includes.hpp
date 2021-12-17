@@ -11,7 +11,7 @@
 #include <TrackballCamera.hpp>
 #include <FreeflyCamera.hpp>
 #include <Cameras.hpp>
-#include <glm/gtx/rotate_vector.hpp> 
+#include <glm/gtx/rotate_vector.hpp>
 #include <MoveMatrix.hpp>
 #include <string>
 #include <TTFtext.hpp>
@@ -25,12 +25,11 @@
 #include "GlewInit.hpp"
 #include "formProgram.hpp"
 #include "Texture.hpp"
-#include "Terrain.hpp"
-#include "Case.hpp"
+#include "Game.hpp"
+#include "TileDrawer.hpp"
 #include "TextureManager.hpp"
 
 #include "cameraDebug.hpp"
-
 
 #include "ObjProgram.hpp"
 #include "Character.hpp"
@@ -39,6 +38,4 @@
 #include "Collectibles.hpp"
 #include "CollectibleRenderer.hpp"
 
-#include <Case.hpp>
 #include "Vertex3D.hpp"
-#include "Terrain.hpp"

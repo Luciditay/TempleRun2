@@ -3,7 +3,7 @@
 // using namespace glimac;
 
 // int main(int argc, char** argv) {
-    
+
 //     // Initialize SDL and open a window
 //     const unsigned int largeur = 800;
 //     const unsigned int hauteur = 600;
@@ -26,13 +26,12 @@
 //     //skybox1
 //     Skybox ourSkybox(applicationPath);
 
-
 //     //Chargement image
 //     std::vector<std::unique_ptr<Image>> ptrImages;
 //     ptrImages.push_back(loadImage("assets/textures/pacmanskin.jpg"));
 //     ptrImages.push_back(loadImage("assets/textures/labyrinth.png"));
 //     ptrImages.push_back(loadImage("assets/textures/CloudMap.jpg"));
-      
+
 //     //Création texture objet : tableau de textures
 //     GLuint t1 = loadAndBindTexture(*ptrImages[1].get());
 
@@ -65,7 +64,7 @@
 
 //     Light lumiereVerte("Directional", 0, objProgram.m_Program, &moveMatrix);
 //     Light lumiereBlanche("Directional", 1, objProgram.m_Program, &moveMatrix);
-    
+
 //     float enemySpeed = 0.1;
 //     float distanceEnemy = 100;
 //     bool looser = false;
@@ -84,19 +83,18 @@
 
 //     FormProgram caseProgramme(applicationPath, "shaders/case3D.vs.glsl", "shaders/case3D.fs.glsl");
 
-//     CaseTerrain CaseTest(Vertex3DUV(glm::vec3(-1000., 0., 1000.), glm::vec2(0., 1000.)), 
+//     TileDrawer CaseTest(Vertex3DUV(glm::vec3(-1000., 0., 1000.), glm::vec2(0., 1000.)),
 //                   Vertex3DUV(glm::vec3(1000., 0., 1000.), glm::vec2(1000., 1000.)),
 //                   Vertex3DUV(glm::vec3(-1000., 0., 0.), glm::vec2(0., 0.)),
 //                   Vertex3DUV(glm::vec3(1000., 0., 0.), glm::vec2(1000., 0.)));
-    
 
 //     CaseTest.loadCase();
 
 //     constexpr GLuint VERTEX_ATTR_POSITION = 0;
 //     constexpr GLuint VERTEX_ATTR_TEXTURE = 2;
-   
+
 //     //Sol
-//     GLuint vboSOL;  
+//     GLuint vboSOL;
 //     glGenBuffers(1,&vboSOL);
 //     //Bind du vbo
 //     glBindBuffer(GL_ARRAY_BUFFER, vboSOL);
@@ -111,7 +109,7 @@
 //     //Débind du vbo
 //     glBindBuffer(GL_ARRAY_BUFFER, 0);
 //     //Bind du ibo
-//     GLuint iboSOL;  
+//     GLuint iboSOL;
 //     glGenBuffers(1,&iboSOL);
 //     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, iboSOL);
 //     //Tableau d'indices
@@ -123,7 +121,7 @@
 //     //Débind du ibo
 //     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 //     //Bind
-//     GLuint vaoSOL;  
+//     GLuint vaoSOL;
 //     glGenVertexArrays(1, &vaoSOL);
 //     glBindVertexArray(vaoSOL);
 //     //Bind du ibo
@@ -138,11 +136,11 @@
 //     //débind vbo
 //     glBindVertexArray(0);
 
-//     //skybox 
+//     //skybox
 //     ourSkybox.fillSkyVao();
 //     ourSkybox.mapTexture();
 
-//     bool done = false; 
+//     bool done = false;
 //     bool gameStart = false;
 //     menu.setStop(&done);
 //     SDL_EnableKeyRepeat(10,10);
@@ -156,13 +154,12 @@
 //             SDL_Event e;
 //             while(windowManager.pollEvent(e)) {
 
-            
 //             if (!pause) {
 //                 maCamera.handleSDLEvent(e);
 //                 character.handleSDLEvent(e);
 //             }
 //             menu.handleSDLEvent(e, gameStart);
-        
+
 //             if(e.type == SDL_MOUSEBUTTONUP) {
 //                 gameStart = titleScreen.close();
 //                 if (looser) {
@@ -189,9 +186,9 @@
 //                 objProgram.setProjMatrix(ProjMatrix);
 
 //                 CaseTest.drawCase();
-                
+
 //                 character.reactToInputs();
-                
+
 //                 moveMatrix.computeAllMatrix();
 //                 glm::mat4 MVMatrix = moveMatrix.getViewMatrix();
 //                 glm::mat4 MVPMatrix = ProjMatrix*MVMatrix;
@@ -212,11 +209,10 @@
 //                 // glUniformMatrix4fv(moonProgram.uMVPMatrix, 1, GL_FALSE, glm::value_ptr(MVPMatrixLune));
 //                 // glUniformMatrix4fv(moonProgram.uMVMatrix, 1, GL_FALSE, glm::value_ptr(MVMatrixLune));
 //                 // glUniformMatrix4fv(moonProgram.uNormalMatrix, 1, GL_FALSE, glm::value_ptr(NormalMatrix));
-                
+
 //                 // glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 //                 // glBindVertexArray(0);
 //                 // glBindTexture(GL_TEXTURE_2D, 0);
-
 
 //                 //Objet 1 (char)
 //                 objProgram.m_Program.use();
@@ -236,7 +232,7 @@
 //                 glUniform3f(objProgram.uKd, 2.,2.,2.);
 //                 glUniform3f(objProgram.uKs, 1.,1.,1.);
 //                 glUniform1f(objProgram.uShininess, 50.);
-//                 //Matrices        
+//                 //Matrices
 //                 objProgram.sendMatrix(moveMatrix.getCharMVMatrix(), glm::vec3(4.,4.,4.), glm::vec3(0.,7.,0.));
 //                 ourModel.Draw(objProgram.m_Program);
 
@@ -244,17 +240,16 @@
 //                 objProgram.sendMatrix(moveMatrix.getWorldMVMatrix(), glm::vec3(0.01,0.01,0.01), glm::vec3(0.,0.02,0.));
 //                 //ourModel.Draw(objProgram.m_Program);
 
-               
 //                 // //Objet3 (on va dire c'est le méchant mouahaha)
 //                 objProgram.sendMatrix(moveMatrix.getEnemyMVMatrix(), glm::vec3(4.,4.,4.), glm::vec3(1,1,1));
-                
-//                 ourModel.Draw(objProgram.m_Program); 
+
+//                 ourModel.Draw(objProgram.m_Program);
 
 //                 collectibles.draw();
 
-//                 ourSkybox.draw(moveMatrix,ProjMatrix);
+//                 ourSkybox.draw(moveMatrix.getLightMVMatrix(),ProjMatrix);
 //             }
-            
+
 //             if (character.isDead()) {
 //                 //perdu
 //                 deadScreen.open();

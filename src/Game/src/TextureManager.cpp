@@ -12,7 +12,7 @@ TextureManager::TextureManager(std::vector<P_Texture> listeTextures){
         idTextureOpenGL = listeTextures.at(i).getIdTexture();
         glActiveTexture(GL_TEXTURE0 + TextureManager::s_nbTextures);
         glBindTexture(GL_TEXTURE_2D, idTextureOpenGL);
-        m_map_NameTexture_IDTexture[nomTexture] = {idTextureOpenGL, TextureManager::s_nbTextures};
+        m_map_NameTexture_IDTexture[nomTexture] = TextureManager::s_nbTextures;
         TextureManager::s_nbTextures++;
     }
 }
@@ -22,10 +22,10 @@ TextureManager::TextureManager(P_Texture &texture){
     GLuint idTextureOpenGL = texture.getIdTexture();
     glActiveTexture(GL_TEXTURE0 + TextureManager::s_nbTextures);
     glBindTexture(GL_TEXTURE_2D, idTextureOpenGL);
-    m_map_NameTexture_IDTexture[nomTexture] = {idTextureOpenGL, TextureManager::s_nbTextures};
+    m_map_NameTexture_IDTexture[nomTexture] = TextureManager::s_nbTextures;
     TextureManager::s_nbTextures++;
 }
 
-TextureMap TextureManager::getTextureMatchingName(int nameTexture) const{
+int TextureManager::getGLTextureMatchingName(int nameTexture) const{
     return m_map_NameTexture_IDTexture.at(nameTexture);
 }
