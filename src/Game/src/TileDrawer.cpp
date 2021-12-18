@@ -1,8 +1,10 @@
 #include "TileDrawer.hpp"
 #include <glm/glm.hpp>
 #include "Vertex3D.hpp"
+#include "glimac/glm.hpp"
 
-TileDrawer::TileDrawer()
+TileDrawer::TileDrawer(const FilePath &applicationPath, const std::string &pathVertexShader, const std::string &pathFragShader) // Création d'une case de 1x1
+    : m_formeProgramme(applicationPath, pathVertexShader, pathFragShader)
 {
     const Vertex3DUV vertices[] = {{glm::vec3(-0.5, 0., 1.), glm::vec3(1., 0., 0.), glm::vec2(0., 0.)}, // BG
                                    {glm::vec3(0.5, 0., 1.), glm::vec3(0., 1., 0.), glm::vec2(1., 0.)},  // BD
@@ -61,8 +63,14 @@ TileDrawer::TileDrawer()
     glBindVertexArray(0);
 }
 
-void TileDrawer::drawCase()
+void TileDrawer::drawCase(const glm::mat4 &MVPMatrix, int texture)
 {
+    m_formeProgramme.m_Program.use();
+
+    glUniformMatrix4fv(m_formeProgramme.uMVPMatrix, 1, GL_FALSE, glm::value_ptr(MVPMatrix));
+
+    glUniform1i(m_formeProgramme.uTexture, texture);
+
     glBindVertexArray(m_vao);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);

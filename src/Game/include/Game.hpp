@@ -14,8 +14,7 @@ class Game
 public:
     Game(const std::string &fileMatrice, std::vector<P_Texture> listeTextures, const FilePath &applicationPath, const std::string &pathVertexShader, const std::string &pathFragShader)
         : m_MatriceTerrain(fileMatrice),
-          m_tileDrawer(),
-          m_formeProgramme(applicationPath, pathVertexShader, pathFragShader),
+          m_tileDrawer(applicationPath, pathVertexShader, pathFragShader),
           m_textureIDManager(listeTextures),
           m_camDebug(),
           m_rotateTerrainLeft(false),
@@ -30,13 +29,12 @@ public:
     }
 
 private:
-    Matrice m_MatriceTerrain; // On va push des vecteurs de 3 (correspondant à chaque ligne du terrain
-    TileDrawer m_tileDrawer;  // Contient le vao, le vbo et une carré de 1x1 démarrant à
-    // Drawer m_drawer;
-    FormProgram m_formeProgramme;
+    Matrice m_MatriceTerrain;          // On va push des vecteurs de 3 (correspondant à chaque ligne du terrain
+    TileDrawer m_tileDrawer;           // Contient le vao, le vbo et une carré de 1x1 démarrant à
     TextureManager m_textureIDManager; // Une map qui va faire le lien entre l'ID d'une case (converti à partir des nombres dans la matriceTerrain) et la valeur de sa constante GLTEXTUREi, que l'on passera pour la dessiner en paramètres (pas clair, check the TP) ==> On peut aussi passer par un enum, pour ne pas avoir à convertir ?
     cameraDebug m_camDebug;
+    Skybox m_Skybox; // dans un std::vector (i.e ca fait du matrice) qui représentera tout le terrain/la partie du terrain actuellement générée en faisant Matrice(FileMatrice)
+
     bool m_rotateTerrainLeft;
     bool m_rotateTerrainRight;
-    Skybox m_Skybox; // dans un std::vector (i.e ca fait du matrice) qui représentera tout le terrain/la partie du terrain actuellement générée en faisant Matrice(FileMatrice)
 };

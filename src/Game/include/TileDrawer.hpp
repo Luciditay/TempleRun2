@@ -1,6 +1,9 @@
 #pragma once
 
 #include "GL/glew.h"
+#include "formProgram.hpp"
+#include "glimac/FilePath.hpp"
+#include "glm/glm.hpp"
 
 class TileDrawer // Case de base, sans saut ni trou
 {
@@ -17,11 +20,12 @@ public:
     //   m_VertexBG(vertices[2]),
     //   m_VertexBD(vertices[3])  {}
 
-    TileDrawer(); // Création d'une case de 1x1
+    TileDrawer(const FilePath &applicationPath, const std::string &pathVertexShader, const std::string &pathFragShader); // Création d'une case de 1x1
 
-    void drawCase();
+    void drawCase(const glm::mat4 &MVPMatrix, int texture);
 
 private:
+    FormProgram m_formeProgramme;
     GLuint m_vbo;
     GLuint m_vao;
     GLuint m_ibo;

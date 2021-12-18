@@ -37,7 +37,7 @@ int main(int argc, char **argv)
     const std::string FSPath = "shaders/case3D.fs.glsl";
 
     P_Texture textureSol(TextureTypeId::SOL, "../assets/textures/dirt.png");
-    P_Texture textureSol1(TextureTypeId::SOL1, "../assets/textures/labyrinth.png");
+    P_Texture textureSol1(TextureTypeId::SOL1, "../assets/textures/textureMur.jpeg");
     P_Texture textureSol2(TextureTypeId::SOL2, "../assets/textures/triforce.png");
     P_Texture textureSol10(TextureTypeId::SOL10, "../assets/textures/dirt.png");
     listeTexture.push_back(textureSol);
