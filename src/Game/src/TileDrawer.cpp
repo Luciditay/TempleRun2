@@ -6,10 +6,10 @@
 TileDrawer::TileDrawer(const FilePath &applicationPath, const std::string &pathVertexShader, const std::string &pathFragShader) // Création d'une case de 1x1
     : m_formeProgramme(applicationPath, pathVertexShader, pathFragShader)
 {
-    const Vertex3DUV vertices[] = {{glm::vec3(-0.5, 0., 1.), glm::vec3(1., 0., 0.), glm::vec2(0., 0.)}, // BG
-                                   {glm::vec3(0.5, 0., 1.), glm::vec3(0., 1., 0.), glm::vec2(1., 0.)},  // BD
-                                   {glm::vec3(-0.5, 0., 0.), glm::vec3(0., 0., 1.), glm::vec2(0., 1.)}, // HG
-                                   {glm::vec3(0.5, 0., 0.), glm::vec3(1., 0., 1.), glm::vec2(1., 1.)}};
+    const Vertex3DUV vertices[] = {{glm::vec3(-1., 0., 2.), glm::vec3(1., 0., 0.), glm::vec2(0., 0.)}, // BG
+                                   {glm::vec3(1., 0., 2.), glm::vec3(0., 1., 0.), glm::vec2(1., 0.)},  // BD
+                                   {glm::vec3(-1., 0., 0.), glm::vec3(0., 0., 1.), glm::vec2(0., 1.)}, // HG
+                                   {glm::vec3(1., 0., 0.), glm::vec3(1., 0., 1.), glm::vec2(1., 1.)}};
 
     glGenBuffers(1, &m_vbo);
     glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
