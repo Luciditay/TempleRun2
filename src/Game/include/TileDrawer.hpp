@@ -8,36 +8,22 @@
 class TileDrawer // Case de base, sans saut ni trou
 {
 public:
-    // TileDrawer(const Vertex3DUV VertexHG, const Vertex3DUV VertexHD, const Vertex3DUV VertexBG, Vertex3DUV VertexBD)
-    // : m_VertexHG(VertexHG),
-    //   m_VertexHD(VertexHD),
-    //   m_VertexBG(VertexBG),
-    //   m_VertexBD(VertexBD)  {}
+    TileDrawer(const FilePath &applicationPath, const std::string &pathVertexShader, const std::string &pathFragShader, float size = 1); // Création d'une case de 1x1
 
-    // TileDrawer(Vertex3DUV vertices[4])
-    // : m_VertexHG(vertices[0]),
-    //   m_VertexHD(vertices[1]),
-    //   m_VertexBG(vertices[2]),
-    //   m_VertexBD(vertices[3])  {}
+    void drawCase(const glm::mat4 &VPMatrix, const glm::vec3 &offset, int texture);
 
-    TileDrawer(const FilePath &applicationPath, const std::string &pathVertexShader, const std::string &pathFragShader); // Création d'une case de 1x1
+    void drawMurHorizontal(const glm::mat4 &VPMatrix, const glm::vec3 &offset, int texture);
+    void drawMurVertical(const glm::mat4 &VPMatrix, const glm::vec3 &offset, int TypeTextureID);
 
-    void drawCase(const glm::mat4 &MVPMatrix, int texture);
+    float getSizeTile()
+    {
+        return m_size;
+    }
 
 private:
     FormProgram m_formeProgramme;
     GLuint m_vbo;
     GLuint m_vao;
     GLuint m_ibo;
+    float m_size;
 };
-
-// class CaseMur : protected Case
-// {
-// public:
-//     CaseMur();
-//     // virtual ~CaseMur(); //Virtuel car polymorphisme
-//     void drawCase();
-
-// private:
-//     float hauteurMur;
-// };

@@ -22,6 +22,11 @@ public:
 
     void drawTerrain(float ratio, cameraDebug &camDebug);
 
+    void drawCrossBetweenTerrain(int idTypeCroisement, int zOffset, const glm::mat4 &PVMatrix); // Draw un croisement
+
+    glm::mat4 MMatrixMur(int xOffset, int yOffset, int zOffset);
+    glm::mat4 MMatrixMurHorizontal(const glm::vec3 &offset);
+
     cameraDebug getCamDebug() const
     {
         return m_camDebug;
