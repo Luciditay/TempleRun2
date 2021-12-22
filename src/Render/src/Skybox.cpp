@@ -5,8 +5,8 @@ Skybox::Skybox(const glimac::FilePath &filePath)
 
     tabTex = {"assets/textures/skybox/right.jpg",
               "assets/textures/skybox/left.jpg",
-              "assets/textures/skybox/top.jpg",
               "assets/textures/skybox/bottom.jpg",
+              "assets/textures/skybox/top.jpg",
               "assets/textures/skybox/front.jpg",
               "assets/textures/skybox/back.jpg"};
 

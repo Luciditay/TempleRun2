@@ -23,6 +23,12 @@ int main(int argc, char **argv)
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     // //Initialisation shaders
+    FilePath applicationPath(argv[0]);
+    ObjProgram objProgram(applicationPath);
+
+    // Modele loading
+    stbi_set_flip_vertically_on_load(true);
+    Model ourModel("assets/assetsTestAssimp/backpack.obj");
 
     /*********************************
      * HERE SHOULD COME THE INITIALIZATION CODE
@@ -31,15 +37,13 @@ int main(int argc, char **argv)
     const std::string matriceFile = "../test/fileTest.txt"; // On remonte de 1 dans l'arbo, car le .exe se trouve dans build, et que le contenu de test n'est pas copié (à modifier)
     std::vector<P_Texture> listeTexture;
 
-    FilePath applicationPath(argv[0]);
-
     const std::string VSPath = "shaders/case3D.vs.glsl";
     const std::string FSPath = "shaders/case3D.fs.glsl";
 
-    P_Texture textureSol(TextureTypeId::SOL, "../assets/textures/dirt.png");
+    P_Texture textureSol(TextureTypeId::SOL, "../assets/textures/pngwing.com.png");
     P_Texture textureSol1(TextureTypeId::SOL1, "../assets/textures/textureMur.jpeg");
     P_Texture textureSol2(TextureTypeId::SOL2, "../assets/textures/triforce.png");
-    P_Texture textureSol10(TextureTypeId::SOL10, "../assets/textures/dirt.png");
+    P_Texture textureSol10(TextureTypeId::SOL10, "../assets/textures/pngwing.com.png");
     listeTexture.push_back(textureSol);
     listeTexture.push_back(textureSol1);
     listeTexture.push_back(textureSol2);
@@ -78,6 +82,14 @@ int main(int argc, char **argv)
                 done = true; // Leave the loop after this iteration
             }
         }
+
+        glm::mat4 ProjMatrix = glm::perspective(glm::radians(70.f), float(largeur) / float(hauteur), 0.1f, 1000.f);
+        objProgram.setProjMatrix(ProjMatrix);
+
+        objProgram.m_Program.use();
+        // Cam fixe
+        objProgram.sendMatrix(camDebug.getViewMatrix(), glm::vec3(1., 1., 1.), glm::vec3(0., 0., 1.));
+        ourModel.Draw(objProgram.m_Program);
 
         terrain.drawTerrain(largeur / hauteur, camDebug);
         /*********************************

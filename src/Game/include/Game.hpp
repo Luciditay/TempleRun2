@@ -18,7 +18,8 @@ public:
           m_camDebug(),
           m_rotateTerrainLeft(false),
           m_rotateTerrainRight(false),
-          m_Skybox(applicationPath) {} // Default constructor of cam is fine
+          m_Skybox(applicationPath),
+          m_character(applicationPath) {} // Default constructor of cam is fine
 
     void drawTerrain(float ratio, cameraDebug &camDebug);
 
@@ -38,7 +39,7 @@ private:
     TextureManager m_textureIDManager; // Une map qui va faire le lien entre l'ID d'une case (converti à partir des nombres dans la matriceTerrain) et la valeur de sa constante GLTEXTUREi, que l'on passera pour la dessiner en paramètres (pas clair, check the TP) ==> On peut aussi passer par un enum, pour ne pas avoir à convertir ?
     cameraDebug m_camDebug;
     Skybox m_Skybox; // dans un std::vector (i.e ca fait du matrice) qui représentera tout le terrain/la partie du terrain actuellement générée en faisant Matrice(FileMatrice)
-
+    Character m_character;
     bool m_rotateTerrainLeft;
     bool m_rotateTerrainRight;
 };
