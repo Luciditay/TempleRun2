@@ -11,15 +11,15 @@
 class Game
 {
 public:
-    Game(const std::string &fileMatrice, std::vector<P_Texture> listeTextures, const FilePath &applicationPath, const std::string &pathVertexShader, const std::string &pathFragShader)
-        : m_MatriceTerrain(fileMatrice),
-          m_tileDrawer(applicationPath, pathVertexShader, pathFragShader),
-          m_textureIDManager(listeTextures),
+    Game(const Matrice &m, const TextureManager &tm, const FilePath &applicationPath, const std::string &VSPath, const std::string &FSPath, const std::string &modelPath)
+        : m_MatriceTerrain(m),
+          m_tileDrawer(applicationPath, VSPath, FSPath),
+          m_textureIDManager(tm),
           m_camDebug(),
           m_rotateTerrainLeft(false),
           m_rotateTerrainRight(false),
           m_Skybox(applicationPath),
-          m_character(applicationPath) {} // Default constructor of cam is fine
+          m_character(modelPath, applicationPath) {} // Default constructor of cam is fine
 
     void drawTerrain(float ratio, cameraDebug &camDebug);
 

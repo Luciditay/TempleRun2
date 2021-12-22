@@ -15,7 +15,7 @@ private:
     glm::vec3 m_scaleChar;     /*!< scale to be applied to the character */
     glm::vec3 m_compenseScale; /*!< translation needed to maintain the character on the floor even with the scale */
 
-    //  Model m_model;
+    Model m_model;
 
     float m_speed;         /*!< character speed */
     float m_distanceEnemy; /*!< distance character-enemy */
@@ -45,11 +45,11 @@ private:
 
 public:
     /// \brief constructor
-    Character(const glimac::FilePath &applicationPath);
+    Character(const std::string &modelPath, const glimac::FilePath &applicationPath);
     /// \brief change the action booleans according to the player inputs
     /// \param e : SDL_Event
 
-    void draw();
+    void draw(glm::mat4 MVPMatrix);
 
     void computeMVCharacter();
 

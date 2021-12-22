@@ -49,6 +49,7 @@ void Game::drawTerrain(float ratio, cameraDebug &camDebug)
     // MVMatrix = glm::translate(MVMatrix, glm::vec3(-1, 0, 0)); //On se place en ligne 0 à gauche
 
     m_Skybox.draw(ViewMatrix, ProjMatrix);
+    m_character.draw(ProjMatrix * ViewMatrix);
 
     for (int i = 0; i < m_MatriceTerrain.getMatrice().size(); i++)
     {

@@ -28,7 +28,7 @@ int main(int argc, char **argv)
 
     // Modele loading
     stbi_set_flip_vertically_on_load(true);
-    Model ourModel("assets/assetsTestAssimp/backpack.obj");
+    // Model modelCharacter("assets/assetsTestAssimp/backpack.obj", applicationPath);
 
     /*********************************
      * HERE SHOULD COME THE INITIALIZATION CODE
@@ -37,6 +37,7 @@ int main(int argc, char **argv)
     const std::string matriceFile = "../test/fileTest.txt"; // On remonte de 1 dans l'arbo, car le .exe se trouve dans build, et que le contenu de test n'est pas copié (à modifier)
     std::vector<P_Texture> listeTexture;
 
+    const std::string modelCharacterPath = "assets/assetsTestAssimp/backpack.obj";
     const std::string VSPath = "shaders/case3D.vs.glsl";
     const std::string FSPath = "shaders/case3D.fs.glsl";
 
@@ -49,12 +50,16 @@ int main(int argc, char **argv)
     listeTexture.push_back(textureSol2);
     listeTexture.push_back(textureSol10);
 
-    Game terrain(matriceFile, listeTexture, applicationPath, VSPath, FSPath);
+    Matrice matriceTerrain(matriceFile);
+    TextureManager textureManager(listeTexture);
+
+    Game terrain(matriceTerrain, textureManager, applicationPath, VSPath, FSPath, modelCharacterPath);
 
     constexpr GLuint VERTEX_ATTR_POSITION = 0;
     constexpr GLuint VERTEX_ATTR_TEXTURE = 2;
 
     cameraDebug camDebug;
+    // Character Player(applicationPath);
 
     glm::mat4 MVMatrix;
     glm::mat4 MVPMatrix;
@@ -83,13 +88,8 @@ int main(int argc, char **argv)
             }
         }
 
-        glm::mat4 ProjMatrix = glm::perspective(glm::radians(70.f), float(largeur) / float(hauteur), 0.1f, 1000.f);
-        objProgram.setProjMatrix(ProjMatrix);
-
-        objProgram.m_Program.use();
         // Cam fixe
-        objProgram.sendMatrix(camDebug.getViewMatrix(), glm::vec3(1., 1., 1.), glm::vec3(0., 0., 1.));
-        ourModel.Draw(objProgram.m_Program);
+        //  terrain.m_.Draw(camDebug.getViewMatrix());
 
         terrain.drawTerrain(largeur / hauteur, camDebug);
         /*********************************

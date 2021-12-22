@@ -23,13 +23,10 @@ void ObjProgram::setProjMatrix(glm::mat4 projMatrix)
     m_ProjMatrix = projMatrix;
 }
 
-void ObjProgram::sendMatrix(glm::mat4 MMatrixObj, glm::vec3 scale, glm::vec3 translate)
+void ObjProgram::sendMatrix(glm::mat4 MVPMatrixObj)
 {
-    glm::mat4 MVMatrixObj = glm::translate(MMatrixObj, translate);
-    MVMatrixObj = glm::scale(MVMatrixObj, scale);
-    glm::mat4 MVPMatrixObj = m_ProjMatrix * MVMatrixObj;
-    glm::mat4 NormalMatrixObj = glm::transpose(glm::inverse(MVMatrixObj));
+    glm::mat4 NormalMatrixObj = glm::transpose(glm::inverse(MVPMatrixObj));
     glUniformMatrix4fv(uMVPMatrix, 1, GL_FALSE, glm::value_ptr(MVPMatrixObj));
-    glUniformMatrix4fv(uMVMatrix, 1, GL_FALSE, glm::value_ptr(MVMatrixObj));
+    //  glUniformMatrix4fv(uMVMatrix, 1, GL_FALSE, glm::value_ptr(MVMatrixObj));
     glUniformMatrix4fv(uNormalMatrix, 1, GL_FALSE, glm::value_ptr(NormalMatrixObj));
 }

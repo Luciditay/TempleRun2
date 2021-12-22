@@ -11,20 +11,20 @@ float squatScale(float x)
     return 1 - (-5 * x * x + 0.5);
 }
 
-Character::Character(const glimac::FilePath &applicationPath) : m_posChar(0., 0., 0.), m_jumping(false), m_jumpIndex(-0.4), m_speed(1.), m_distanceEnemy(100), m_enemySpeed(0.1),
-                                                                m_scaleChar(1., 1., 1.), m_compenseScale(0., 0., 0.), m_squating(false), m_squatIndex(-0.3),
-                                                                m_turn(false), m_turningLeft(false), m_turningRight(false), m_angle(0), m_variationAngle(0),
-                                                                m_upChar(0., 1., 0.), m_frontChar({0., 0., 0.1}), m_dead(false),
-                                                                m_lateralStepRight(false), m_lateralStepLeft(false), m_fall(false), m_fallDistance(0)
-// m_model("assets/assetsTestAssimp/backpack.obj", applicationPath)
+Character::Character(const std::string &modelPath, const glimac::FilePath &applicationPath)
+    : m_posChar(0., 0., 0.), m_jumping(false), m_jumpIndex(-0.4), m_speed(1.), m_distanceEnemy(100), m_enemySpeed(0.1),
+      m_scaleChar(1., 1., 1.), m_compenseScale(0., 0., 0.), m_squating(false), m_squatIndex(-0.3),
+      m_turn(false), m_turningLeft(false), m_turningRight(false), m_angle(0), m_variationAngle(0),
+      m_upChar(0., 1., 0.), m_frontChar({0., 0., 0.1}), m_dead(false),
+      m_lateralStepRight(false), m_lateralStepLeft(false), m_fall(false), m_fallDistance(0),
+      m_model(modelPath, applicationPath)
 {
 }
 
-// void Character::draw()
-// {
-//     glm::mat4 MVPMatrix;
-//     m_model.m_objProgramme.sendMatrix(MVPMatrix, glm::vec3(4., 4., 4.), glm::vec3(0., 7., 0.));
-// }
+void Character::draw(glm::mat4 MVPMatrix)
+{
+    m_model.Draw(MVPMatrix);
+}
 
 void Character::handleSDLEvent(const SDL_Event &e)
 {

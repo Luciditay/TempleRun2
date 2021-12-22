@@ -1,6 +1,5 @@
 #pragma once
 #include <glimac/glm.hpp>
-#include <glimac/Program.hpp>
 #include <vector>
 #include <string>
 #include <iostream>
@@ -10,7 +9,7 @@
 #include <assimp/postprocess.h> // Post processing flags
 #include <Mesh.hpp>
 #include <stb/stb_image.h>
-//#include "ObjProgram.hpp"
+#include "ObjProgram.hpp"
 
 /// \class Model
 /// \brief class that load a 3D object .obj using assimp
@@ -19,21 +18,21 @@ class Model
 public:
     /// \brief constructor (load the .obj)
     /// \param path : path of the .obj
-    Model(std::string path)
-    //: m_objProgramme(applicationPath)
+    Model(std::string const &path, const glimac::FilePath &applicationPath)
+        : m_objProgramme(applicationPath)
     {
         loadModel(path);
     }
     /// \brief draw the object
     /// \param program : used to draw
-    void Draw(glimac::Program &program);
+    void Draw(glm::mat4 MVPMatrix);
 
 private:
     // model data
     std::vector<Mesh> _meshes;            /*!< vector of model meshes */
     std::string _directory;               /*!< model directory */
     std::vector<Texture> textures_loaded; /*!< vector of loaded texture */
-                                          //    ObjProgram m_objProgramme;
+    ObjProgram m_objProgramme;
 
     /// \brief load the .obj
     /// \param path : path of the .obj
