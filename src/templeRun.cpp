@@ -53,7 +53,7 @@ int main(int argc, char **argv)
     Matrice matriceTerrain(matriceFile);
     TextureManager textureManager(listeTexture);
 
-    Game game(matriceTerrain, textureManager, applicationPath, VSPath, FSPath, modelCharacterPath, windowManager);
+    Render3D game(matriceTerrain, textureManager, applicationPath, VSPath, FSPath, modelCharacterPath, windowManager);
 
     constexpr GLuint VERTEX_ATTR_POSITION = 0;
     constexpr GLuint VERTEX_ATTR_TEXTURE = 2;
@@ -68,37 +68,39 @@ int main(int argc, char **argv)
     bool done = false;
     bool gameStart = false;
     SDL_EnableKeyRepeat(10, 10);
-    while (!done)
-    {
 
-        // Nettoyage de la fenêtre
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    game.playGame(largeur, hauteur);
+    // while (!done)
+    // {
 
-        // update current time
-        //  Event loop:
-        SDL_Event e;
-        while (windowManager.pollEvent(e))
-        {
+    //     // Nettoyage de la fenêtre
+    //     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-            camDebug.reactSDLEvents(e);
+    //     // update current time
+    //     //  Event loop:
+    //     SDL_Event e;
+    //     while (windowManager.pollEvent(e))
+    //     {
 
-            if (e.type == SDL_QUIT)
-            {
-                done = true; // Leave the loop after this iteration
-            }
-        }
+    //         camDebug.reactSDLEvents(e);
 
-        /*********************************
-         * HERE SHOULD COME THE RENDERING CODE
-         *********************************/
+    //         if (e.type == SDL_QUIT)
+    //         {
+    //             done = true; // Leave the loop after this iteration
+    //         }
+    //     }
 
-        game.drawTerrain(largeur / hauteur, camDebug, Player);
+    //     /*********************************
+    //      * HERE SHOULD COME THE RENDERING CODE
+    //      *********************************/
 
-        // Update the display
-        windowManager.swapBuffers();
+    //     game.drawTerrain(largeur / hauteur);
 
-        // update previous time
-    }
+    //     // Update the display
+    //     windowManager.swapBuffers();
+
+    //     // update previous time
+    // }
 
     // TTF_Quit();
 

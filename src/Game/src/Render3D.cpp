@@ -1,12 +1,45 @@
-#include "Game.hpp"
+#include "Render3D.hpp"
 #include "glimac/glm.hpp"
 #include "Constants.hpp"
 
-void Game::playGame()
+void Render3D::playGame(float largeur, float hauteur)
 {
+    while (true)
+    {
+
+        // Nettoyage de la fenêtre
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        // update current time
+        //  Event loop:
+        SDL_Event e;
+
+        while (m_windowManager.pollEvent(e))
+        {
+
+            m_camDebug.reactSDLEvents(e);
+
+            if (e.type == SDL_QUIT)
+            {
+                // A CODER : FONCTION LIBERATIONS DE MEMOIRES
+                exit(EXIT_SUCCESS); // Leave the loop after this iteration
+            }
+        }
+
+        /*********************************
+         * HERE SHOULD COME THE RENDERING CODE
+         *********************************/
+
+        drawTerrain(largeur / hauteur);
+
+        // Update the display
+        m_windowManager.swapBuffers();
+
+        // update previous time
+    }
 }
 
-void Game::drawCrossBetweenTerrain(int idTypeCroisement, int zOffset, const glm::mat4 &PVMatrix)
+void Render3D::drawCrossBetweenTerrain(int idTypeCroisement, int zOffset, const glm::mat4 &PVMatrix)
 {
     int currentTex = m_textureIDManager.getGLTextureMatchingName(idTypeCroisement);
 
@@ -36,10 +69,10 @@ void Game::drawCrossBetweenTerrain(int idTypeCroisement, int zOffset, const glm:
     }
 }
 
-void Game::drawTerrain(float ratio, cameraDebug &camDebug, Character &c)
+void Render3D::drawTerrain(float ratio)
 {
     glm::mat4 MMatrix;
-    const glm::mat4 ViewMatrix = camDebug.getViewMatrix();
+    const glm::mat4 ViewMatrix = m_camDebug.getViewMatrix();
     const glm::mat4 ProjMatrix = glm::perspective(glm::radians(70.f), ratio, 0.1f, 100.f);
 
     float tailleCase = m_tileDrawer.getSizeTile();
@@ -52,7 +85,7 @@ void Game::drawTerrain(float ratio, cameraDebug &camDebug, Character &c)
 
     // MVMatrix = glm::translate(MVMatrix, glm::vec3(-1, 0, 0)); //On se place en ligne 0 à gauche
 
-    const glm::mat4 MVMatrixPersonnage = c.computeMVMatrixCharacter(camDebug);
+    const glm::mat4 MVMatrixPersonnage = m_character.computeMVMatrixCharacter(m_camDebug);
     m_Skybox.draw(ViewMatrix, ProjMatrix);
     m_character.draw(ProjMatrix * MVMatrixPersonnage);
 

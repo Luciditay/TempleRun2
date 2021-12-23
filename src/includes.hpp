@@ -25,7 +25,7 @@
 #include "GlewInit.hpp"
 #include "formProgram.hpp"
 #include "Texture.hpp"
-#include "Game.hpp"
+#include "Render3D.hpp"
 #include "TileDrawer.hpp"
 #include "TextureManager.hpp"
 

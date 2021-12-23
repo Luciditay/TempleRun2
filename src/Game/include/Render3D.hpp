@@ -23,9 +23,9 @@ public:
           m_character(modelPath, applicationPath),
           m_windowManager(wm) {} // Default constructor of cam is fine
 
-    void playGame();
+    void playGame(float largeur, float hauteur);
 
-    void drawTerrain(float ratio, cameraDebug &camDebug, Character &c);
+    void drawTerrain(float ratio);
 
     void drawCrossBetweenTerrain(int idTypeCroisement, int zOffset, const glm::mat4 &PVMatrix); // Draw un croisement
 
