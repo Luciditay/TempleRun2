@@ -1,3 +1,4 @@
 #!/bin/bash
 
-./build/templeRun
+cd build
+./templeRun
