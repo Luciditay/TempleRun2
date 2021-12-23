@@ -7,11 +7,12 @@
 #include "TextureManager.hpp"
 #include "cameraDebug.hpp"
 #include "glimac/Program.hpp"
+#include "GlewInit.hpp"
 
 class Game
 {
 public:
-    Game(const Matrice &m, const TextureManager &tm, const FilePath &applicationPath, const std::string &VSPath, const std::string &FSPath, const std::string &modelPath)
+    Game(const Matrice &m, const TextureManager &tm, const FilePath &applicationPath, const std::string &VSPath, const std::string &FSPath, const std::string &modelPath, const glimac::SDLWindowManager &wm)
         : m_MatriceTerrain(m),
           m_tileDrawer(applicationPath, VSPath, FSPath),
           m_textureIDManager(tm),
@@ -19,9 +20,12 @@ public:
           m_rotateTerrainLeft(false),
           m_rotateTerrainRight(false),
           m_Skybox(applicationPath),
-          m_character(modelPath, applicationPath) {} // Default constructor of cam is fine
+          m_character(modelPath, applicationPath),
+          m_windowManager(wm) {} // Default constructor of cam is fine
 
-    void drawTerrain(float ratio, cameraDebug &camDebug);
+    void playGame();
+
+    void drawTerrain(float ratio, cameraDebug &camDebug, Character &c);
 
     void drawCrossBetweenTerrain(int idTypeCroisement, int zOffset, const glm::mat4 &PVMatrix); // Draw un croisement
 
@@ -40,6 +44,7 @@ private:
     cameraDebug m_camDebug;
     Skybox m_Skybox; // dans un std::vector (i.e ca fait du matrice) qui représentera tout le terrain/la partie du terrain actuellement générée en faisant Matrice(FileMatrice)
     Character m_character;
+    SDLWindowManager m_windowManager;
     bool m_rotateTerrainLeft;
     bool m_rotateTerrainRight;
 };

@@ -98,17 +98,22 @@ void Character::handleSDLEvent(const SDL_Event &e)
     }
 }
 
-// void Character::computeViewMatrix()
-// {
-//     m_ViewMatrix = glm::translate(m_camera->getViewMatrix(), glm::vec3(0., -m_char->getPos().y, 0.));
-// }
+glm::mat4 Character::computeMVMatrixCharacter(cameraDebug &c)
+{
+    return computeViewMatrix(c) * computeMMatrixCharacter();
+}
 
-// void Character::computeMVCharacter()
-// {
-//     glm::mat4 VChar = glm::translate(glm::mat4(), glm::vec3(0., m_char->getPos().y, 0.) + m_char->getCompenseScale());
-//     VChar = glm::scale(VChar, m_char->getScale());
-//     m_MVMatrixCharacter = m_ViewMatrix * VChar;
-// }
+glm::mat4 Character::computeViewMatrix(cameraDebug &c) const
+{
+    return glm::translate(c.getViewMatrix(), glm::vec3(0., -m_posChar.y, 0.));
+}
+
+glm::mat4 Character::computeMMatrixCharacter()
+{
+    glm::mat4 MMatrixChar = glm::translate(glm::mat4(), glm::vec3(0., m_posChar.y, 0.) + m_compenseScale);
+    MMatrixChar = glm::scale(MMatrixChar, m_scaleChar);
+    return MMatrixChar;
+}
 
 void Character::reactToInputs()
 {

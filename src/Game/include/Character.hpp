@@ -3,6 +3,7 @@
 #include <glm/gtx/rotate_vector.hpp>
 #include "Model.hpp"
 #include <glimac/SDLWindowManager.hpp>
+#include "cameraDebug.hpp"
 
 /// \class Character
 class Character
@@ -51,9 +52,11 @@ public:
 
     void draw(glm::mat4 MVPMatrix);
 
-    void computeMVCharacter();
+    glm::mat4 computeMMatrixCharacter();
 
-    void computeViewMatrix();
+    glm::mat4 computeViewMatrix(cameraDebug &c) const;
+
+    glm::mat4 computeMVMatrixCharacter(cameraDebug &c);
 
     void handleSDLEvent(const SDL_Event &e);
     /// \brief react to action booleans changes, by modifying position value etc.

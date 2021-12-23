@@ -2,6 +2,10 @@
 #include "glimac/glm.hpp"
 #include "Constants.hpp"
 
+void Game::playGame()
+{
+}
+
 void Game::drawCrossBetweenTerrain(int idTypeCroisement, int zOffset, const glm::mat4 &PVMatrix)
 {
     int currentTex = m_textureIDManager.getGLTextureMatchingName(idTypeCroisement);
@@ -32,7 +36,7 @@ void Game::drawCrossBetweenTerrain(int idTypeCroisement, int zOffset, const glm:
     }
 }
 
-void Game::drawTerrain(float ratio, cameraDebug &camDebug)
+void Game::drawTerrain(float ratio, cameraDebug &camDebug, Character &c)
 {
     glm::mat4 MMatrix;
     const glm::mat4 ViewMatrix = camDebug.getViewMatrix();
@@ -48,8 +52,9 @@ void Game::drawTerrain(float ratio, cameraDebug &camDebug)
 
     // MVMatrix = glm::translate(MVMatrix, glm::vec3(-1, 0, 0)); //On se place en ligne 0 à gauche
 
+    const glm::mat4 MVMatrixPersonnage = c.computeMVMatrixCharacter(camDebug);
     m_Skybox.draw(ViewMatrix, ProjMatrix);
-    m_character.draw(ProjMatrix * ViewMatrix);
+    m_character.draw(ProjMatrix * MVMatrixPersonnage);
 
     for (int i = 0; i < m_MatriceTerrain.getMatrice().size(); i++)
     {

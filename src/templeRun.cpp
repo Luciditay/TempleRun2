@@ -53,13 +53,13 @@ int main(int argc, char **argv)
     Matrice matriceTerrain(matriceFile);
     TextureManager textureManager(listeTexture);
 
-    Game terrain(matriceTerrain, textureManager, applicationPath, VSPath, FSPath, modelCharacterPath);
+    Game game(matriceTerrain, textureManager, applicationPath, VSPath, FSPath, modelCharacterPath, windowManager);
 
     constexpr GLuint VERTEX_ATTR_POSITION = 0;
     constexpr GLuint VERTEX_ATTR_TEXTURE = 2;
 
     cameraDebug camDebug;
-    // Character Player(applicationPath);
+    Character Player(modelCharacterPath, applicationPath);
 
     glm::mat4 MVMatrix;
     glm::mat4 MVPMatrix;
@@ -88,35 +88,11 @@ int main(int argc, char **argv)
             }
         }
 
-        // Cam fixe
-        //  terrain.m_.Draw(camDebug.getViewMatrix());
-
-        terrain.drawTerrain(largeur / hauteur, camDebug);
         /*********************************
          * HERE SHOULD COME THE RENDERING CODE
          *********************************/
 
-        // CaseTest1.drawCase();
-        //  MVMatrix = glm::translate(glm::mat4{1.f}, glm::vec3(0, 0, -5));
-        //  //MVMatrix = glm::scale(MVMatrix, glm::vec3(20, 20, 20));
-
-        // MVMatrix =   camDebug.getViewMatrix() *MVMatrix;
-        // ProjMatrix = glm::perspective(glm::radians(70.f), largeur/hauteur, 0.1f, 100.f);
-
-        // CaseTest1.m_drawer.m_Program.use();
-
-        // //glUniform4fv(caseProgramme.uMVMatrix, 1, glm::value_ptr(glm::mat4{1.f}));
-        // glUniformMatrix4fv(CaseTest1.m_drawer.uMVPMatrix, 1, GL_FALSE, glm::value_ptr(ProjMatrix * MVMatrix));
-
-        // CaseTest1.drawCase();
-
-        // for (int i=0; i<10; i++){
-
-        //     MVMatrix = glm::translate(MVMatrix, glm::vec3(0, 0, -1));
-        //     glUniformMatrix4fv(CaseTest1.m_drawer.uMVPMatrix, 1, GL_FALSE, glm::value_ptr(ProjMatrix * MVMatrix));
-        //     CaseTest1.drawCase();
-
-        // }
+        game.drawTerrain(largeur / hauteur, camDebug, Player);
 
         // Update the display
         windowManager.swapBuffers();
