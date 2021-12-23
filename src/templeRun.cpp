@@ -37,14 +37,14 @@ int main(int argc, char **argv)
     const std::string matriceFile = "../map/fileTest.txt"; // On remonte de 1 dans l'arbo, car le .exe se trouve dans build, et que le contenu de test n'est pas copié (à modifier)
     std::vector<P_Texture> listeTexture;
 
-    const std::string modelCharacterPath = "assets/assetsTestAssimp/backpack.obj";
+    const std::string modelCharacterPath = "../assets/assetsTestAssimp/backpack.obj";
     const std::string VSPath = "shaders/case3D.vs.glsl";
     const std::string FSPath = "shaders/case3D.fs.glsl";
 
-    P_Texture textureSol(TextureTypeId::SOL, "assets/textures/pngwing.com.png");
-    P_Texture textureSol1(TextureTypeId::SOL1, "assets/textures/textureMur.jpeg");
-    P_Texture textureSol2(TextureTypeId::SOL2, "assets/textures/triforce.png");
-    P_Texture textureSol10(TextureTypeId::SOL10, "assets/textures/pngwing.com.png");
+    P_Texture textureSol(TextureTypeId::SOL, "../assets/textures/pngwing.com.png");
+    P_Texture textureSol1(TextureTypeId::SOL1, "../assets/textures/textureMur.jpeg");
+    P_Texture textureSol2(TextureTypeId::SOL2, "../assets/textures/triforce.png");
+    P_Texture textureSol10(TextureTypeId::SOL10, "../assets/textures/pngwing.com.png");
     listeTexture.push_back(textureSol);
     listeTexture.push_back(textureSol1);
     listeTexture.push_back(textureSol2);
