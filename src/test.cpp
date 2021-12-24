@@ -124,7 +124,7 @@
 
 //                 //Objet 1 (char)
 //                 objProgram.m_Program.use();
-//                 //lumière
+//                 //lumière 
 //                 lumiereVerte.sendUniformIntensity(glm::vec3(1.,1.,0.));
 //                 lumiereVerte.sendUniformVec(glm::vec3(0.,1.,-1.));
 //                 lumiereBlanche.sendUniformIntensity(glm::vec3(1.,1.,1.));

@@ -35,8 +35,10 @@ private:
     int m_angle;          /*!< angle of character rotation */
     int m_variationAngle; /*!< variation of the angle during the rotation */
     // Run
-    bool m_lateralStepRight; /*!< true if the character is being translated to the right */
-    bool m_lateralStepLeft;  /*!< true if the character is being translated to the left */
+    bool m_walkingRight; /*!< true if the character is being translated to the right */
+    bool m_walkingLeft; /*!< true if the character is being translated to the right */
+    float m_lateralStepRight; /*!< variation to the right */
+    float m_lateralStepLeft;  /*!< variation to the left */
     // Fall
     bool m_fall;        /*!< true if the character is falling */
     int m_fallDistance; /*!< distance (y axis) travelled when falling */
@@ -50,7 +52,7 @@ public:
     /// \brief change the action booleans according to the player inputs
     /// \param e : SDL_Event
 
-    void draw(glm::mat4 MVPMatrix);
+    void draw(glm::mat4 MVPMatrix, ObjProgram *program, glm::mat4 MVMatrix);
 
     glm::mat4 computeMMatrixCharacter();
 

@@ -18,21 +18,19 @@ class Model
 public:
     /// \brief constructor (load the .obj)
     /// \param path : path of the .obj
-    Model(std::string const &path, const glimac::FilePath &applicationPath)
-        : m_objProgramme(applicationPath)
+    Model(std::string const &path)
     {
         loadModel(path);
     }
     /// \brief draw the object
     /// \param program : used to draw
-    void Draw(glm::mat4 MVPMatrix);
+    void Draw(glm::mat4 MVPMatrix, ObjProgram *program, glm::mat4 MVMatrix);
 
 private:
     // model data
     std::vector<Mesh> _meshes;            /*!< vector of model meshes */
     std::string _directory;               /*!< model directory */
     std::vector<Texture> textures_loaded; /*!< vector of loaded texture */
-    ObjProgram m_objProgramme;
 
     /// \brief load the .obj
     /// \param path : path of the .obj

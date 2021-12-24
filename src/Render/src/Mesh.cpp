@@ -42,7 +42,7 @@ void Mesh::Draw(glimac::Program &program)
     unsigned int specularNr = 1;
     for (unsigned int i = 0; i < _textures.size(); i++)
     {                                         // La valeur 4 doit correspondre aux nombres de textures actuellement présentes +1 (pour l'instant 4 : sol 1, 2, 10)
-        glActiveTexture(GL_TEXTURE0 + 4 + i); // activate proper texture unit before binding
+        glActiveTexture(GL_TEXTURE0 + i); // activate proper texture unit before binding
         // retrieve texture number (the N in diffuse_textureN)
         std::string number;
         std::string name = _textures[i]._type;

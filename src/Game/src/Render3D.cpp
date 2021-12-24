@@ -2,6 +2,7 @@
 #include "glimac/glm.hpp"
 #include "Constants.hpp"
 
+
 void Render3D::playGame(float largeur, float hauteur)
 {
     int currentTime = 0;
@@ -78,8 +79,30 @@ void Render3D::drawCrossBetweenTerrain(int idTypeCroisement, int zOffset, const 
     }
 }
 
+void Render3D::sendLightsToProgram() {
+    m_objprogram.m_Program.use();
+    //lumière 
+    m_lightdir1.sendUniformIntensity(glm::vec3(1.,1.,0.));
+    m_lightdir1.sendUniformVec(glm::vec3(0.,1.,-1.));
+    m_lightdir2.sendUniformIntensity(glm::vec3(1.,1.,1.));
+    m_lightdir2.sendUniformVec(glm::vec3(0.,-1.,1.));
+    // glm::vec4 dirLight = glm::rotate(moveMatrix.getLightMVMatrix(), float(M_PI/4.), glm::vec3(0.,0.,1.))*glm::vec4(1.,1.,1.,0.);
+    glm::vec4 dirLight = m_moveMatrix.getLightMVMatrix() * glm::vec4(0.,0.,1.,0.);
+    glUniform3f(m_objprogram.uLightDir_vs, dirLight.x, dirLight.y, dirLight.z);
+    // glUniform3f(objProgram.uLightIntensity, 1.,1., 1.);
+    glm::vec4 posLight = m_moveMatrix.getWorldMVMatrix()*glm::vec4(0.,0.02,0.,1.);
+    glUniform3f(m_objprogram.uLightPos_vs, posLight.x, posLight.y, posLight.z);
+    glUniform3f(m_objprogram.uLightIntensityPos, 1.,0., 0.);
+    // matériaux
+    glUniform3f(m_objprogram.uKd, 2.,2.,2.);
+    glUniform3f(m_objprogram.uKs, 1.,1.,1.);
+    glUniform1f(m_objprogram.uShininess, 50.);
+}
+
 void Render3D::drawTerrain(float ratio)
 {
+   
+
     glm::mat4 MMatrix;
     const glm::mat4 ProjMatrix = glm::perspective(glm::radians(70.f), ratio, 0.1f, 100.f);
 
@@ -100,7 +123,9 @@ void Render3D::drawTerrain(float ratio)
 
     const glm::mat4 MVMatrixPersonnage = m_moveMatrix.getCharMVMatrix();
     m_Skybox.draw(VMatrix, ProjMatrix);
-    m_character.draw(ProjMatrix * MVMatrixPersonnage);
+
+    sendLightsToProgram();
+    m_character.draw(ProjMatrix * MVMatrixPersonnage, &m_objprogram, MVMatrixPersonnage);
 
     const glm::mat4 worldMVMatrix = m_moveMatrix.getWorldMVMatrix();
 

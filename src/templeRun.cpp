@@ -100,6 +100,12 @@ int main(int argc, char **argv)
     //     // update previous time
     // }
 
+    //     // Update the display
+    //     windowManager.swapBuffers();
+
+    //     // update previous time
+    // }
+
     // TTF_Quit();
 
     // Libération des ressources

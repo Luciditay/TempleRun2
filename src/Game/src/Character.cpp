@@ -3,7 +3,7 @@
 
 float jumpHight(float x)
 {
-    return -50 * x * x + 8.;
+    return -8 * x * x + 1.5;
 };
 
 float squatScale(float x)
@@ -16,14 +16,15 @@ Character::Character(const std::string &modelPath, const glimac::FilePath &appli
       m_scaleChar(1., 1., 1.), m_compenseScale(0., 0., 0.), m_squating(false), m_squatIndex(-0.3),
       m_turn(false), m_turningLeft(false), m_turningRight(false), m_angle(0), m_variationAngle(0),
       m_upChar(0., 1., 0.), m_frontChar({0., 0., 0.1}), m_dead(false),
-      m_lateralStepRight(false), m_lateralStepLeft(false), m_fall(false), m_fallDistance(0),
-      m_model(modelPath, applicationPath)
+      m_walkingLeft(false), m_walkingRight(false),
+      m_lateralStepRight(0.), m_lateralStepLeft(0.), m_fall(false), m_fallDistance(0),
+      m_model(modelPath)
 {
 }
 
-void Character::draw(glm::mat4 MVPMatrix)
+void Character::draw(glm::mat4 MVPMatrix, ObjProgram *program, glm::mat4 MVMatrix)
 {
-    m_model.Draw(MVPMatrix);
+    m_model.Draw(MVPMatrix, program, MVMatrix);
 }
 
 void Character::handleSDLEvent(const SDL_Event &e)
@@ -44,7 +45,7 @@ void Character::handleSDLEvent(const SDL_Event &e)
         {
             if (!m_turn)
             { // Lateral Mode
-                m_lateralStepLeft = true;
+                m_walkingLeft = true;
             }
             else
             { // Rotation 90°
@@ -59,7 +60,7 @@ void Character::handleSDLEvent(const SDL_Event &e)
         {
             if (!m_turn)
             { // Lateral move
-                m_lateralStepRight = true;
+                m_walkingRight = true;
             }
             else
             { // Rotation 90°
@@ -132,17 +133,27 @@ void Character::reactToInputs()
     }
 
     // Go to left or right
-    if (m_lateralStepRight == true)
+    glm::vec3 m_stepRight = glm::normalize(glm::cross(m_frontChar, m_upChar));
+
+    if (m_walkingRight == true)
     {
-        glm::vec3 m_stepRight = glm::normalize(glm::cross(m_frontChar, m_upChar));
-        m_posChar -= m_stepRight;
-        m_lateralStepRight = false;
+        if (m_lateralStepRight <= 0.5) {
+            m_posChar -= m_lateralStepRight*m_stepRight;
+            m_lateralStepRight += 0.05;
+        } else {
+            m_lateralStepRight = 0.;
+            m_walkingRight = false;
+        }
     }
-    if (m_lateralStepLeft == true)
+    if (m_walkingLeft == true)
     {
-        glm::vec3 m_stepRight = glm::normalize(glm::cross(m_frontChar, m_upChar));
-        m_posChar += m_stepRight;
-        m_lateralStepLeft = false;
+        if (m_lateralStepLeft <= 0.5) {
+            m_posChar += m_lateralStepLeft*m_stepRight;
+            m_lateralStepLeft += 0.05;
+        } else {
+            m_lateralStepLeft = 0.;
+            m_walkingLeft = false;
+        }
     }
 
     // Jump
@@ -162,7 +173,7 @@ void Character::reactToInputs()
     if (m_squating == true && m_scaleChar.y <= 1)
     {
         m_scaleChar.y = squatScale(m_squatIndex);
-        m_compenseScale.y = -1 + squatScale(m_squatIndex);
+        m_compenseScale.y = -0.1 + 0.1*squatScale(m_squatIndex);
         m_squatIndex += 0.01;
     }
     else
