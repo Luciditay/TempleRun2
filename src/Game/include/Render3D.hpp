@@ -8,19 +8,21 @@
 #include "cameraDebug.hpp"
 #include "glimac/Program.hpp"
 #include "GlewInit.hpp"
+#include "Cameras.hpp"
 
 class Render3D
 {
 public:
-    Render3D(const Matrice &m, const TextureManager &tm, const FilePath &applicationPath, const std::string &VSPath, const std::string &FSPath, const std::string &modelPath, const glimac::SDLWindowManager &wm)
+    Render3D(const Matrice &m, const TextureManager &tm, Camera &cam, const FilePath &applicationPath, const std::string &VSPath, const std::string &FSPath, const std::string &modelPath, const glimac::SDLWindowManager &wm)
         : m_MatriceTerrain(m),
           m_tileDrawer(applicationPath, VSPath, FSPath),
           m_textureIDManager(tm),
-          m_camDebug(),
+          m_camera(cam),
           m_rotateTerrainLeft(false),
           m_rotateTerrainRight(false),
           m_Skybox(applicationPath),
           m_character(modelPath, applicationPath),
+          m_moveMatrix(&cam, &m_character),
           m_windowManager(wm) {} // Default constructor of cam is fine
 
     void playGame(float largeur, float hauteur);
@@ -32,19 +34,15 @@ public:
     glm::mat4 MMatrixMur(int xOffset, int yOffset, int zOffset);
     glm::mat4 MMatrixMurHorizontal(const glm::vec3 &offset);
 
-    cameraDebug getCamDebug() const
-    {
-        return m_camDebug;
-    }
-
 private:
     Matrice m_MatriceTerrain;          // On va push des vecteurs de 3 (correspondant à chaque ligne du terrain
     TileDrawer m_tileDrawer;           // Contient le vao, le vbo et une carré de 2x2 démarrant à (0, 0)
     TextureManager m_textureIDManager; // Une map qui va faire le lien entre l'ID d'une case (converti à partir des nombres dans la matriceTerrain) et la valeur de sa constante GLTEXTUREi, que l'on passera pour la dessiner en paramètres (pas clair, check the TP) ==> On peut aussi passer par un enum, pour ne pas avoir à convertir ?
-    cameraDebug m_camDebug;
+    Camera m_camera;
     Skybox m_Skybox; // dans un std::vector (i.e ca fait du matrice) qui représentera tout le terrain/la partie du terrain actuellement générée en faisant Matrice(FileMatrice)
     Character m_character;
     SDLWindowManager m_windowManager;
+    MoveMatrix m_moveMatrix;
     bool m_rotateTerrainLeft;
     bool m_rotateTerrainRight;
 };

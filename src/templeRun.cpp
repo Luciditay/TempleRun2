@@ -53,17 +53,12 @@ int main(int argc, char **argv)
     Matrice matriceTerrain(matriceFile);
     TextureManager textureManager(listeTexture);
 
-    Render3D game(matriceTerrain, textureManager, applicationPath, VSPath, FSPath, modelCharacterPath, windowManager);
+    Camera camera(-30., M_PI / 6., 0.);
+    Character Player(modelCharacterPath, applicationPath);
+    Render3D game(matriceTerrain, textureManager, camera, applicationPath, VSPath, FSPath, modelCharacterPath, windowManager);
 
     constexpr GLuint VERTEX_ATTR_POSITION = 0;
     constexpr GLuint VERTEX_ATTR_TEXTURE = 2;
-
-    cameraDebug camDebug;
-    Character Player(modelCharacterPath, applicationPath);
-
-    glm::mat4 MVMatrix;
-    glm::mat4 MVPMatrix;
-    glm::mat4 ProjMatrix;
 
     bool done = false;
     bool gameStart = false;
