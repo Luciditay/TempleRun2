@@ -9,6 +9,7 @@
 #include "glimac/Program.hpp"
 #include "GlewInit.hpp"
 #include "Cameras.hpp"
+#include "MoveMatrix.hpp"
 
 class Render3D
 {
@@ -17,12 +18,12 @@ public:
         : m_MatriceTerrain(m),
           m_tileDrawer(applicationPath, VSPath, FSPath),
           m_textureIDManager(tm),
-          m_camera(cam),
+          m_camera(-2., M_PI / 6., 0.),
           m_rotateTerrainLeft(false),
           m_rotateTerrainRight(false),
           m_Skybox(applicationPath),
           m_character(modelPath, applicationPath),
-          m_moveMatrix(&cam, &m_character),
+          m_moveMatrix(&m_camera, &m_character),
           m_windowManager(wm) {} // Default constructor of cam is fine
 
     void playGame(float largeur, float hauteur);

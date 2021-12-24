@@ -3,7 +3,7 @@
 
 float jumpHight(float x)
 {
-    return -50 * x * x + 10;
+    return -50 * x * x + 8.;
 };
 
 float squatScale(float x)
@@ -12,7 +12,7 @@ float squatScale(float x)
 }
 
 Character::Character(const std::string &modelPath, const glimac::FilePath &applicationPath)
-    : m_posChar(0., 0., 0.), m_jumping(false), m_jumpIndex(-0.4), m_speed(1.), m_distanceEnemy(100), m_enemySpeed(0.1),
+    : m_posChar(0., 0., 0.), m_jumping(false), m_jumpIndex(-0.4), m_speed(0.005), m_distanceEnemy(100), m_enemySpeed(0.1),
       m_scaleChar(1., 1., 1.), m_compenseScale(0., 0., 0.), m_squating(false), m_squatIndex(-0.3),
       m_turn(false), m_turningLeft(false), m_turningRight(false), m_angle(0), m_variationAngle(0),
       m_upChar(0., 1., 0.), m_frontChar({0., 0., 0.1}), m_dead(false),

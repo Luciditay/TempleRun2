@@ -64,6 +64,9 @@ int main(int argc, char **argv)
     bool gameStart = false;
     SDL_EnableKeyRepeat(10, 10);
 
+    int currentTime = 0;
+    int previousTime = 0;
+
     game.playGame(largeur, hauteur);
     // while (!done)
     // {

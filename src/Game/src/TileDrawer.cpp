@@ -66,7 +66,7 @@ TileDrawer::TileDrawer(const FilePath &applicationPath, const std::string &pathV
 
 void TileDrawer::drawCase(const glm::mat4 &VPMatrix, const glm::vec3 &tileOffset, int texture)
 {
-    glm::mat4 MMatrix = glm::translate(glm::mat4{1.f}, glm::vec3(-1, -1, -5));                                 // On se place devant la caméra, en ligne 0 à gauche (en 0 du monde décalé de -1, 0, 0)
+    glm::mat4 MMatrix = glm::translate(glm::mat4{1.f}, glm::vec3(0, 0, 0));                                    // On se place devant la caméra, en ligne 0 à gauche (en 0 du monde décalé de -1, 0, 0)
     MMatrix = glm::translate(MMatrix, glm::vec3(m_size * tileOffset.x, tileOffset.y, -tileOffset.z * m_size)); // On se translate dans la matrice                                               // On récupère la vraie Mview matrice;
 
     m_formeProgramme.m_Program.use();
@@ -83,7 +83,7 @@ void TileDrawer::drawCase(const glm::mat4 &VPMatrix, const glm::vec3 &tileOffset
 void TileDrawer::drawMurHorizontal(const glm::mat4 &VPMatrix, const glm::vec3 &offset, int TypeTextureID)
 {
     // Séparer lA M matrix du code dessin ?
-    glm::mat4 MMatrix = glm::translate(glm::mat4{1.f}, glm::vec3(0, -1, -5));
+    glm::mat4 MMatrix = glm::translate(glm::mat4{1.f}, glm::vec3(0, 0, 0));
     MMatrix = glm::translate(MMatrix, glm::vec3(-m_size / 2 + m_size * offset.x, m_size / 2, m_size * -offset.z));
     MMatrix = glm::rotate(MMatrix, glm::radians(90.f), glm::vec3(1, 0, 0));
     MMatrix = glm::translate(MMatrix, glm::vec3(-m_size / 2, 0, -m_size / 2));
@@ -101,7 +101,7 @@ void TileDrawer::drawMurHorizontal(const glm::mat4 &VPMatrix, const glm::vec3 &o
 void TileDrawer::drawMurVertical(const glm::mat4 &VPMatrix, const glm::vec3 &offset, int TypeTextureID)
 {
     // Séparer lA M matrix du code dessin ?
-    glm::mat4 MMatrix = glm::translate(glm::mat4{1.f}, glm::vec3(-1, -1, -5));
+    glm::mat4 MMatrix = glm::translate(glm::mat4{1.f}, glm::vec3(0, 0, 0));
     MMatrix = glm::translate(MMatrix, glm::vec3(-m_size / 2 + m_size * offset.x, m_size / 2, m_size * -offset.z));
     MMatrix = glm::rotate(MMatrix, glm::radians(90.f), glm::vec3(0, 0, 1));
     MMatrix = glm::rotate(MMatrix, glm::radians(90.f), glm::vec3(0, 1, 0));

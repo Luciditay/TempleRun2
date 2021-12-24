@@ -4,40 +4,47 @@
 
 void Render3D::playGame(float largeur, float hauteur)
 {
+    int currentTime = 0;
+    int previousTime = 0;
     while (true)
     {
-
-        // Nettoyage de la fenêtre
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
         // update current time
-        //  Event loop:
-        SDL_Event e;
-
-        while (m_windowManager.pollEvent(e))
+        currentTime = SDL_GetTicks();
+        if (currentTime - previousTime > 30)
         {
 
-            m_camera.handleSDLEvent(e);
-            m_character.handleSDLEvent(e);
-            m_character.reactToInputs();
+            // Nettoyage de la fenêtre
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-            if (e.type == SDL_QUIT)
+            // update current time
+            //  Event loop:
+            SDL_Event e;
+
+            while (m_windowManager.pollEvent(e))
             {
-                // A CODER : FONCTION LIBERATIONS DE MEMOIRES
-                exit(EXIT_SUCCESS); // Leave the loop after this iteration
+
+                m_camera.handleSDLEvent(e);
+                m_character.handleSDLEvent(e);
+
+                if (e.type == SDL_QUIT)
+                {
+                    // A CODER : FONCTION LIBERATIONS DE MEMOIRES
+                    exit(EXIT_SUCCESS); // Leave the loop after this iteration
+                }
             }
+
+            /*********************************
+             * HERE SHOULD COME THE RENDERING CODE
+             *********************************/
+            m_character.reactToInputs();
+            drawTerrain(largeur / hauteur);
+
+            // Update the display
+            m_windowManager.swapBuffers();
+
+            // update previous time
+            previousTime = currentTime;
         }
-
-        /*********************************
-         * HERE SHOULD COME THE RENDERING CODE
-         *********************************/
-
-        drawTerrain(largeur / hauteur);
-
-        // Update the display
-        m_windowManager.swapBuffers();
-
-        // update previous time
     }
 }
 
@@ -87,12 +94,12 @@ void Render3D::drawTerrain(float ratio)
     // MVMatrix = glm::translate(MVMatrix, glm::vec3(-1, 0, 0)); //On se place en ligne 0 à gauche
 
     m_moveMatrix.computeAllMatrix();
-    const glm::mat4 MVMatrix = m_moveMatrix.getViewMatrix();
-    const glm::mat4 MVPMatrix = ProjMatrix * MVMatrix;
-    const glm::mat4 NormalMatrix = glm::transpose(glm::inverse(MVMatrix));
+    const glm::mat4 VMatrix = m_moveMatrix.getViewMatrix();
+    // const glm::mat4 MVPMatrix = ProjMatrix * MVMatrix;
+    // const glm::mat4 NormalMatrix = glm::transpose(glm::inverse(MVMatrix));
 
     const glm::mat4 MVMatrixPersonnage = m_moveMatrix.getCharMVMatrix();
-    m_Skybox.draw(MVMatrix, ProjMatrix);
+    m_Skybox.draw(VMatrix, ProjMatrix);
     m_character.draw(ProjMatrix * MVMatrixPersonnage);
 
     const glm::mat4 worldMVMatrix = m_moveMatrix.getWorldMVMatrix();
