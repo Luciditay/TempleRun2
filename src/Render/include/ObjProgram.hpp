@@ -2,7 +2,6 @@
 #include <string>
 #include <iostream>
 #include <glimac/Program.hpp>
-//#include <MoveMatrix.hpp>
 #include <glimac/glm.hpp>
 #include <glimac/FilePath.hpp>
 #include <cstring>
@@ -28,7 +27,7 @@ public:
     /// \param MMatrixObj : model matrix of the 3D object
     /// \param scale : scale to be applied to the 3D object
     /// \param translate : translation to be applied to the 3D object
-    void sendMatrix(glm::mat4 MMatrixObj);
+    void sendMatrix(glm::mat4 MMatrixObj, glm::mat4 MVMatrixObj);
 
     glimac::Program m_Program; /*!< program */
 

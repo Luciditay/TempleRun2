@@ -10,9 +10,6 @@
 #include "GlewInit.hpp"
 #include "Cameras.hpp"
 #include "MoveMatrix.hpp"
-#include "ObjProgram.hpp"
-#include "Lights.hpp"
-#include "Vertex3D.hpp"
 
 class Render3D
 {
@@ -27,20 +24,13 @@ public:
           m_Skybox(applicationPath),
           m_character(modelPath, applicationPath),
           m_moveMatrix(&m_camera, &m_character),
-          m_objprogram(applicationPath),
-          m_lightdir1("Directional", 0, m_objprogram.m_Program, &m_moveMatrix),
-          m_lightdir2("Directional", 1, m_objprogram.m_Program, &m_moveMatrix),
           m_windowManager(wm) {} // Default constructor of cam is fine
 
     void playGame(float largeur, float hauteur);
 
     void drawTerrain(float ratio);
 
-    void drawCrossBetweenTerrain(int idTypeCroisement, int nbreCase, int zOffset, const glm::mat4 &PVMatrix); // Draw un croisement
-
-    Point2D<int> getPosPersonnageInGame();
-
-    void sendLightsToProgram();
+    void drawCrossBetweenTerrain(int idTypeCroisement, int zOffset, const glm::mat4 &PVMatrix); // Draw un croisement
 
     glm::mat4 MMatrixMur(int xOffset, int yOffset, int zOffset);
     glm::mat4 MMatrixMurHorizontal(const glm::vec3 &offset);
@@ -56,8 +46,4 @@ private:
     MoveMatrix m_moveMatrix;
     bool m_rotateTerrainLeft;
     bool m_rotateTerrainRight;
-    ObjProgram m_objprogram;
-    
-    Light m_lightdir1;
-    Light m_lightdir2;
 };

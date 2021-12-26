@@ -2,7 +2,6 @@
 
 ObjProgram::ObjProgram(const glimac::FilePath &applicationPath) : m_Program(glimac::loadProgram(applicationPath.dirPath() + "shaders/obj.vs.glsl",
                                                                                                 applicationPath.dirPath() + "shaders/obj.fs.glsl"))
-
 {
     uMVPMatrix = glGetUniformLocation(m_Program.getGLId(), "uMVPMatrix");
     uMVMatrix = glGetUniformLocation(m_Program.getGLId(), "uMVMatrix");
@@ -23,10 +22,10 @@ void ObjProgram::setProjMatrix(glm::mat4 projMatrix)
     m_ProjMatrix = projMatrix;
 }
 
-void ObjProgram::sendMatrix(glm::mat4 MVPMatrixObj)
+void ObjProgram::sendMatrix(glm::mat4 MVPMatrixObj, glm::mat4 MVMatrixObj)
 {
     glm::mat4 NormalMatrixObj = glm::transpose(glm::inverse(MVPMatrixObj));
     glUniformMatrix4fv(uMVPMatrix, 1, GL_FALSE, glm::value_ptr(MVPMatrixObj));
-    //  glUniformMatrix4fv(uMVMatrix, 1, GL_FALSE, glm::value_ptr(MVMatrixObj));
+    glUniformMatrix4fv(uMVMatrix, 1, GL_FALSE, glm::value_ptr(MVMatrixObj));
     glUniformMatrix4fv(uNormalMatrix, 1, GL_FALSE, glm::value_ptr(NormalMatrixObj));
 }

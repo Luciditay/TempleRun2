@@ -1,8 +1,9 @@
 #include "CollectibleRenderer.hpp"
 
-CollectibleRenderer::CollectibleRenderer(ObjProgram *program, MoveMatrix *moveMatrix, const glimac::FilePath &applicationPath, const std::string coinModelPath, const std::string &bonusModelPath) : m_program(program), m_moveMatrix(moveMatrix),
-                                                                                                                                                                                                     m_modelCoin(coinModelPath, applicationPath),
-                                                                                                                                                                                                     m_modelBonus(bonusModelPath, applicationPath)
+CollectibleRenderer::CollectibleRenderer(ObjProgram *program, MoveMatrix *moveMatrix, const glimac::FilePath &applicationPath, const std::string coinModelPath, const std::string &bonusModelPath) : 
+    m_program(program), m_moveMatrix(moveMatrix),
+    m_modelCoin(coinModelPath),
+    m_modelBonus(bonusModelPath)
 
 {
 }

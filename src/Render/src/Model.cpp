@@ -1,12 +1,12 @@
 #include "Model.hpp"
 
-void Model::Draw(glm::mat4 MVPMatrix)
+void Model::Draw(glm::mat4 MVPMatrix, ObjProgram *program, glm::mat4 MVMatrix)
 {
-    m_objProgramme.m_Program.use();
-    m_objProgramme.sendMatrix(MVPMatrix);
+    program->m_Program.use(); 
+    program->sendMatrix(MVPMatrix, MVMatrix);
     for (unsigned int i = 0; i < _meshes.size(); i++)
     {
-        _meshes[i].Draw(m_objProgramme.m_Program);
+        _meshes[i].Draw(program->m_Program); 
     }
 }
 
