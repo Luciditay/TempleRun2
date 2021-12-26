@@ -22,6 +22,9 @@ private:
     float m_distanceEnemy; /*!< distance character-enemy */
     float m_enemySpeed;    /*!< enemy speed */
 
+    // Position
+    int m_xAxisPosition; //-1 si le perso est à gauche, 1 a droite, 0 sinon
+
     // Jump
     bool m_jumping;    /*!< true if the character is jumping */
     float m_jumpIndex; /*!< abscissa of the height of the character in the parabola representing the jump */
@@ -52,13 +55,15 @@ public:
 
     void draw(glm::mat4 MVPMatrix);
 
-    glm::mat4 computeMMatrixCharacter();
+    void jumpAnimation();
 
-    glm::mat4 computeViewMatrix(cameraDebug &c) const;
+    void squatAnimation();
 
-    glm::mat4 computeMVMatrixCharacter(cameraDebug &c);
+    void lateralStepLeftAnimation();
 
-    void handleSDLEvent(const SDL_Event &e);
+    void lateralStepRightAnimation();
+
+    void handleSDLEvent(const SDL_Event &e, int currentTileID);
     /// \brief react to action booleans changes, by modifying position value etc.
     void reactToInputs();
     /// \brief give the angle
@@ -72,6 +77,10 @@ public:
     /// \brief give the distance enemy-character
     float getDistanceEnemy();
     /// \brief increase character speed and decrease the enemy speed
+    float getxAxisPosition()
+    {
+        return m_xAxisPosition;
+    }
     void increaseSpeed();
     /// \brief true if the character is dead
     bool isDead();

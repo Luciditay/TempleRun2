@@ -6,6 +6,8 @@ void Render3D::playGame(float largeur, float hauteur)
 {
     int currentTime = 0;
     int previousTime = 0;
+    Point2D<int> currentPos;
+    int currentTileId;
     while (true)
     {
         // update current time
@@ -16,15 +18,19 @@ void Render3D::playGame(float largeur, float hauteur)
             // Nettoyage de la fenêtre
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-            // update current time
-            //  Event loop:
+            // On récupère la position du personnage dans la matrice
+            currentPos = getPosPersonnageInGame();
+            // std::cout << currentPos.x << currentPos.z << std::endl;
+            currentTileId = m_MatriceTerrain.getMatrice().at(-currentPos.z).at(currentPos.x);
+            // std::cout << currentTileId << std::endl;
+            //   Event loop:
             SDL_Event e;
 
             while (m_windowManager.pollEvent(e))
             {
 
                 m_camera.handleSDLEvent(e);
-                m_character.handleSDLEvent(e);
+                m_character.handleSDLEvent(e, currentTileId);
 
                 if (e.type == SDL_QUIT)
                 {
@@ -48,33 +54,39 @@ void Render3D::playGame(float largeur, float hauteur)
     }
 }
 
-void Render3D::drawCrossBetweenTerrain(int idTypeCroisement, int zOffset, const glm::mat4 &PVMatrix)
+void Render3D::drawCrossBetweenTerrain(int idTypeCroisement, int nbreCase, int zOffset, const glm::mat4 &PVMatrix)
 {
     int currentTex = m_textureIDManager.getGLTextureMatchingName(idTypeCroisement);
 
     if (idTypeCroisement == 10)
     {
-        // Dessin de la case
-        m_tileDrawer.drawCase(PVMatrix, glm::vec3(-1, 0, zOffset), currentTex);
-        m_tileDrawer.drawCase(PVMatrix, glm::vec3(-2, 0, zOffset), currentTex);
+        for (int i = 0; i < nbreCase; i++)
+        {
+            // Dessin de la case
+            m_tileDrawer.drawCase(PVMatrix, glm::vec3(-1 - i, 0, zOffset), currentTex);
+        }
         // Mur à droite
         m_tileDrawer.drawMurVertical(PVMatrix, glm::vec3(3, 0, zOffset), TextureTypeId::SOL1);
     }
 
     if (idTypeCroisement == 20)
     {
-        m_tileDrawer.drawCase(PVMatrix, glm::vec3(3, 0, zOffset), currentTex);
-        m_tileDrawer.drawCase(PVMatrix, glm::vec3(4, 0, zOffset), currentTex);
+        for (int i = 0; i < nbreCase; i++)
+        {
+            // Dessin de la case
+            m_tileDrawer.drawCase(PVMatrix, glm::vec3(3 + i, 0, zOffset), currentTex);
+        }
         // Mur à gauche
         m_tileDrawer.drawMurVertical(PVMatrix, glm::vec3(0, 0, zOffset), TextureTypeId::SOL1);
     }
 
     if (idTypeCroisement == 30)
     { // On dessine une case à gauche et à droite
-        m_tileDrawer.drawCase(PVMatrix, glm::vec3(-1, 0, zOffset), currentTex);
-        m_tileDrawer.drawCase(PVMatrix, glm::vec3(-2, 0, zOffset), currentTex);
-        m_tileDrawer.drawCase(PVMatrix, glm::vec3(3, 0, zOffset), currentTex);
-        m_tileDrawer.drawCase(PVMatrix, glm::vec3(4, 0, zOffset), currentTex);
+        for (int i = 0; i < nbreCase; i++)
+        {
+            m_tileDrawer.drawCase(PVMatrix, glm::vec3(-1 - i, 0, zOffset), currentTex);
+            m_tileDrawer.drawCase(PVMatrix, glm::vec3(3 + i, 0, zOffset), currentTex);
+        }
     }
 }
 
@@ -117,16 +129,16 @@ void Render3D::drawTerrain(float ratio)
             m_tileDrawer.drawCase(ProjMatrix * worldMVMatrix, glm::vec3(j, 0, i), currentTex);
         }
 
-        if (idCurrentCase == 10 || idCurrentCase == 20 || idCurrentCase == 30)     // Si on arrive à un croisement : 10=left, 20=right, 30=both
-        {                                                                          // Croisement means : pas de dessin des murs mais dessin d'une/deux cases en plus sur les côtés
-            drawCrossBetweenTerrain(idCurrentCase, i, ProjMatrix * worldMVMatrix); // Fonction qui sert à R : appelle une fonction déjà existante
+        if (idCurrentCase == 10 || idCurrentCase == 20 || idCurrentCase == 30)        // Si on arrive à un croisement : 10=left, 20=right, 30=both
+        {                                                                             // Croisement means : pas de dessin des murs mais dessin d'une/deux cases en plus sur les côtés
+            drawCrossBetweenTerrain(idCurrentCase, 3, i, ProjMatrix * worldMVMatrix); // Fonction qui sert à R : appelle une fonction déjà existante
             finCroisement++;
 
             if (finCroisement == 3) // On arrive "au bout" du croisement, il faut dessiner les murs
             {
-                m_tileDrawer.drawMurHorizontal(ProjMatrix * worldMVMatrix, glm::vec3(0, 0, i), TextureTypeId::SOL1);
                 m_tileDrawer.drawMurHorizontal(ProjMatrix * worldMVMatrix, glm::vec3(1, 0, i), TextureTypeId::SOL1);
                 m_tileDrawer.drawMurHorizontal(ProjMatrix * worldMVMatrix, glm::vec3(2, 0, i), TextureTypeId::SOL1);
+                m_tileDrawer.drawMurHorizontal(ProjMatrix * worldMVMatrix, glm::vec3(3, 0, i), TextureTypeId::SOL1);
 
                 if (idCurrentCase == 10)
                 {
@@ -152,9 +164,15 @@ void Render3D::drawTerrain(float ratio)
             m_tileDrawer.drawMurVertical(ProjMatrix * worldMVMatrix, glm::vec3(0, 0, i), TextureTypeId::SOL1);
 
             // Dessin des murs de droite
-            m_tileDrawer.drawMurVertical(ProjMatrix * worldMVMatrix, glm::vec3(tailleCase * 3, 0, i), TextureTypeId::SOL1);
+            m_tileDrawer.drawMurVertical(ProjMatrix * worldMVMatrix, glm::vec3(3, 0, i), TextureTypeId::SOL1);
         }
     }
 }
 
+Point2D<int> Render3D::getPosPersonnageInGame()
+{
+    int x = m_character.getxAxisPosition() + 1;
+    int z = glm::floor(m_character.getPos().z);
+    return {x, z};
+}
 // CHANGER LA FIN AVEC LES IF IMBRIQUES ?

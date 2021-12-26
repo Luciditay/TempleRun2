@@ -10,6 +10,7 @@
 #include "GlewInit.hpp"
 #include "Cameras.hpp"
 #include "MoveMatrix.hpp"
+#include "Vertex3D.hpp"
 
 class Render3D
 {
@@ -30,7 +31,9 @@ public:
 
     void drawTerrain(float ratio);
 
-    void drawCrossBetweenTerrain(int idTypeCroisement, int zOffset, const glm::mat4 &PVMatrix); // Draw un croisement
+    void drawCrossBetweenTerrain(int idTypeCroisement, int nbreCase, int zOffset, const glm::mat4 &PVMatrix); // Draw un croisement
+
+    Point2D<int> getPosPersonnageInGame();
 
     glm::mat4 MMatrixMur(int xOffset, int yOffset, int zOffset);
     glm::mat4 MMatrixMurHorizontal(const glm::vec3 &offset);
