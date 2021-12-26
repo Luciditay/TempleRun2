@@ -20,9 +20,9 @@ void Render3D::playGame(float largeur, float hauteur)
 
             // On récupère la position du personnage dans la matrice
             currentPos = getPosPersonnageInGame();
-            //  std::cout << currentPos.x << currentPos.z << std::endl;
+            std::cout << currentPos.x << currentPos.z << std::endl;
             currentTileId = m_MatriceTerrain.getMatrice().at(-currentPos.z).at(currentPos.x);
-            // std::cout << currentTileId << std::endl;
+            std::cout << currentTileId << std::endl;
             //   Event loop:
             SDL_Event e;
 
@@ -43,6 +43,7 @@ void Render3D::playGame(float largeur, float hauteur)
              * HERE SHOULD COME THE RENDERING CODE
              *********************************/
             m_character.reactToInputs();
+            m_character.checkState(currentTileId);
             drawTerrain(largeur / hauteur);
 
             // Update the display
@@ -50,42 +51,6 @@ void Render3D::playGame(float largeur, float hauteur)
 
             // update previous time
             previousTime = currentTime;
-        }
-    }
-}
-
-void Render3D::drawCrossBetweenTerrain(int idTypeCroisement, int nbreCase, int zOffset, const glm::mat4 &PVMatrix)
-{
-    int currentTex = m_textureIDManager.getGLTextureMatchingName(idTypeCroisement);
-
-    if (idTypeCroisement == 10)
-    {
-        for (int i = 0; i < nbreCase; i++)
-        {
-            // Dessin de la case
-            m_tileDrawer.drawCase(PVMatrix, glm::vec3(-1 - i, 0, zOffset), currentTex);
-        }
-        // Mur à droite
-        m_tileDrawer.drawMurVertical(PVMatrix, glm::vec3(3, 0, zOffset), TextureTypeId::SOL1);
-    }
-
-    if (idTypeCroisement == 20)
-    {
-        for (int i = 0; i < nbreCase; i++)
-        {
-            // Dessin de la case
-            m_tileDrawer.drawCase(PVMatrix, glm::vec3(3 + i, 0, zOffset), currentTex);
-        }
-        // Mur à gauche
-        m_tileDrawer.drawMurVertical(PVMatrix, glm::vec3(0, 0, zOffset), TextureTypeId::SOL1);
-    }
-
-    if (idTypeCroisement == 30)
-    { // On dessine une case à gauche et à droite
-        for (int i = 0; i < nbreCase; i++)
-        {
-            m_tileDrawer.drawCase(PVMatrix, glm::vec3(-1 - i, 0, zOffset), currentTex);
-            m_tileDrawer.drawCase(PVMatrix, glm::vec3(3 + i, 0, zOffset), currentTex);
         }
     }
 }

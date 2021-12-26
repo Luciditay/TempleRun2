@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Character.hpp"
+#include "Constants.hpp"
 
 float jumpHight(float x)
 {
@@ -12,7 +13,7 @@ float squatScale(float x)
 }
 
 Character::Character(const std::string &modelPath, const glimac::FilePath &applicationPath)
-    : m_posChar(0., 0., 0.), m_jumping(false), m_jumpIndex(-0.4), m_speed(0.01), m_distanceEnemy(100), m_enemySpeed(0.1),
+    : m_posChar(0., 0., 0.), m_jumping(false), m_jumpIndex(-0.4), m_speed(0.05), m_distanceEnemy(100), m_enemySpeed(0.1),
       m_scaleChar(1., 1., 1.), m_compenseScale(0., 0., 0.), m_squating(false), m_squatIndex(-0.3),
       m_turn(false), m_turningLeft(false), m_turningRight(false), m_angle(0), m_variationAngle(0),
       m_upChar(0., 1., 0.), m_frontChar({0., 0., 0.1}), m_dead(false),
@@ -35,7 +36,7 @@ void Character::squatAnimation()
     // m_squatIndex += 0.01;
 
     m_scaleChar.y = squatScale(m_squatIndex);
-    m_compenseScale.y = -0.1 + 0.1*squatScale(m_squatIndex);
+    m_compenseScale.y = -0.1 + 0.1 * squatScale(m_squatIndex);
     m_squatIndex += 0.01;
 }
 
@@ -52,14 +53,17 @@ void Character::lateralStepLeftAnimation()
     // m_lateralStepLeft = false;
     // m_xAxisPosition--;
 
-          if (m_lateralStepLeft <= 0.25) {
-            m_posChar += m_lateralStepLeft*m_stepRight;
-            m_lateralStepLeft += 0.05;
-        } else {
-            m_lateralStepLeft = 0.;
-            m_walkingLeft = false;
-            m_xAxisPosition--;
-        }
+    if (m_lateralStepLeft <= 0.25)
+    {
+        m_posChar += m_lateralStepLeft * m_stepRight;
+        m_lateralStepLeft += 0.05;
+    }
+    else
+    {
+        m_lateralStepLeft = 0.;
+        m_walkingLeft = false;
+        m_xAxisPosition--;
+    }
 }
 
 void Character::lateralStepRightAnimation()
@@ -69,14 +73,17 @@ void Character::lateralStepRightAnimation()
     // m_lateralStepRight = false;
     //   m_xAxisPosition++;
 
-     if (m_lateralStepRight <= 0.25) {
-            m_posChar -= m_lateralStepRight*m_stepRight;
-            m_lateralStepRight += 0.05;
-        } else {
-            m_lateralStepRight = 0.;
-            m_walkingRight = false;
-            m_xAxisPosition++;
-        }
+    if (m_lateralStepRight <= 0.25)
+    {
+        m_posChar -= m_lateralStepRight * m_stepRight;
+        m_lateralStepRight += 0.05;
+    }
+    else
+    {
+        m_lateralStepRight = 0.;
+        m_walkingRight = false;
+        m_xAxisPosition++;
+    }
 }
 
 void Character::handleSDLEvent(const SDL_Event &e, int currentTileID)
@@ -109,7 +116,7 @@ void Character::handleSDLEvent(const SDL_Event &e, int currentTileID)
             {
                 if (m_xAxisPosition != 1) // Si le perso n'est pas à l'ED
                 {
-                     m_walkingRight = true;
+                    m_walkingRight = true;
                 }
             }
         }
@@ -136,6 +143,16 @@ void Character::handleSDLEvent(const SDL_Event &e, int currentTileID)
         {
             m_squating = true;
         }
+    }
+}
+
+void Character::checkState(int currentTileId)
+{
+    if (currentTileId == TextureTypeId::TROU && isJumping() == false)
+    {
+        std::cout << "T'es mort" << std::endl;
+        m_dead = true;
+        exit(EXIT_SUCCESS);
     }
 }
 

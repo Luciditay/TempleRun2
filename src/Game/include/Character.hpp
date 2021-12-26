@@ -38,8 +38,8 @@ private:
     int m_angle;          /*!< angle of character rotation */
     int m_variationAngle; /*!< variation of the angle during the rotation */
     // Run
-    bool m_walkingRight; /*!< true if the character is being translated to the right */
-    bool m_walkingLeft; /*!< true if the character is being translated to the right */
+    bool m_walkingRight;      /*!< true if the character is being translated to the right */
+    bool m_walkingLeft;       /*!< true if the character is being translated to the right */
     float m_lateralStepRight; /*!< variation to the right */
     float m_lateralStepLeft;  /*!< variation to the left */
     // Fall
@@ -56,6 +56,8 @@ public:
     /// \param e : SDL_Event
 
     void draw(glm::mat4 MVPMatrix, ObjProgram *program, glm::mat4 MVMatrix);
+
+    void checkState(int currentTileId);
 
     void jumpAnimation();
 

@@ -45,10 +45,12 @@ int main(int argc, char **argv)
     P_Texture textureSol1(TextureTypeId::SOL1, "../assets/textures/textureMur.jpeg");
     P_Texture textureSol2(TextureTypeId::SOL2, "../assets/textures/triforce.png");
     P_Texture textureSol10(TextureTypeId::SOL10, "../assets/textures/pngwing.com.png");
+    P_Texture textureTrou(TextureTypeId::TROU, "../assets/textures/boucheEgout.jpeg");
     listeTexture.push_back(textureSol);
     listeTexture.push_back(textureSol1);
     listeTexture.push_back(textureSol2);
     listeTexture.push_back(textureSol10);
+    listeTexture.push_back(textureTrou);
 
     Matrice matriceTerrain(matriceFile);
     TextureManager textureManager(listeTexture);
