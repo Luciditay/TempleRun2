@@ -155,7 +155,7 @@ void Render3D::drawTerrain(float ratio)
 
 Point2D<int> Render3D::getPosPersonnageInGame()
 {
-    int x = m_character.getxAxisPosition() + 1;
+    int x = glm::floor(m_character.getPos().x + 1);
     int z = glm::floor(m_character.getPos().z);
     return {x, z};
 }

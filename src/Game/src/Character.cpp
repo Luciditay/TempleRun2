@@ -73,11 +73,12 @@ void Character::lateralStepRightAnimation()
     // m_lateralStepRight = false;
     //   m_xAxisPosition++;
 
-    if (m_lateralStepRight <= 0.25)
+    if (m_lateralStepRight <= 0.35)
     {
         m_posChar -= m_lateralStepRight * m_stepRight;
         m_lateralStepRight += 0.05;
     }
+
     else
     {
         m_lateralStepRight = 0.;
@@ -167,6 +168,7 @@ void Character::checkState(int currentTileId)
 
 void Character::reactToInputs()
 {
+    int vAngulaire = 6;
     // Go front
     m_frontChar = m_speed * glm::normalize(glm::rotate(glm::vec3(0., 0., 1.), glm::radians(float(m_angle)), glm::vec3(0., 1., 0.)));
     m_posChar -= m_frontChar;
@@ -221,13 +223,14 @@ void Character::reactToInputs()
     // Turn left or Right
     if (m_turningLeft == true && m_variationAngle < 90)
     {
-        m_angle += 2;
-        m_variationAngle += 2;
+
+        m_angle += vAngulaire;
+        m_variationAngle += vAngulaire;
     }
     else if (m_turningRight == true && m_variationAngle > -90)
     {
-        m_angle -= 2;
-        m_variationAngle -= 2;
+        m_angle -= vAngulaire;
+        m_variationAngle -= vAngulaire;
     }
     else
     {
