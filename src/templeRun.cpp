@@ -51,6 +51,7 @@ int main(int argc, char **argv)
     listeTexture.push_back(textureSol10);
 
     Matrice matriceTerrain(matriceFile);
+    matriceTerrain.toString();
     TextureManager textureManager(listeTexture);
 
     Camera camera(-30., M_PI / 6., 0.);

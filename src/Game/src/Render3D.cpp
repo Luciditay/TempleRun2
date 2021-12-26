@@ -20,7 +20,7 @@ void Render3D::playGame(float largeur, float hauteur)
 
             // On récupère la position du personnage dans la matrice
             currentPos = getPosPersonnageInGame();
-            // std::cout << currentPos.x << currentPos.z << std::endl;
+            //  std::cout << currentPos.x << currentPos.z << std::endl;
             currentTileId = m_MatriceTerrain.getMatrice().at(-currentPos.z).at(currentPos.x);
             // std::cout << currentTileId << std::endl;
             //   Event loop:
