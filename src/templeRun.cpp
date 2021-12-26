@@ -51,7 +51,6 @@ int main(int argc, char **argv)
     listeTexture.push_back(textureSol10);
 
     Matrice matriceTerrain(matriceFile);
-    matriceTerrain.toString();
     TextureManager textureManager(listeTexture);
 
     Camera camera(-30., M_PI / 6., 0.);
@@ -112,5 +111,5 @@ int main(int argc, char **argv)
     // Libération des ressources
     // glDeleteTextures(1, &t1);
 
-    return EXIT_SUCCESS;
+    return 0;
 }

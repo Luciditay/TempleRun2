@@ -1,7 +1,7 @@
 #include "Matrice.hpp"
 
-Matrice::Matrice(const std::string &fileMatrice, int beginFile, int lenghtFirstPart)
-    : m_beginningFile(beginFile), m_lenghtFirstPart(lenghtFirstPart)
+Matrice::Matrice(const std::string &fileMatrice, int beginFile, int lenghtFirstPart, int lenghtSecondPart)
+    : m_beginningFile(beginFile), m_lenghtFirstPart(lenghtFirstPart), m_lenghtSecondPart(lenghtSecondPart)
 {
     loadFromFile(fileMatrice);
 }
@@ -33,48 +33,23 @@ void Matrice::loadFromFile(const std::string &Path)
         std::cout << "Le fichier " << Path << " n'existe pas"
                   << "\n";
     }
-    std::vector<int> ligneMatrice = {1, 2, 3};
+    std::vector<int> ligneMatrice(10, 0);
     int number;
     int rowCount = 0;
     int lineCount = 0;
-    int segmentCount = 0;
-    bool lenghtFirstPartComputed = false;
-
-    if (m_beginningFile != 0)
-    {
-        std::string ligne;
-        for (int i = 0; i < m_beginningFile; i++)
-        {
-            getline(matFile, ligne); // On saute à la bonne partie du fichier
-        }
-        // matFile.ignore(); // On change de mode pour passer en lecture par "mot"
-    }
 
     while (matFile >> number)
     {
-        if (number == 10 || number == 20 || number == 30)
+        if (rowCount == 10)
         {
-            segmentCount++;
-        }
-
-        if (segmentCount == 9 && lenghtFirstPartComputed == false)
-        {
-            m_lenghtFirstPart = lineCount + 1;
-            lenghtFirstPartComputed = true;
-        }
-        if (rowCount == 3)
-        {
+            std::cout << number << std::endl;
             m_Matrice.push_back(ligneMatrice);
             rowCount = 0;
-            lineCount++;
-            if (segmentCount == 9)
-            {
-                break; // Si on arrive à deux croisements, on sort de la boucle
-            }
         }
         ligneMatrice.at(rowCount) = number;
         rowCount++;
     }
-    std::cout << "a" << m_lenghtFirstPart << std::endl;
+    // ligneMatrice.at(rowCount) = number;
+    m_Matrice.push_back(ligneMatrice);
     toString();
 }

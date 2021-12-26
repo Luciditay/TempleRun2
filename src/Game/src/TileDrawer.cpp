@@ -64,11 +64,26 @@ TileDrawer::TileDrawer(const FilePath &applicationPath, const std::string &pathV
     glBindVertexArray(0);
 }
 
+void TileDrawer::drawCase(const glm::mat4 &VPMatrix, const glm::vec3 &tileOffset, const glm::vec3 &rotation, int texture)
+{
+    glm::mat4 MMatrix = glm::translate(glm::mat4{1.f}, glm::vec3(0, 0, 0));                                    // On se place devant la caméra, en ligne 0 à gauche (en 0 du monde décalé de -1, 0, 0)
+    MMatrix = glm::translate(MMatrix, glm::vec3(m_size * tileOffset.x, tileOffset.y, -tileOffset.z * m_size)); // On se translate dans la matrice
+    // MMatrix = glm::rotate(MMatrix, glm::radians(90.f), rotation);                                              // On récupère la vraie Mview matrice;
+    m_formeProgramme.m_Program.use();
+
+    glUniformMatrix4fv(m_formeProgramme.uMVPMatrix, 1, GL_FALSE, glm::value_ptr(VPMatrix * MMatrix));
+
+    glUniform1i(m_formeProgramme.uTexture, texture);
+
+    glBindVertexArray(m_vao);
+    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+    glBindVertexArray(0);
+}
+
 void TileDrawer::drawCase(const glm::mat4 &VPMatrix, const glm::vec3 &tileOffset, int texture)
 {
     glm::mat4 MMatrix = glm::translate(glm::mat4{1.f}, glm::vec3(0, 0, 0));                                    // On se place devant la caméra, en ligne 0 à gauche (en 0 du monde décalé de -1, 0, 0)
     MMatrix = glm::translate(MMatrix, glm::vec3(m_size * tileOffset.x, tileOffset.y, -tileOffset.z * m_size)); // On se translate dans la matrice                                               // On récupère la vraie Mview matrice;
-
     m_formeProgramme.m_Program.use();
 
     glUniformMatrix4fv(m_formeProgramme.uMVPMatrix, 1, GL_FALSE, glm::value_ptr(VPMatrix * MMatrix));
