@@ -50,8 +50,9 @@ void Character::lateralStepLeftAnimation()
     glm::vec3 m_stepRight = glm::normalize(glm::cross(m_frontChar, m_upChar));
     // m_posChar += m_stepRight;
     // m_lateralStepLeft = false;
+    // m_xAxisPosition--;
 
-          if (m_lateralStepLeft <= 0.5) {
+          if (m_lateralStepLeft <= 0.25) {
             m_posChar += m_lateralStepLeft*m_stepRight;
             m_lateralStepLeft += 0.05;
         } else {
@@ -66,14 +67,14 @@ void Character::lateralStepRightAnimation()
     glm::vec3 m_stepRight = glm::normalize(glm::cross(m_frontChar, m_upChar));
     // m_posChar -= m_stepRight;
     // m_lateralStepRight = false;
-    
+    //   m_xAxisPosition++;
 
-     if (m_lateralStepLeft <= 0.5) {
-            m_posChar += m_lateralStepLeft*m_stepRight;
-            m_lateralStepLeft += 0.05;
+     if (m_lateralStepRight <= 0.25) {
+            m_posChar -= m_lateralStepRight*m_stepRight;
+            m_lateralStepRight += 0.05;
         } else {
-            m_lateralStepLeft = 0.;
-            m_walkingLeft = false;
+            m_lateralStepRight = 0.;
+            m_walkingRight = false;
             m_xAxisPosition++;
         }
 }
