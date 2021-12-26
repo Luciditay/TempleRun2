@@ -8,7 +8,7 @@
 class TileDrawer // Case de base, sans saut ni trou
 {
 public:
-    TileDrawer(const FilePath &applicationPath, const std::string &pathVertexShader, const std::string &pathFragShader, float size = 2); // Création d'une case de 1x1
+    TileDrawer(const FilePath &applicationPath, const std::string &pathVertexShader, const std::string &pathFragShader, float size = 1); // Création d'une case de 1x1
 
     void drawCase(const glm::mat4 &VPMatrix, const glm::vec3 &offset, int texture);
 

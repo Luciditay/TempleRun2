@@ -12,6 +12,7 @@
 #include "MoveMatrix.hpp"
 #include "ObjProgram.hpp"
 #include "Lights.hpp"
+#include "Vertex3D.hpp"
 
 class Render3D
 {
@@ -35,7 +36,9 @@ public:
 
     void drawTerrain(float ratio);
 
-    void drawCrossBetweenTerrain(int idTypeCroisement, int zOffset, const glm::mat4 &PVMatrix); // Draw un croisement
+    void drawCrossBetweenTerrain(int idTypeCroisement, int nbreCase, int zOffset, const glm::mat4 &PVMatrix); // Draw un croisement
+
+    Point2D<int> getPosPersonnageInGame();
 
     void sendLightsToProgram();
 

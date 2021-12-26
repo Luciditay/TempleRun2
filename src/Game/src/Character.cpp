@@ -12,13 +12,14 @@ float squatScale(float x)
 }
 
 Character::Character(const std::string &modelPath, const glimac::FilePath &applicationPath)
-    : m_posChar(0., 0., 0.), m_jumping(false), m_jumpIndex(-0.4), m_speed(0.005), m_distanceEnemy(100), m_enemySpeed(0.1),
+    : m_posChar(0., 0., 0.), m_jumping(false), m_jumpIndex(-0.4), m_speed(0.01), m_distanceEnemy(100), m_enemySpeed(0.1),
       m_scaleChar(1., 1., 1.), m_compenseScale(0., 0., 0.), m_squating(false), m_squatIndex(-0.3),
       m_turn(false), m_turningLeft(false), m_turningRight(false), m_angle(0), m_variationAngle(0),
       m_upChar(0., 1., 0.), m_frontChar({0., 0., 0.1}), m_dead(false),
       m_walkingLeft(false), m_walkingRight(false),
       m_lateralStepRight(0.), m_lateralStepLeft(0.), m_fall(false), m_fallDistance(0),
-      m_model(modelPath)
+      m_model(modelPath),
+      m_xAxisPosition(0)
 {
 }
 
@@ -27,46 +28,87 @@ void Character::draw(glm::mat4 MVPMatrix, ObjProgram *program, glm::mat4 MVMatri
     m_model.Draw(MVPMatrix, program, MVMatrix);
 }
 
-void Character::handleSDLEvent(const SDL_Event &e)
+void Character::squatAnimation()
+{
+    // m_scaleChar.y = squatScale(m_squatIndex);
+    // m_compenseScale.y = -1 + squatScale(m_squatIndex);
+    // m_squatIndex += 0.01;
+
+    m_scaleChar.y = squatScale(m_squatIndex);
+    m_compenseScale.y = -0.1 + 0.1*squatScale(m_squatIndex);
+    m_squatIndex += 0.01;
+}
+
+void Character::jumpAnimation()
+{
+    m_posChar.y = 1 + jumpHight(m_jumpIndex);
+    m_jumpIndex += 0.02;
+}
+
+void Character::lateralStepLeftAnimation()
+{
+    glm::vec3 m_stepRight = glm::normalize(glm::cross(m_frontChar, m_upChar));
+    // m_posChar += m_stepRight;
+    // m_lateralStepLeft = false;
+
+          if (m_lateralStepLeft <= 0.5) {
+            m_posChar += m_lateralStepLeft*m_stepRight;
+            m_lateralStepLeft += 0.05;
+        } else {
+            m_lateralStepLeft = 0.;
+            m_walkingLeft = false;
+            m_xAxisPosition--;
+        }
+}
+
+void Character::lateralStepRightAnimation()
+{
+    glm::vec3 m_stepRight = glm::normalize(glm::cross(m_frontChar, m_upChar));
+    // m_posChar -= m_stepRight;
+    // m_lateralStepRight = false;
+    
+
+     if (m_lateralStepLeft <= 0.5) {
+            m_posChar += m_lateralStepLeft*m_stepRight;
+            m_lateralStepLeft += 0.05;
+        } else {
+            m_lateralStepLeft = 0.;
+            m_walkingLeft = false;
+            m_xAxisPosition++;
+        }
+}
+
+void Character::handleSDLEvent(const SDL_Event &e, int currentTileID)
 {
     if (e.type == SDL_KEYDOWN)
     {
-        // Key T or Y : Enable Turn or Rotation
-        if (e.key.keysym.sym == SDLK_t)
-        {
-            m_turn = true;
-        }
-        if (e.key.keysym.sym == SDLK_y)
-        {
-            m_turn = false;
-        }
         // Key Q : LEFT
         if (e.key.keysym.sym == SDLK_q)
         {
-            if (!m_turn)
-            { // Lateral Mode
-                m_walkingLeft = true;
+            if (currentTileID == 10 || currentTileID == 30) // Left or double turning point
+            {                                               // Lateral Mode
+                m_turningLeft = true;
             }
             else
-            { // Rotation 90°
-                if (m_turningRight == false)
+            {
+                if (m_xAxisPosition != -1) // Si le perso n'est pas à l'extrême gauche
                 {
-                    m_turningLeft = true;
+                    m_walkingLeft = true;
                 }
             }
         }
         // Key D : RIGHT
         else if (e.key.keysym.sym == SDLK_d)
         {
-            if (!m_turn)
+            if (currentTileID == 20 || currentTileID == 30)
             { // Lateral move
-                m_walkingRight = true;
+                m_turningRight = true;
             }
             else
-            { // Rotation 90°
-                if (m_turningLeft == false)
+            {
+                if (m_xAxisPosition != 1) // Si le perso n'est pas à l'ED
                 {
-                    m_turningRight = true;
+                     m_walkingRight = true;
                 }
             }
         }
@@ -91,29 +133,9 @@ void Character::handleSDLEvent(const SDL_Event &e)
         // Key S : SQUAT
         else if (e.key.keysym.sym == SDLK_s)
         {
-            if (m_jumping == false)
-            {
-                m_squating = true;
-            }
+            m_squating = true;
         }
     }
-}
-
-glm::mat4 Character::computeMVMatrixCharacter(cameraDebug &c)
-{
-    return computeViewMatrix(c) * computeMMatrixCharacter();
-}
-
-glm::mat4 Character::computeViewMatrix(cameraDebug &c) const
-{
-    return glm::translate(c.getViewMatrix(), glm::vec3(0., -m_posChar.y, 0.));
-}
-
-glm::mat4 Character::computeMMatrixCharacter()
-{
-    glm::mat4 MMatrixChar = glm::translate(glm::mat4(), glm::vec3(0., m_posChar.y, 0.) + m_compenseScale);
-    MMatrixChar = glm::scale(MMatrixChar, m_scaleChar);
-    return MMatrixChar;
 }
 
 void Character::reactToInputs()
@@ -133,34 +155,21 @@ void Character::reactToInputs()
     }
 
     // Go to left or right
-    glm::vec3 m_stepRight = glm::normalize(glm::cross(m_frontChar, m_upChar));
+    // glm::vec3 m_stepRight = glm::normalize(glm::cross(m_frontChar, m_upChar));
 
     if (m_walkingRight == true)
     {
-        if (m_lateralStepRight <= 0.5) {
-            m_posChar -= m_lateralStepRight*m_stepRight;
-            m_lateralStepRight += 0.05;
-        } else {
-            m_lateralStepRight = 0.;
-            m_walkingRight = false;
-        }
+        lateralStepRightAnimation();
     }
     if (m_walkingLeft == true)
     {
-        if (m_lateralStepLeft <= 0.5) {
-            m_posChar += m_lateralStepLeft*m_stepRight;
-            m_lateralStepLeft += 0.05;
-        } else {
-            m_lateralStepLeft = 0.;
-            m_walkingLeft = false;
-        }
+        lateralStepLeftAnimation();
     }
 
     // Jump
     if (m_jumping == true && m_posChar.y >= 1)
     {
-        m_posChar.y = 1 + jumpHight(m_jumpIndex);
-        m_jumpIndex += 0.02;
+        jumpAnimation();
     }
     else
     {
@@ -172,9 +181,7 @@ void Character::reactToInputs()
     // Squat
     if (m_squating == true && m_scaleChar.y <= 1)
     {
-        m_scaleChar.y = squatScale(m_squatIndex);
-        m_compenseScale.y = -0.1 + 0.1*squatScale(m_squatIndex);
-        m_squatIndex += 0.01;
+        squatAnimation();
     }
     else
     {
