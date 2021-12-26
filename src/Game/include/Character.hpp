@@ -85,6 +85,8 @@ public:
     {
         return m_xAxisPosition;
     }
+    bool isSquating();
+
     void increaseSpeed();
     /// \brief true if the character is dead
     bool isDead();

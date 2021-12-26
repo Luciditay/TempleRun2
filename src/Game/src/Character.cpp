@@ -91,10 +91,15 @@ void Character::handleSDLEvent(const SDL_Event &e, int currentTileID)
     if (e.type == SDL_KEYDOWN)
     {
         // Key Q : LEFT
+        if (currentTileID != 10 && currentTileID != 20 && currentTileID != 30)
+        { // Eviter qu'il puisse tourner deux fois dans la même séquence
+            m_turn = true;
+        }
+
         if (e.key.keysym.sym == SDLK_q)
         {
-            if (currentTileID == 10 || currentTileID == 30) // Left or double turning point
-            {                                               // Lateral Mode
+            if (currentTileID == 10 || currentTileID == 30 && m_turn) // Left or double turning point
+            {                                                         // Lateral Mode
                 m_turningLeft = true;
             }
             else
@@ -108,7 +113,7 @@ void Character::handleSDLEvent(const SDL_Event &e, int currentTileID)
         // Key D : RIGHT
         else if (e.key.keysym.sym == SDLK_d)
         {
-            if (currentTileID == 20 || currentTileID == 30)
+            if (currentTileID == 20 || currentTileID == 30 && m_turn)
             { // Lateral move
                 m_turningRight = true;
             }
@@ -152,8 +157,12 @@ void Character::checkState(int currentTileId)
     {
         std::cout << "T'es mort" << std::endl;
         m_dead = true;
-        exit(EXIT_SUCCESS);
     }
+
+    // if (currentTileId == TextureTypeId::FautSBaisser && isSquatting() == false)
+    // {
+    //     std::cout << "Mieux vaut être un nain vivant qu'un grand échalas succombant" << std::endl;
+    // }
 }
 
 void Character::reactToInputs()
@@ -225,6 +234,7 @@ void Character::reactToInputs()
         m_variationAngle = 0;
         m_turningLeft = false;
         m_turningRight = false;
+        m_turn = false;
     }
 
     // Fall
@@ -267,6 +277,11 @@ float Character::getDistanceEnemy()
 bool Character::isDead()
 {
     return m_dead;
+}
+
+bool Character::isSquating()
+{
+    return m_squating;
 }
 
 bool Character::isJumping()
