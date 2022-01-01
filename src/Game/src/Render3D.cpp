@@ -8,6 +8,8 @@ void Render3D::playGame(float largeur, float hauteur)
     int previousTime = 0;
     Point2D<int> currentPos;
     int currentTileId;
+    menu.setStop(&done);
+    SDL_EnableKeyRepeat(10, 10);
     while (true)
     {
         // update current time
@@ -20,9 +22,9 @@ void Render3D::playGame(float largeur, float hauteur)
 
             // On récupère la position du personnage dans la matrice
             currentPos = getPosPersonnageInGame();
-            std::cout << currentPos.x << currentPos.z << std::endl;
+            //  std::cout << currentPos.x << currentPos.z << std::endl;
             currentTileId = m_MatriceTerrain.getMatrice().at(-currentPos.z).at(currentPos.x);
-            std::cout << currentTileId << std::endl;
+            //    std::cout << currentTileId << std::endl;
             //   Event loop:
             SDL_Event e;
 
@@ -31,6 +33,8 @@ void Render3D::playGame(float largeur, float hauteur)
 
                 m_camera.handleSDLEvent(e);
                 m_character.handleSDLEvent(e, currentTileId);
+
+                catch_UI(e);
 
                 if (e.type == SDL_QUIT)
                 {
@@ -45,7 +49,8 @@ void Render3D::playGame(float largeur, float hauteur)
             m_character.reactToInputs();
             m_character.checkState(currentTileId);
             drawTerrain(largeur / hauteur);
-
+            enemyCalcul();
+            draw_Ui();
             // Update the display
             m_windowManager.swapBuffers();
 
@@ -53,6 +58,7 @@ void Render3D::playGame(float largeur, float hauteur)
             previousTime = currentTime;
         }
     }
+    TTF_Quit();
 }
 
 void Render3D::sendLightsToProgram()
@@ -164,3 +170,77 @@ Point2D<int> Render3D::getPosPersonnageInGame()
     return {x, z};
 }
 // CHANGER LA FIN AVEC LES IF IMBRIQUES ?
+
+// ui SCREEN
+
+void Render3D::catch_UI(SDL_Event e)
+{
+
+    menu.handleSDLEvent(e, gameStart);
+
+    if (e.type == SDL_MOUSEBUTTONUP)
+    {
+        gameStart = titleScreen.close();
+
+        if (looser)
+        {
+            deadScreen.close();
+            m_character.reset();
+            looser = false;
+            pause = false;
+            compteur = 0;
+            score.resetItemsAndDistance();
+            score.update();
+        }
+    }
+}
+
+void Render3D::enemyCalcul()
+{
+    if (m_character.isDead())
+    {
+        // perdu
+        deadScreen.open();
+        deadScreen.draw();
+        deadScreen.updateScore(score.getTotalScore());
+        looser = true;
+        pause = true;
+        menu.updateHighScores(score.getTotalScore());
+    }
+}
+
+void Render3D::draw_Ui()
+{
+    if (!pause && !looser)
+    {
+        compteur += 1;
+        if (compteur >= 10)
+        {
+            score.increaseDistance();
+            compteur = 0;
+        }
+        score.update();
+        score.draw();
+    }
+    if (gameStart)
+    {
+        menu.draw();
+    }
+    titleScreen.draw();
+
+    if (menu.someMenuIsOpen())
+    {
+        pause = true;
+    }
+    else
+    {
+        pause = false;
+    }
+    if (menu.shouldStartAgain())
+    {
+        m_character.reset();
+        compteur = 0;
+        score.resetItemsAndDistance();
+        score.update();
+    }
+}
