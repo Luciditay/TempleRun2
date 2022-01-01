@@ -73,7 +73,9 @@ void TileDrawer::drawCase(const glm::mat4 &VPMatrix, const glm::vec3 &tileOffset
 
     glUniformMatrix4fv(m_formeProgramme.uMVPMatrix, 1, GL_FALSE, glm::value_ptr(VPMatrix * MMatrix));
 
-    glUniform1i(m_formeProgramme.uTexture, texture);
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, texture);
+    glUniform1i(m_formeProgramme.uTexture, 0);
 
     glBindVertexArray(m_vao);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
@@ -88,7 +90,9 @@ void TileDrawer::drawCase(const glm::mat4 &VPMatrix, const glm::vec3 &tileOffset
 
     glUniformMatrix4fv(m_formeProgramme.uMVPMatrix, 1, GL_FALSE, glm::value_ptr(VPMatrix * MMatrix));
 
-    glUniform1i(m_formeProgramme.uTexture, texture);
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, texture);
+    glUniform1i(m_formeProgramme.uTexture, 0);
 
     glBindVertexArray(m_vao);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
@@ -107,7 +111,9 @@ void TileDrawer::drawMurHorizontal(const glm::mat4 &VPMatrix, const glm::vec3 &o
 
     glUniformMatrix4fv(m_formeProgramme.uMVPMatrix, 1, GL_FALSE, glm::value_ptr(VPMatrix * MMatrix));
 
-    glUniform1i(m_formeProgramme.uTexture, TypeTextureID);
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, TypeTextureID);
+    glUniform1i(m_formeProgramme.uTexture, 0);
 
     glBindVertexArray(m_vao);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
@@ -126,7 +132,9 @@ void TileDrawer::drawMurVertical(const glm::mat4 &VPMatrix, const glm::vec3 &off
 
     glUniformMatrix4fv(m_formeProgramme.uMVPMatrix, 1, GL_FALSE, glm::value_ptr(VPMatrix * MMatrix));
 
-    glUniform1i(m_formeProgramme.uTexture, TypeTextureID);
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, TypeTextureID);
+    glUniform1i(m_formeProgramme.uTexture, 0);
 
     glBindVertexArray(m_vao);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);

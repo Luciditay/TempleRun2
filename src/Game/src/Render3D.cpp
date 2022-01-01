@@ -46,11 +46,15 @@ void Render3D::playGame(float largeur, float hauteur)
             /*********************************
              * HERE SHOULD COME THE RENDERING CODE
              *********************************/
+            draw_Ui();
+
+            // if (menu.ge)
+
             m_character.reactToInputs();
             m_character.checkState(currentTileId);
             drawTerrain(largeur / hauteur);
             enemyCalcul();
-            draw_Ui();
+
             // Update the display
             m_windowManager.swapBuffers();
 
@@ -107,8 +111,10 @@ void Render3D::drawTerrain(float ratio)
 
     const glm::mat4 worldMVMatrix = m_moveMatrix.getWorldMVMatrix();
 
+    std::cout << "debut draw" << std::endl;
     for (int i = 0; i < terrain.size(); i++)
     {
+        std::cout << "Debut ligne " << i << std::endl;
         for (int j = 0; j < terrain.at(i).size(); j++)
         {
             // On texturise
@@ -118,10 +124,11 @@ void Render3D::drawTerrain(float ratio)
             {
                 currentTex = m_textureIDManager.getGLTextureMatchingName(idCurrentCase);
                 m_tileDrawer.drawCase(ProjMatrix * worldMVMatrix, glm::vec3(j, 0, i), currentTex);
+                std::cout << currentTex << " ";
 
                 if (j - 1 < 0 || terrain.at(i).at(j - 1) == 0) // On dessine à gauche de toute les cases au bord du monde, un mur
                 {
-                    m_tileDrawer.drawMurVertical(ProjMatrix * worldMVMatrix, glm::vec3(j, 0, i), TextureTypeId::SOL1);
+                    m_tileDrawer.drawMurVertical(ProjMatrix * worldMVMatrix, glm::vec3(j, 0, i), m_textureIDManager.getGLTextureMatchingName(TextureTypeId::SOL1));
                 }
 
                 if (j + 1 >= terrain.at(i).size() || terrain.at(i).at(j + 1) == 0) // On dessine à gauche de toute les cases au bord du monde, un mur
@@ -140,22 +147,7 @@ void Render3D::drawTerrain(float ratio)
                 }
             }
         }
-
-        // if (idCurrentCase == 10)
-        // {
-        //     m_tileDrawer.drawMurHorizontal(ProjMatrix * worldMVMatrix, glm::vec3(-1, 0, i), TextureTypeId::SOL1);
-        // }
-
-        // if (idCurrentCase == 20)
-        // {
-        //     m_tileDrawer.drawMurVertical(ProjMatrix * worldMVMatrix, glm::vec3(1, 0, i), TextureTypeId::SOL1);
-        // }
-
-        // if (idCurrentCase == 30)
-        // {
-        //     m_tileDrawer.drawMurHorizontal(ProjMatrix * worldMVMatrix, glm::vec3(-1, 0, i), TextureTypeId::SOL1);
-        //     m_tileDrawer.drawMurHorizontal(ProjMatrix * worldMVMatrix, glm::vec3(1, 0, i), TextureTypeId::SOL1);
-        // }
+        std::cout << std::endl;
     }
 }
 

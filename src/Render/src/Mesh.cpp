@@ -41,18 +41,18 @@ void Mesh::Draw(glimac::Program &program)
     unsigned int diffuseNr = 1;
     unsigned int specularNr = 1;
     for (unsigned int i = 0; i < _textures.size(); i++)
-    {                                          // La valeur 4 doit correspondre aux nombres de textures actuellement présentes +1 (pour l'instant 4 : sol 1, 2, 10)
-        glActiveTexture(GL_TEXTURE0 + 11 + i); // activate proper texture unit before binding
-        // retrieve texture number (the N in diffuse_textureN)
-        std::string number;
-        std::string name = _textures[i]._type;
-        if (name == "texture_diffuse")
-            number = std::to_string(diffuseNr++);
-        else if (name == "texture_specular")
-            number = std::to_string(specularNr++);
+    { // La valeur 4 doit correspondre aux nombres de textures actuellement présentes +1 (pour l'instant 4 : sol 1, 2, 10)
+      // glActiveTexture(GL_TEXTURE0 + i); // activate proper texture unit before binding
+      // // retrieve texture number (the N in diffuse_textureN)
+      // std::string number;
+      // std::string name = _textures[i]._type;
+      // if (name == "texture_diffuse")
+      //     number = std::to_string(diffuseNr++);
+      // else if (name == "texture_specular")
+      //     number = std::to_string(specularNr++);
 
-        glUniform1f(glGetUniformLocation(program.getGLId(), ("material." + name + number).c_str()), i);
-        glBindTexture(GL_TEXTURE_2D, _textures[i]._id);
+        // glUniform1f(glGetUniformLocation(program.getGLId(), ("material." + name + number).c_str()), i);
+        // glBindTexture(GL_TEXTURE_2D, _textures[i]._id);
     }
     glActiveTexture(GL_TEXTURE0);
 

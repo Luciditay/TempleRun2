@@ -46,6 +46,7 @@ int main(int argc, char **argv)
     P_Texture textureSol2(TextureTypeId::SOL2, "../assets/textures/triforce.png");
     P_Texture textureSol10(TextureTypeId::SOL10, "../assets/textures/pngwing.com.png");
     P_Texture textureTrou(TextureTypeId::TROU, "../assets/textures/boucheEgout.jpeg");
+
     listeTexture.push_back(textureSol);
     listeTexture.push_back(textureSol1);
     listeTexture.push_back(textureSol2);
@@ -68,7 +69,7 @@ int main(int argc, char **argv)
 
     SDL_EnableKeyRepeat(10, 10);
 
-      game.playGame(largeur, hauteur);
+    game.playGame(largeur, hauteur);
     // while (!done)
     // {
 
