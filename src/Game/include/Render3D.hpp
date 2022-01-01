@@ -13,11 +13,15 @@
 #include "ObjProgram.hpp"
 #include "Lights.hpp"
 #include "Vertex3D.hpp"
+#include "TTFtext.hpp"
+#include "UI.hpp"
+#include "UIScreens.hpp"
+#include "HighScores.hpp"
 
 class Render3D
 {
 public:
-    Render3D(const Matrice &m, const TextureManager &tm, Camera &cam, const FilePath &applicationPath, const std::string &VSPath, const std::string &FSPath, const std::string &modelPath, const glimac::SDLWindowManager &wm)
+    Render3D(const Matrice &m, const TextureManager &tm, Camera &cam, const FilePath &applicationPath, const std::string &VSPath, const std::string &FSPath, const std::string &modelPath, const glimac::SDLWindowManager &wm, float largeur, float hauteur, const char *fontpath, const char *image1, const char *image2)
         : m_MatriceTerrain(m),
           m_tileDrawer(applicationPath, VSPath, FSPath),
           m_textureIDManager(tm),
@@ -30,7 +34,27 @@ public:
           m_objprogram(applicationPath),
           m_lightdir1("Directional", 0, m_objprogram.m_Program, &m_moveMatrix),
           m_lightdir2("Directional", 1, m_objprogram.m_Program, &m_moveMatrix),
-          m_windowManager(wm) {} // Default constructor of cam is fine
+          m_windowManager(wm),
+
+          //////LAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+          // ui
+          compteur(0),
+          fontPath(fontpath),
+          score(applicationPath, largeur, hauteur),
+          imagePath(image1),
+          imagePath2(image2),
+          menu(imagePath, fontPath, 30, applicationPath, largeur, hauteur),
+          titleScreen(imagePath2, fontPath, 100, applicationPath, largeur, hauteur),
+          deadScreen(imagePath2, fontPath, 100, applicationPath, largeur, hauteur),
+          done(false),
+          gameStart(false),
+          enemySpeed(0.1),
+          distanceEnemy(100),
+          looser(false),
+          pause(true)
+
+    {
+    } // Default constructor of cam is fine
 
     void playGame(float largeur, float hauteur);
 
@@ -44,6 +68,9 @@ public:
 
     glm::mat4 MMatrixMur(int xOffset, int yOffset, int zOffset);
     glm::mat4 MMatrixMurHorizontal(const glm::vec3 &offset);
+    void catch_UI(SDL_Event e);
+    void enemyCalcul();
+    void draw_Ui();
 
 private:
     Matrice m_MatriceTerrain;          // On va push des vecteurs de 3 (correspondant à chaque ligne du terrain
@@ -57,7 +84,25 @@ private:
     bool m_rotateTerrainLeft;
     bool m_rotateTerrainRight;
     ObjProgram m_objprogram;
-    
+
     Light m_lightdir1;
     Light m_lightdir2;
+
+    // ui
+    //////LAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+    const char *fontPath;
+    int compteur;
+    ScoreCounter score;
+    const char *imagePath;
+    const char *imagePath2;
+    Menu menu;
+    TitleScreen titleScreen;
+    DeadScreen deadScreen;
+    bool done;
+    bool gameStart;
+    float enemySpeed;
+    float distanceEnemy;
+    bool looser;
+    bool pause;
 };
