@@ -1,19 +1,20 @@
 #include <iostream>
 #include "Character.hpp"
 #include "Constants.hpp"
+#include <functional> 
 
-float jumpHight(float x)
-{
-    return -8 * x * x + 1.5;
-};
+// float jumpHight(float x)
+// {
+//     return -8 * x * x + 1.5;
+// };
 
-float squatScale(float x)
-{
-    return 1 - (-5 * x * x + 0.5);
-}
+// float squatScale(float x)
+// {
+//     return 1 - (-5 * x * x + 0.5);
+// }
 
 Character::Character(const std::string &modelPath, const glimac::FilePath &applicationPath)
-    : m_posChar(0., 0., 0.), m_jumping(false), m_jumpIndex(-0.4), m_speed(0.05), m_distanceEnemy(100), m_enemySpeed(0.1),
+    : m_posChar(0., 0., 0.), m_jumping(false), m_jumpIndex(-0.4), m_speed(0.05), m_distanceEnemy(3), m_enemySpeed(0.001),
       m_scaleChar(1., 1., 1.), m_compenseScale(0., 0., 0.), m_squating(false), m_squatIndex(-0.3),
       m_turn(false), m_turningLeft(false), m_turningRight(false), m_angle(0), m_variationAngle(0),
       m_upChar(0., 1., 0.), m_frontChar({0., 0., 0.1}), m_dead(false),
@@ -35,6 +36,8 @@ void Character::squatAnimation()
     // m_compenseScale.y = -1 + squatScale(m_squatIndex);
     // m_squatIndex += 0.01;
 
+    std::function<float(float x)> squatScale = [](float x){return 1 - (-5 * x * x + 0.5);};
+
     m_scaleChar.y = squatScale(m_squatIndex);
     m_compenseScale.y = -0.1 + 0.1 * squatScale(m_squatIndex);
     m_squatIndex += 0.01;
@@ -42,6 +45,8 @@ void Character::squatAnimation()
 
 void Character::jumpAnimation()
 {
+    std::function<float(float x)> jumpHight = [](float x){return -8 * x * x + 1.5;};
+
     m_posChar.y = 1 + jumpHight(m_jumpIndex);
     m_jumpIndex += 0.02;
 }
@@ -301,7 +306,7 @@ void Character::increaseSpeed()
 void Character::reset()
 {
     m_enemySpeed = 0.1;
-    m_distanceEnemy = 100;
+    m_distanceEnemy = 3;
     m_posChar = glm::vec3(0., 0., 0.);
     m_frontChar = glm::vec3(0., 0., 0.1);
     m_fallDistance = 0;

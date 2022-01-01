@@ -17,6 +17,6 @@ private:
     MoveMatrix *m_moveMatrix;
 
 public:
-    CollectibleRenderer(ObjProgram *program, MoveMatrix *moveMatrix, const glimac::FilePath &applicationPath, const std::string coinModelPath, const std::string &bonusModelPath);
-    // void drawCollectible(const Collectible collectible);
+    CollectibleRenderer(ObjProgram *program, MoveMatrix *moveMatrix);
+    void drawCollectible(const Collectible collectible, glm::mat4 ProjMatrix);
 };

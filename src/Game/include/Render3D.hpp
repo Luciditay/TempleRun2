@@ -13,6 +13,10 @@
 #include "ObjProgram.hpp"
 #include "Lights.hpp"
 #include "Vertex3D.hpp"
+#include "Collectible.hpp"
+#include "Collectibles.hpp"
+#include "CollectibleRenderer.hpp"
+#include "Model.hpp"
 #include "TTFtext.hpp"
 #include "UI.hpp"
 #include "UIScreens.hpp"
@@ -21,7 +25,7 @@
 class Render3D
 {
 public:
-    Render3D(const Matrice &m, const TextureManager &tm, Camera &cam, const FilePath &applicationPath, const std::string &VSPath, const std::string &FSPath, const std::string &modelPath, const glimac::SDLWindowManager &wm, float largeur, float hauteur, const char *fontpath, const char *image1, const char *image2)
+    Render3D(const Matrice &m, const TextureManager &tm, Camera &cam, const FilePath &applicationPath, const std::string &VSPath, const std::string &FSPath, const std::string &modelPath, const std::string &modelPathEnemy, const glimac::SDLWindowManager &wm, float largeur, float hauteur, const char *fontpath, const char *image1, const char *image2)
         : m_MatriceTerrain(m),
           m_tileDrawer(applicationPath, VSPath, FSPath),
           m_textureIDManager(tm),
@@ -30,6 +34,7 @@ public:
           m_rotateTerrainRight(false),
           m_Skybox(applicationPath),
           m_character(modelPath, applicationPath),
+          m_enemy(modelPathEnemy),
           m_moveMatrix(&m_camera, &m_character),
           m_objprogram(applicationPath),
           m_lightdir1("Directional", 0, m_objprogram.m_Program, &m_moveMatrix),
@@ -84,7 +89,11 @@ private:
     bool m_rotateTerrainLeft;
     bool m_rotateTerrainRight;
     ObjProgram m_objprogram;
+    Model m_enemy;
 
+
+    // Collectibles collectibles;
+    
     Light m_lightdir1;
     Light m_lightdir2;
 

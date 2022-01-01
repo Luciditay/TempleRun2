@@ -34,7 +34,9 @@ void MoveMatrix::computeMVLight()
 
 void MoveMatrix::computeMVEnemy()
 {
-    m_MVMatrixEnemy = glm::translate(m_ViewMatrix, glm::vec3(0., 1., m_char->getDistanceEnemy()));
+    glm::mat4 VEnemy = glm::translate(glm::mat4(), glm::vec3(0., 1., m_char->getDistanceEnemy()));
+    VEnemy= glm::scale(VEnemy, glm::vec3(0.1, 0.1, 0.1));
+    m_MVMatrixEnemy = m_ViewMatrix * VEnemy;
 }
 
 void MoveMatrix::computeMVCollectible(glm::vec3 position)
