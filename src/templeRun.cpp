@@ -38,6 +38,7 @@ int main(int argc, char **argv)
     std::vector<P_Texture> listeTexture;
 
     const std::string modelCharacterPath = "../assets/assetsTestAssimp/backpack.obj";
+    const std::string modelEnemyPath = "../assets/obj/Handgun_obj.obj";
     const std::string VSPath = "shaders/case3D.vs.glsl";
     const std::string FSPath = "shaders/case3D.fs.glsl";
 
@@ -57,7 +58,7 @@ int main(int argc, char **argv)
 
     Camera camera(-30., M_PI / 6., 0.);
     Character Player(modelCharacterPath, applicationPath);
-    Render3D game(matriceTerrain, textureManager, camera, applicationPath, VSPath, FSPath, modelCharacterPath, windowManager);
+    Render3D game(matriceTerrain, textureManager, camera, applicationPath, VSPath, FSPath, modelCharacterPath, modelEnemyPath, windowManager);
 
     constexpr GLuint VERTEX_ATTR_POSITION = 0;
     constexpr GLuint VERTEX_ATTR_TEXTURE = 2;

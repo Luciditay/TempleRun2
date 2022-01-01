@@ -99,6 +99,10 @@ void Render3D::drawTerrain(float ratio)
     sendLightsToProgram();
     m_character.draw(ProjMatrix * MVMatrixPersonnage, &m_objprogram, MVMatrixPersonnage);
 
+    const glm::mat4 MVMatrixEnemy = m_moveMatrix.getEnemyMVMatrix();
+    // m_character.draw(ProjMatrix * MVMatrixEnemy, &m_objprogram, MVMatrixEnemy);
+    m_enemy.Draw(ProjMatrix * MVMatrixEnemy, &m_objprogram, MVMatrixEnemy);
+
     const glm::mat4 worldMVMatrix = m_moveMatrix.getWorldMVMatrix();
 
     for (int i = 0; i < terrain.size(); i++)
