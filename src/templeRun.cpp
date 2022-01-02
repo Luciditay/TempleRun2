@@ -39,7 +39,8 @@ int main(int argc, char **argv)
 
     // const std::string modelCharacterPath = "../assets/assetsTestAssimp/backpack.obj";
     const std::string modelCharacterPath = "../assets/obj/pacman/pacman.obj";
-    const std::string modelEnemyPath = "../assets/obj/Handgun_obj.obj";
+    // const std::string modelEnemyPath = "../assets/obj/Handgun_obj.obj";
+    const std::string modelEnemyPath = "../assets/obj/ghost/ghost.obj";
     const std::string VSPath = "shaders/case3D.vs.glsl";
     const std::string FSPath = "shaders/case3D.fs.glsl";
 
