@@ -39,6 +39,8 @@ void MoveMatrix::computeMVEnemy()
 {
     glm::mat4 VEnemy = glm::translate(glm::mat4(), glm::vec3(0., 1., m_char->getDistanceEnemy()));
     VEnemy= glm::scale(VEnemy, glm::vec3(0.1, 0.1, 0.1));
+    VEnemy = glm::rotate(VEnemy, glm::radians(float(90.)), glm::vec3(1.,0.,0.));
+    // VEnemy = glm::rotate(VEnemy, glm::radians(float(90.)), glm::vec3(0.,1.,0.));
     m_MVMatrixEnemy = m_ViewMatrix * VEnemy;
 }
 
@@ -47,6 +49,7 @@ void MoveMatrix::computeMVCollectible(glm::vec3 position)
     glm::mat4 VCollectible = glm::rotate(glm::mat4(), glm::radians(float(-m_char->getAngle())), glm::vec3(0., 1., 0.));
     VCollectible = glm::translate(VCollectible, (glm::vec3(-m_char->getPos().x, 0, -m_char->getPos().z)) + position);
     VCollectible = glm::scale(VCollectible, glm::vec3(0.1, 0.1, 0.1));
+    VCollectible = glm::rotate(VCollectible, glm::radians(float(90.)), glm::vec3(1.,0.,0.));
     m_MVMatrixCollectible = m_ViewMatrix * VCollectible;
 }
 

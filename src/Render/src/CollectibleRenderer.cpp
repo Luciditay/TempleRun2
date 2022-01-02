@@ -2,8 +2,8 @@
 
 CollectibleRenderer::CollectibleRenderer(ObjProgram *program, MoveMatrix *moveMatrix) : 
     m_program(program), m_moveMatrix(moveMatrix),
-    m_modelCoin("../assets/obj/Handgun_obj.obj"),
-    m_modelBonus("../assets/obj/Handgun_obj.obj")
+    m_modelCoin("../assets/obj/coin/coin.obj"),
+    m_modelBonus("../assets/obj/fruit/fruit.obj")
 
 {
 }
