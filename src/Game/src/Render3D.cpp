@@ -129,22 +129,22 @@ void Render3D::drawTerrain(float ratio)
 
                 if (j - 1 < 0 || terrain.at(i).at(j - 1) == 0) // On dessine à gauche de toute les cases au bord du monde, un mur
                 {
-                    m_tileDrawer.drawMurVertical(ProjMatrix * worldMVMatrix, glm::vec3(j, 0, i), m_textureIDManager.getGLTextureMatchingName(TextureTypeId::SOL1));
+                    m_tileDrawer.drawMurVertical(ProjMatrix * worldMVMatrix, glm::vec3(j, 0, i), m_textureIDManager.getGLTextureMatchingName(TextureTypeId::SOL2));
                 }
 
                 if (j + 1 >= terrain.at(i).size() || terrain.at(i).at(j + 1) == 0) // On dessine à gauche de toute les cases au bord du monde, un mur
                 {
-                    m_tileDrawer.drawMurVertical(ProjMatrix * worldMVMatrix, glm::vec3(j + 1, 0, i), TextureTypeId::SOL1);
+                    m_tileDrawer.drawMurVertical(ProjMatrix * worldMVMatrix, glm::vec3(j + 1, 0, i), TextureTypeId::SOL2);
                 }
 
                 if (i - 1 < 0 || terrain.at(i - 1).at(j) == 0) // On dessine à gauche de toute les cases au bord du monde, un mur
                 {
-                    m_tileDrawer.drawMurHorizontal(ProjMatrix * worldMVMatrix, glm::vec3(j + 1, 0, i - 1), TextureTypeId::SOL1);
+                    m_tileDrawer.drawMurHorizontal(ProjMatrix * worldMVMatrix, glm::vec3(j + 1, 0, i - 1), TextureTypeId::SOL2);
                 }
 
                 if (i + 1 >= terrain.size() || terrain.at(i + 1).at(j) == 0) // On dessine à gauche de toute les cases au bord du monde, un mur
                 {
-                    m_tileDrawer.drawMurHorizontal(ProjMatrix * worldMVMatrix, glm::vec3(j + 1, 0, i), TextureTypeId::SOL1);
+                    m_tileDrawer.drawMurHorizontal(ProjMatrix * worldMVMatrix, glm::vec3(j + 1, 0, i), TextureTypeId::SOL2);
                 }
             }
         }
