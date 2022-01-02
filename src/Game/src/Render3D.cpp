@@ -46,7 +46,7 @@ void Render3D::playGame(float largeur, float hauteur)
             /*********************************
              * HERE SHOULD COME THE RENDERING CODE
              *********************************/
-            draw_Ui();
+            
 
             // if (menu.ge)
 
@@ -54,6 +54,9 @@ void Render3D::playGame(float largeur, float hauteur)
             m_character.checkState(currentTileId);
             drawTerrain(largeur / hauteur);
             enemyCalcul();
+
+            // !!! UI must be drawn after everything else, because it's 2D !
+            draw_Ui();
 
             // Update the display
             m_windowManager.swapBuffers();
