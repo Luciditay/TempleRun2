@@ -14,7 +14,7 @@
 // }
 
 Character::Character(const std::string &modelPath, const glimac::FilePath &applicationPath)
-    : m_posChar(0., 0., 0.), m_jumping(false), m_jumpIndex(-0.4), m_speed(0.05), m_distanceEnemy(3), m_enemySpeed(0.005),
+    : m_posChar(1., 0., -4.), m_jumping(false), m_jumpIndex(-0.4), m_speed(0.05), m_distanceEnemy(3), m_enemySpeed(0.001),
       m_scaleChar(1., 1., 1.), m_compenseScale(0., 0., 0.), m_squating(false), m_squatIndex(-0.3),
       m_turn(false), m_turningLeft(false), m_turningRight(false), m_angle(0), m_variationAngle(0),
       m_upChar(0., 1., 0.), m_frontChar({0., 0., 0.1}), m_dead(false),
@@ -23,8 +23,6 @@ Character::Character(const std::string &modelPath, const glimac::FilePath &appli
       m_model(modelPath),
       m_xAxisPosition(0)
 {
-    stbi_set_flip_vertically_on_load(true);
-    m_model = Model(modelPath);
 }
 
 void Character::draw(glm::mat4 MVPMatrix, ObjProgram *program, glm::mat4 MVMatrix)
@@ -175,25 +173,24 @@ void Character::checkState(int currentTileId)
         die();
     }
 
-    // if (currentTileId == TextureTypeId::FautSBaisser && isSquating() == false)
+    if (currentTileId == 0)
+    {
+        std::cout << "Collision mur" << std::endl;
+        die();
+    }
+
+    // if (currentTileId == TextureTypeId::FautSBaisser && isSquatting() == false)
     // {
     //     std::cout << "Mieux vaut être un nain vivant qu'un grand échalas succombant" << std::endl;
     // }
 }
 
-void Character::reactToInputs(const glm::mat4 &matTerrain)
+void Character::reactToInputs()
 {
     int vAngulaire = 6;
     // Go front
     m_frontChar = m_speed * glm::normalize(glm::rotate(glm::vec3(0., 0., 1.), glm::radians(float(m_angle)), glm::vec3(0., 1., 0.)));
     m_posChar -= m_frontChar;
-
-    int zSizeMatrice = matTerrain.get int xSizeMatrice =
-
-        if (m_posChar)
-    {
-        std::cout << "Wall collapse" << std::endl;
-    }
 
     // Enemy is coming...
     if (m_distanceEnemy > 0)
@@ -202,7 +199,7 @@ void Character::reactToInputs(const glm::mat4 &matTerrain)
     }
     else
     {
-        m_dead = true;
+        die();
     }
 
     // Go to left or right
@@ -329,7 +326,7 @@ void Character::reset()
 {
     m_enemySpeed = 0.001;
     m_distanceEnemy = 3;
-    m_posChar = glm::vec3(0., 0., 0.);
+    m_posChar = glm::vec3(1., 0., -4.);
     m_frontChar = glm::vec3(0., 0., 0.1);
     m_fallDistance = 0;
     m_fall = false;

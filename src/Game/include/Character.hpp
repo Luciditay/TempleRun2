@@ -69,7 +69,7 @@ public:
 
     void handleSDLEvent(const SDL_Event &e, int currentTileID);
     /// \brief react to action booleans changes, by modifying position value etc.
-    void reactToInputs(const glm::mat4 &matTerrain);
+    void reactToInputs();
     /// \brief give the angle
     int getAngle();
     /// \brief give the scale
@@ -86,6 +86,17 @@ public:
     {
         return m_xAxisPosition;
     }
+
+    void setAxisPos(int axisPos)
+    {
+        m_xAxisPosition = axisPos;
+    }
+
+    void setPosChar(const glm::vec3 &posChar)
+    {
+        m_posChar = posChar;
+    }
+
     bool isSquating();
 
     void die();

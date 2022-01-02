@@ -33,14 +33,14 @@ void Matrice::loadFromFile(const std::string &Path)
         std::cout << "Le fichier " << Path << " n'existe pas"
                   << "\n";
     }
-    std::vector<int> ligneMatrice(10, 0);
+    std::vector<int> ligneMatrice(12, 0);
     int number;
     int rowCount = 0;
     int lineCount = 0;
 
     while (matFile >> number)
     {
-        if (rowCount == 10)
+        if (rowCount == 12)
         {
             std::cout << number << std::endl;
             m_Matrice.push_back(ligneMatrice);

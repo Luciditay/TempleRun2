@@ -22,7 +22,7 @@ void Render3D::playGame(float largeur, float hauteur)
 
             // On récupère la position du personnage dans la matrice
             currentPos = getPosPersonnageInGame();
-            //  std::cout << currentPos.x << currentPos.z << std::endl;
+            std::cout << currentPos.x << currentPos.z << std::endl;
             currentTileId = m_MatriceTerrain.getMatrice().at(-currentPos.z).at(currentPos.x);
             std::cout << currentTileId << std::endl;
             //   Event loop:
@@ -48,13 +48,14 @@ void Render3D::playGame(float largeur, float hauteur)
              *********************************/
 
             // if (menu.ge)
-            if (!pause) {
+            if (!pause)
+            {
                 m_character.reactToInputs();
                 m_character.checkState(currentTileId);
                 drawTerrain(largeur / hauteur);
                 enemyCalcul();
             }
-            
+
             // !!! UI must be drawn after everything else, because it's 2D !
             draw_Ui();
 
@@ -204,6 +205,8 @@ void Render3D::enemyCalcul()
         looser = true;
         pause = true;
         menu.updateHighScores(score.getTotalScore());
+        m_character.setPosChar(glm::vec3(1., 0., -4));
+        m_character.setAxisPos(0);
     }
 }
 
