@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Character.hpp"
 #include "Constants.hpp"
-#include <functional> 
+#include <functional>
 
 // float jumpHight(float x)
 // {
@@ -36,7 +36,8 @@ void Character::squatAnimation()
     // m_compenseScale.y = -1 + squatScale(m_squatIndex);
     // m_squatIndex += 0.01;
 
-    std::function<float(float x)> squatScale = [](float x){return 1 - (-5 * x * x + 0.5);};
+    std::function<float(float x)> squatScale = [](float x)
+    { return 1 - (-5 * x * x + 0.5); };
 
     m_scaleChar.y = squatScale(m_squatIndex);
     m_compenseScale.y = -0.1 + 0.1 * squatScale(m_squatIndex);
@@ -45,7 +46,8 @@ void Character::squatAnimation()
 
 void Character::jumpAnimation()
 {
-    std::function<float(float x)> jumpHight = [](float x){return -8 * x * x + 1.5;};
+    std::function<float(float x)> jumpHight = [](float x)
+    { return -8 * x * x + 1.5; };
 
     m_posChar.y = 1 + jumpHight(m_jumpIndex);
     m_jumpIndex += 0.02;
@@ -157,12 +159,18 @@ void Character::handleSDLEvent(const SDL_Event &e, int currentTileID)
     }
 }
 
+void Character::die()
+{
+    m_dead = true;
+}
+
 void Character::checkState(int currentTileId)
 {
+
     if (currentTileId == TextureTypeId::TROU && isJumping() == false)
     {
         std::cout << "T'es mort" << std::endl;
-        m_dead = true;
+        die();
     }
 
     // if (currentTileId == TextureTypeId::FautSBaisser && isSquatting() == false)
@@ -171,12 +179,19 @@ void Character::checkState(int currentTileId)
     // }
 }
 
-void Character::reactToInputs()
+void Character::reactToInputs(const glm::mat4 &matTerrain)
 {
     int vAngulaire = 6;
     // Go front
     m_frontChar = m_speed * glm::normalize(glm::rotate(glm::vec3(0., 0., 1.), glm::radians(float(m_angle)), glm::vec3(0., 1., 0.)));
     m_posChar -= m_frontChar;
+
+    int zSizeMatrice = matTerrain.get int xSizeMatrice =
+
+        if (m_posChar)
+    {
+        std::cout << "Wall collapse" << std::endl;
+    }
 
     // Enemy is coming...
     if (m_distanceEnemy > 0)
@@ -260,6 +275,11 @@ void Character::reactToInputs()
 int Character::getAngle()
 {
     return m_angle;
+}
+
+glm::vec3 Character::getLookDirection()
+{
+    return glm::normalize(glm::rotate(glm::vec3(0., 0., 1.), glm::radians(float(m_angle)), glm::vec3(0., 1., 0.)));
 }
 
 glm::vec3 Character::getScale()

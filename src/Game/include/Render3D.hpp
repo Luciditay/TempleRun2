@@ -74,6 +74,10 @@ public:
 
     void sendLightsToProgram();
 
+    void WillCharacterDie();
+
+    void updateCharacterState(int i, int j);
+
     glm::mat4 MMatrixMur(int xOffset, int yOffset, int zOffset);
     glm::mat4 MMatrixMurHorizontal(const glm::vec3 &offset);
     void catch_UI(SDL_Event e);
@@ -94,6 +98,7 @@ private:
     ObjProgram m_objprogram;
     Model m_enemy;
 
+    // Collectibles collectibles;
 
     Collectibles m_collectibles;
     

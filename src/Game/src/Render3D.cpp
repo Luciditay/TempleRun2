@@ -24,7 +24,7 @@ void Render3D::playGame(float largeur, float hauteur)
             currentPos = getPosPersonnageInGame();
             //  std::cout << currentPos.x << currentPos.z << std::endl;
             currentTileId = m_MatriceTerrain.getMatrice().at(-currentPos.z).at(currentPos.x);
-            //    std::cout << currentTileId << std::endl;
+            std::cout << currentTileId << std::endl;
             //   Event loop:
             SDL_Event e;
 
@@ -46,12 +46,13 @@ void Render3D::playGame(float largeur, float hauteur)
             /*********************************
              * HERE SHOULD COME THE RENDERING CODE
              *********************************/
-            
 
             // if (menu.ge)
 
-            m_character.reactToInputs();
             m_character.checkState(currentTileId);
+            m_character.reactToInputs();
+            draw_Ui();
+
             drawTerrain(largeur / hauteur);
             enemyCalcul();
 
@@ -67,6 +68,10 @@ void Render3D::playGame(float largeur, float hauteur)
     }
     TTF_Quit();
 }
+
+// void Render3D::WillCharacterDie(){
+//     glm::vec3 frontChar = m_character.
+// }
 
 void Render3D::sendLightsToProgram()
 {
@@ -120,10 +125,8 @@ void Render3D::drawTerrain(float ratio)
 
     const glm::mat4 worldMVMatrix = m_moveMatrix.getWorldMVMatrix();
 
-    std::cout << "debut draw" << std::endl;
     for (int i = 0; i < terrain.size(); i++)
     {
-        std::cout << "Debut ligne " << i << std::endl;
         for (int j = 0; j < terrain.at(i).size(); j++)
         {
             // On texturise
@@ -133,7 +136,6 @@ void Render3D::drawTerrain(float ratio)
             {
                 currentTex = m_textureIDManager.getGLTextureMatchingName(idCurrentCase);
                 m_tileDrawer.drawCase(ProjMatrix * worldMVMatrix, glm::vec3(j, 0, i), currentTex);
-                std::cout << currentTex << " ";
 
                 if (j - 1 < 0 || terrain.at(i).at(j - 1) == 0) // On dessine à gauche de toute les cases au bord du monde, un mur
                 {

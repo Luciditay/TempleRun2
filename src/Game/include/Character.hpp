@@ -69,10 +69,11 @@ public:
 
     void handleSDLEvent(const SDL_Event &e, int currentTileID);
     /// \brief react to action booleans changes, by modifying position value etc.
-    void reactToInputs();
+    void reactToInputs(const glm::mat4 &matTerrain);
     /// \brief give the angle
     int getAngle();
     /// \brief give the scale
+    glm::vec3 getLookDirection();
     glm::vec3 getScale();
     /// \brief give the translation keep character on the floor
     glm::vec3 getCompenseScale();
@@ -86,6 +87,8 @@ public:
         return m_xAxisPosition;
     }
     bool isSquating();
+
+    void die();
 
     void increaseSpeed();
     /// \brief true if the character is dead
