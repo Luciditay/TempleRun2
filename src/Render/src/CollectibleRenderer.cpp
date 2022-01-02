@@ -2,7 +2,7 @@
 
 CollectibleRenderer::CollectibleRenderer(ObjProgram *program, MoveMatrix *moveMatrix) : 
     m_program(program), m_moveMatrix(moveMatrix),
-    m_modelCoin("../assets/obj/coin/Only_Spider_with_Animations_Export.obj"),
+    m_modelCoin("../assets/obj/Handgun_obj.obj"),
     m_modelBonus("../assets/obj/Handgun_obj.obj")
 
 {
@@ -19,10 +19,11 @@ void CollectibleRenderer::drawCollectible(const Collectible collectible, glm::ma
         if (collectible.type() == "Coin")
         {
             m_modelCoin.Draw(ProjMatrix*MVMatrixCollectible, m_program, MVMatrixCollectible);
+            
         }
         else
         {
-            m_modelBonus.Draw(ProjMatrix*MVMatrixCollectible, m_program, MVMatrixCollectible);
+            m_modelBonus.Draw(ProjMatrix*MVMatrixCollectible, m_program, MVMatrixCollectible); 
         }
     }
 }

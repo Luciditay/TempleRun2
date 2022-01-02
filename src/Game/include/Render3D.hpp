@@ -56,9 +56,12 @@ public:
           enemySpeed(0.1),
           distanceEnemy(100),
           looser(false),
-          pause(true)
+          pause(true),
+          m_collectibles(&m_objprogram, &m_moveMatrix, &m_character, &score)
 
     {
+        m_collectibles.addCollectible(glm::vec2(1.,-4.), "Bonus", true);
+        m_collectibles.addCollectible(glm::vec2(0.,-6.), "Coin", false);
     } // Default constructor of cam is fine
 
     void playGame(float largeur, float hauteur);
@@ -92,7 +95,7 @@ private:
     Model m_enemy;
 
 
-    // Collectibles collectibles;
+    Collectibles m_collectibles;
     
     Light m_lightdir1;
     Light m_lightdir2;

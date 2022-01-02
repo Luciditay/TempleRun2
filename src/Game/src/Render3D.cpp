@@ -116,6 +116,8 @@ void Render3D::drawTerrain(float ratio)
     // m_character.draw(ProjMatrix * MVMatrixEnemy, &m_objprogram, MVMatrixEnemy);
     m_enemy.Draw(ProjMatrix * MVMatrixEnemy, &m_objprogram, MVMatrixEnemy);
 
+    m_collectibles.draw(ProjMatrix);
+
     const glm::mat4 worldMVMatrix = m_moveMatrix.getWorldMVMatrix();
 
     std::cout << "debut draw" << std::endl;

@@ -3,9 +3,9 @@
 Collectible::Collectible(glm::vec2 position, std::string type, bool flying,Character* character, ScoreCounter* score) :
    m_scale(0.8,0.8,0.8), m_flying(flying), m_type(type), m_hidden(false), m_char(character), m_score(score) {
     if (m_flying) {
-        m_position = glm::vec3(position.x, 15., position.y);
+        m_position = glm::vec3(position.x, 1.5, position.y);
     } else {
-         m_position = glm::vec3(position.x, 0., position.y);
+         m_position = glm::vec3(position.x, 0.8, position.y);
     }
 
     if (m_type == "Coin") {
@@ -32,7 +32,7 @@ float Collectible::distanceToChar() {
 }
 
 void Collectible::collect() {
-    if(distanceToChar() < 50 && (!m_hidden) && ((m_flying && m_char->isJumping()) || (!m_flying && !m_char->isJumping()))) {
+    if(distanceToChar() < 0.5 && (!m_hidden) && ((m_flying && m_char->isJumping()) || (!m_flying && !m_char->isJumping()))) {
         m_hidden = true;
         action();
     }

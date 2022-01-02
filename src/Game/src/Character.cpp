@@ -299,13 +299,13 @@ bool Character::isJumping()
 
 void Character::increaseSpeed()
 {
-    m_speed += 0.5;
-    m_enemySpeed -= 0.05;
+    m_speed += 0.05;
+    m_enemySpeed -= 0.0005;
 }
 
 void Character::reset()
 {
-    m_enemySpeed = 0.1;
+    m_enemySpeed = 0.001;
     m_distanceEnemy = 3;
     m_posChar = glm::vec3(0., 0., 0.);
     m_frontChar = glm::vec3(0., 0., 0.1);
