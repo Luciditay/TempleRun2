@@ -16,10 +16,10 @@
 Character::Character(const std::string &modelPath, const glimac::FilePath &applicationPath)
     : m_posChar(1., 0., -4.), m_jumping(false), m_jumpIndex(-0.4), m_speed(0.05), m_distanceEnemy(3), m_enemySpeed(0.001),
       m_scaleChar(1., 1., 1.), m_compenseScale(0., 0., 0.), m_squating(false), m_squatIndex(-0.3),
-      m_turn(false), m_turningLeft(false), m_turningRight(false), m_angle(0), m_variationAngle(0),
+      m_turn(false), m_turningLeft(false), m_turningRight(false), m_angle(0), m_variationAngle(0), m_alreadyTurned(false),
       m_upChar(0., 1., 0.), m_frontChar({0., 0., 0.1}), m_dead(false),
       m_walkingLeft(false), m_walkingRight(false),
-      m_lateralStepRight(0.), m_lateralStepLeft(0.), m_fall(false), m_fallDistance(0),
+      m_lateralStepRight(0.), m_lateralStepLeft(0.), m_fall(false), m_fallDistance(0.),
       m_model(modelPath),
       m_xAxisPosition(0)
 {
@@ -96,6 +96,10 @@ void Character::lateralStepRightAnimation()
 
 void Character::handleSDLEvent(const SDL_Event &e, int currentTileID, Matrice &matTerrain)
 {
+    if(currentTileID != 20) {
+        m_alreadyTurned = false;
+    }
+
     if (e.type == SDL_KEYDOWN)
     {
         // Key Q : LEFT
@@ -136,9 +140,11 @@ void Character::handleSDLEvent(const SDL_Event &e, int currentTileID, Matrice &m
         // Key D : RIGHT
         else if (e.key.keysym.sym == SDLK_d)
         {
-            if (currentTileID == 20 || currentTileID == 30 && m_turn)
+            if ((!m_alreadyTurned) && (currentTileID == 20 || currentTileID == 30 && m_turn))
             { // Lateral move
+                m_alreadyTurned = true;
                 m_turningRight = true;
+                std::cout << "already turn" << m_alreadyTurned << std::endl;
             }
             else
             {
@@ -200,7 +206,8 @@ void Character::checkState(int currentTileId)
     if (currentTileId == TextureTypeId::TROU && isJumping() == false)
     {
         std::cout << "T'es mort" << std::endl;
-        die();
+        m_fall = true;
+        // die();
     }
 
     if (currentTileId == 0)
@@ -212,11 +219,13 @@ void Character::checkState(int currentTileId)
     if (currentTileId == TextureTypeId::FautSBaisser && isSquatting() == false)
     {
         std::cout << "Mieux vaut être un nain vivant qu'un grand échalas succombant" << std::endl;
+        die();
     }
 }
 
 void Character::reactToInputs()
 {
+
     int vAngulaire = 6;
     // Go front
     m_frontChar = m_speed * glm::normalize(glm::rotate(glm::vec3(0., 0., 1.), glm::radians(float(m_angle)), glm::vec3(0., 1., 0.)));
@@ -296,9 +305,10 @@ void Character::reactToInputs()
     // Fall
     if (m_fall)
     {
-        m_fallDistance++;
+        
+        m_fallDistance+= 0.1;
         m_posChar.y -= m_fallDistance;
-        if (m_fallDistance > 20)
+        if (m_fallDistance > 1)
         {
             m_dead = true;
         }
@@ -363,7 +373,7 @@ void Character::reset()
     m_distanceEnemy = 3;
     m_posChar = glm::vec3(1., 0., -4.);
     m_frontChar = glm::vec3(0., 0., 0.1);
-    m_fallDistance = 0;
+    m_fallDistance = 0.;
     m_fall = false;
     m_dead = false;
     m_angle = 0;

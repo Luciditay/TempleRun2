@@ -30,9 +30,12 @@ void MoveMatrix::computeMVWorld()
 
 void MoveMatrix::computeMVLight()
 {
-    glm::mat4 VLight = glm::rotate(glm::mat4(), glm::radians(float(-m_char->getAngle())), glm::vec3(0., 1., 0.));
+    // glm::mat4 VLight = glm::rotate(glm::mat4(), glm::radians(float(-m_char->getAngle())), glm::vec3(0., 1., 0.));
     // m_MVMatrixLight = m_ViewMatrix * VLight;
-    m_MVMatrixLight =  VLight;
+
+    glm::mat4 VLight = glm::rotate(glm::mat4(), glm::radians(float(-m_char->getAngle())), glm::vec3(0.,1.,0.));
+    m_MVMatrixLight = m_ViewMatrix * VLight;
+    
 }
 
 void MoveMatrix::computeMVEnemy()

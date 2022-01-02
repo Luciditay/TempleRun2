@@ -6,6 +6,8 @@ CollectibleRenderer::CollectibleRenderer(ObjProgram *program, MoveMatrix *moveMa
     m_modelBonus("../assets/obj/fruit/fruit.obj")
 
 {
+    stbi_set_flip_vertically_on_load(false);
+    m_modelBonus = Model("../assets/obj/fruit/fruit.obj");
 }
 
 void CollectibleRenderer::drawCollectible(const Collectible collectible, glm::mat4 ProjMatrix)

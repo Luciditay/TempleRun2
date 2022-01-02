@@ -45,8 +45,8 @@ int main(int argc, char **argv)
     const std::string FSPath = "shaders/case3D.fs.glsl";
 
     P_Texture textureSol(TextureTypeId::SOL, "../assets/textures/pngwing.com.png");
-    P_Texture textureSol1(TextureTypeId::SOL1, "../assets/textures/textureMur.jpeg");
-    P_Texture textureSol2(TextureTypeId::SOL2, "../assets/textures/triforce.png");
+    P_Texture textureSol1(TextureTypeId::SOL1, "../assets/textures/pngwing.com.png");
+    P_Texture textureSol2(TextureTypeId::SOL2, "../assets/textures/pngwing.com.png");
     P_Texture textureSol10(TextureTypeId::SOL10, "../assets/textures/pngwing.com.png");
     P_Texture textureTrou(TextureTypeId::TROU, "../assets/textures/boucheEgout.jpeg");
     P_Texture textureFautSeBaisser(TextureTypeId::FautSBaisser, "../assets/textures/triforce.png");

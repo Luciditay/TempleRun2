@@ -111,17 +111,7 @@ void Render3D::drawTerrain(float ratio)
     // const glm::mat4 MVPMatrix = ProjMatrix * MVMatrix;
     // const glm::mat4 NormalMatrix = glm::transpose(glm::inverse(MVMatrix));
 
-    const glm::mat4 MVMatrixPersonnage = m_moveMatrix.getCharMVMatrix();
-    m_Skybox.draw(VMatrix, ProjMatrix);
-
-    sendLightsToProgram();
-    m_character.draw(ProjMatrix * MVMatrixPersonnage, &m_objprogram, MVMatrixPersonnage);
-
-    const glm::mat4 MVMatrixEnemy = m_moveMatrix.getEnemyMVMatrix();
-    // m_character.draw(ProjMatrix * MVMatrixEnemy, &m_objprogram, MVMatrixEnemy);
-    m_enemy.Draw(ProjMatrix * MVMatrixEnemy, &m_objprogram, MVMatrixEnemy);
-
-    m_collectibles.draw(ProjMatrix);
+   
 
     const glm::mat4 worldMVMatrix = m_moveMatrix.getWorldMVMatrix();
 
@@ -160,6 +150,20 @@ void Render3D::drawTerrain(float ratio)
         }
         // std::cout << std::endl;
     }
+
+    const glm::mat4 MVMatrixPersonnage = m_moveMatrix.getCharMVMatrix();
+   
+    sendLightsToProgram();
+
+    m_character.draw(ProjMatrix * MVMatrixPersonnage, &m_objprogram, MVMatrixPersonnage);
+
+    const glm::mat4 MVMatrixEnemy = m_moveMatrix.getEnemyMVMatrix();
+    // m_character.draw(ProjMatrix * MVMatrixEnemy, &m_objprogram, MVMatrixEnemy);
+    m_enemy.Draw(ProjMatrix * MVMatrixEnemy, &m_objprogram, MVMatrixEnemy);
+
+    m_collectibles.draw(ProjMatrix);
+
+    m_Skybox.draw(VMatrix, ProjMatrix);
 }
 
 Point2D<int> Render3D::getPosPersonnageInGame()

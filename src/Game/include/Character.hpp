@@ -45,10 +45,13 @@ private:
     float m_lateralStepLeft;  /*!< variation to the left */
     // Fall
     bool m_fall;        /*!< true if the character is falling */
-    int m_fallDistance; /*!< distance (y axis) travelled when falling */
+    float m_fallDistance; /*!< distance (y axis) travelled when falling */
 
     // State
     bool m_dead; /*!< true if the character is dead (RIP) */
+
+    //Turn
+    bool m_alreadyTurned;
 
 public:
     /// \brief constructor
