@@ -60,7 +60,7 @@ void Character::lateralStepLeftAnimation()
     // m_lateralStepLeft = false;
     // m_xAxisPosition--;
 
-    if (m_lateralStepLeft <= 0.25)
+    if (m_lateralStepLeft < 0.25)
     {
         m_posChar += m_lateralStepLeft * m_stepRight;
         m_lateralStepLeft += 0.05;
@@ -80,7 +80,7 @@ void Character::lateralStepRightAnimation()
     // m_lateralStepRight = false;
     //   m_xAxisPosition++;
 
-    if (m_lateralStepRight <= 0.35)
+    if (m_lateralStepRight < 0.25)
     {
         m_posChar -= m_lateralStepRight * m_stepRight;
         m_lateralStepRight += 0.05;
@@ -94,7 +94,7 @@ void Character::lateralStepRightAnimation()
     }
 }
 
-void Character::handleSDLEvent(const SDL_Event &e, int currentTileID)
+void Character::handleSDLEvent(const SDL_Event &e, int currentTileID, Matrice &matTerrain)
 {
     if (e.type == SDL_KEYDOWN)
     {
@@ -112,7 +112,19 @@ void Character::handleSDLEvent(const SDL_Event &e, int currentTileID)
             }
             else
             {
-                if (m_xAxisPosition != -1) // Si le perso n'est pas à l'extrême gauche
+                glm::vec3 m_stepRight = glm::normalize(glm::cross(m_frontChar, m_upChar));
+                glm::vec3 futurePos = m_posChar + float(0.05) * m_stepRight;
+                int x, z;
+                if (m_stepRight.x == 0) {
+                    x = glm::round(futurePos.x);
+                    z = glm::round(futurePos.z-1);
+                } else {
+                    x = glm::round(futurePos.x+1);
+                    z = glm::round(futurePos.z);
+                }
+                // std::cout << "x "<< x << " z " << z << std::endl;
+
+                if (!matTerrain.isZero(-z,x)) // Si le perso n'est pas à l'extrême gauche
                 {
                     m_walkingLeft = true;
                 }
@@ -127,7 +139,19 @@ void Character::handleSDLEvent(const SDL_Event &e, int currentTileID)
             }
             else
             {
-                if (m_xAxisPosition != 1) // Si le perso n'est pas à l'ED
+                glm::vec3 m_stepRight = glm::normalize(glm::cross(m_frontChar, m_upChar));
+                glm::vec3 futurePos = m_posChar - float(0.05) * m_stepRight;
+                int x, z;
+                if (m_stepRight.x == 0) {
+                    x = glm::round(futurePos.x);
+                    z = glm::round(futurePos.z-1);
+                } else {
+                    x = glm::round(futurePos.x+1);
+                    z = glm::round(futurePos.z);
+                }
+                // std::cout << "x "<< x << " z " << z << std::endl;
+
+                if (!matTerrain.isZero(-z,x)) // Si le perso n'est pas à l'ED
                 {
                     m_walkingRight = true;
                 }
@@ -203,15 +227,19 @@ void Character::reactToInputs()
     }
 
     // Go to left or right
-    // glm::vec3 m_stepRight = glm::normalize(glm::cross(m_frontChar, m_upChar));
+    glm::vec3 m_stepRight = glm::normalize(glm::cross(m_frontChar, m_upChar));
 
     if (m_walkingRight == true)
     {
-        lateralStepRightAnimation();
+        m_posChar -= float(0.05) * m_stepRight;
+        // lateralStepRightAnimation();
+        m_walkingRight = false;
     }
     if (m_walkingLeft == true)
     {
-        lateralStepLeftAnimation();
+        m_posChar += float(0.05) * m_stepRight;
+        // lateralStepLeftAnimation();
+        m_walkingLeft = false;
     }
 
     // Jump

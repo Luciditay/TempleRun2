@@ -24,6 +24,15 @@ void Matrice::toString()
     }
 }
 
+bool Matrice::isZero(int i, int j) {
+    std::cout << m_Matrice.at(i).at(j) << std::endl;
+    if (m_Matrice.at(i).at(j) == 0) {
+        return true;
+    } 
+    return false;    
+}
+
+
 void Matrice::loadFromFile(const std::string &Path)
 {
 

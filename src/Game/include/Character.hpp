@@ -4,6 +4,7 @@
 #include "Model.hpp"
 #include <glimac/SDLWindowManager.hpp>
 #include "cameraDebug.hpp"
+#include "Matrice.hpp"
 
 /// \class Character
 class Character
@@ -67,7 +68,7 @@ public:
 
     void lateralStepRightAnimation();
 
-    void handleSDLEvent(const SDL_Event &e, int currentTileID);
+    void handleSDLEvent(const SDL_Event &e, int currentTileID, Matrice &matTerrain);
     /// \brief react to action booleans changes, by modifying position value etc.
     void reactToInputs();
     /// \brief give the angle

@@ -24,7 +24,7 @@ void MoveMatrix::computeMVWorld()
 {
     glm::mat4 VWorld = glm::rotate(glm::mat4(), glm::radians(float(-m_char->getAngle())), glm::vec3(0., 1., 0.));
     VWorld = glm::translate(VWorld, glm::vec3(-m_char->getPos().x, 0, -m_char->getPos().z));
-    VWorld = glm::translate(VWorld, glm::vec3(-1, 0.75, 0));
+    VWorld = glm::translate(VWorld, glm::vec3(-1., 0.75, 0));
     m_MVMatrixWorld = m_ViewMatrix * VWorld;
 }
 
@@ -47,7 +47,7 @@ void MoveMatrix::computeMVEnemy()
 void MoveMatrix::computeMVCollectible(glm::vec3 position)
 {
     glm::mat4 VCollectible = glm::rotate(glm::mat4(), glm::radians(float(-m_char->getAngle())), glm::vec3(0., 1., 0.));
-    VCollectible = glm::translate(VCollectible, (glm::vec3(-m_char->getPos().x, 0, -m_char->getPos().z)) + position);
+    VCollectible = glm::translate(VCollectible, (glm::vec3(-m_char->getPos().x, 0, -m_char->getPos().z)) + glm::vec3(-1., 0., 0) + position);
     VCollectible = glm::scale(VCollectible, glm::vec3(0.1, 0.1, 0.1));
     VCollectible = glm::rotate(VCollectible, glm::radians(float(90.)), glm::vec3(1.,0.,0.));
     m_MVMatrixCollectible = m_ViewMatrix * VCollectible;

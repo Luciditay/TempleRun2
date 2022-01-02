@@ -62,8 +62,8 @@ public:
     {
         stbi_set_flip_vertically_on_load(false);
         m_enemy = Model(modelPathEnemy);
-        m_collectibles.addCollectible(glm::vec2(1.,-4.), "Bonus", true);
-        m_collectibles.addCollectible(glm::vec2(0.,-6.), "Coin", false);
+        m_collectibles.addCollectible(glm::vec2(2.,-4.), "Bonus", true);
+        m_collectibles.addCollectible(glm::vec2(3.,-6.), "Coin", false);
     } // Default constructor of cam is fine
 
     void playGame(float largeur, float hauteur);

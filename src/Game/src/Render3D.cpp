@@ -10,7 +10,7 @@ void Render3D::playGame(float largeur, float hauteur)
     int currentTileId;
     menu.setStop(&done);
     SDL_EnableKeyRepeat(10, 10);
-    while (true)
+    while (!done)
     {
         // update current time
         currentTime = SDL_GetTicks();
@@ -22,9 +22,9 @@ void Render3D::playGame(float largeur, float hauteur)
 
             // On récupère la position du personnage dans la matrice
             currentPos = getPosPersonnageInGame();
-            std::cout << currentPos.x << currentPos.z << std::endl;
+            // std::cout << currentPos.x << currentPos.z << std::endl;
             currentTileId = m_MatriceTerrain.getMatrice().at(-currentPos.z).at(currentPos.x);
-            std::cout << currentTileId << std::endl;
+            // std::cout << currentTileId << std::endl;
             //   Event loop:
             SDL_Event e;
 
@@ -32,7 +32,7 @@ void Render3D::playGame(float largeur, float hauteur)
             {
 
                 m_camera.handleSDLEvent(e);
-                m_character.handleSDLEvent(e, currentTileId);
+                m_character.handleSDLEvent(e, currentTileId, m_MatriceTerrain);
 
                 catch_UI(e);
 
@@ -158,14 +158,14 @@ void Render3D::drawTerrain(float ratio)
                 }
             }
         }
-        std::cout << std::endl;
+        // std::cout << std::endl;
     }
 }
 
 Point2D<int> Render3D::getPosPersonnageInGame()
 {
-    int x = glm::floor(m_character.getPos().x + 1);
-    int z = glm::floor(m_character.getPos().z);
+    int x = glm::round(m_character.getPos().x + 1);
+    int z = glm::round(m_character.getPos().z);
     return {x, z};
 }
 // CHANGER LA FIN AVEC LES IF IMBRIQUES ?

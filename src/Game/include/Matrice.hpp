@@ -21,6 +21,8 @@ public:
         return m_lenghtSecondPart;
     }
 
+    bool isZero(int i, int j);
+
 private:
     void loadFromFile(const std::string &Path);
 
