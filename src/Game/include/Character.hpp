@@ -98,7 +98,7 @@ public:
         m_posChar = posChar;
     }
 
-    bool isSquating();
+    bool isSquatting();
 
     void die();
 

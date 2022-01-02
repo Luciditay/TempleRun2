@@ -115,16 +115,19 @@ void Character::handleSDLEvent(const SDL_Event &e, int currentTileID, Matrice &m
                 glm::vec3 m_stepRight = glm::normalize(glm::cross(m_frontChar, m_upChar));
                 glm::vec3 futurePos = m_posChar + float(0.05) * m_stepRight;
                 int x, z;
-                if (m_stepRight.x == 0) {
+                if (m_stepRight.x == 0)
+                {
                     x = glm::round(futurePos.x);
-                    z = glm::round(futurePos.z-1);
-                } else {
-                    x = glm::round(futurePos.x+1);
+                    z = glm::round(futurePos.z - 1);
+                }
+                else
+                {
+                    x = glm::round(futurePos.x + 1);
                     z = glm::round(futurePos.z);
                 }
                 // std::cout << "x "<< x << " z " << z << std::endl;
 
-                if (!matTerrain.isZero(-z,x)) // Si le perso n'est pas à l'extrême gauche
+                if (!matTerrain.isZero(-z, x)) // Si le perso n'est pas à l'extrême gauche
                 {
                     m_walkingLeft = true;
                 }
@@ -142,16 +145,19 @@ void Character::handleSDLEvent(const SDL_Event &e, int currentTileID, Matrice &m
                 glm::vec3 m_stepRight = glm::normalize(glm::cross(m_frontChar, m_upChar));
                 glm::vec3 futurePos = m_posChar - float(0.05) * m_stepRight;
                 int x, z;
-                if (m_stepRight.x == 0) {
+                if (m_stepRight.x == 0)
+                {
                     x = glm::round(futurePos.x);
-                    z = glm::round(futurePos.z-1);
-                } else {
-                    x = glm::round(futurePos.x+1);
+                    z = glm::round(futurePos.z - 1);
+                }
+                else
+                {
+                    x = glm::round(futurePos.x + 1);
                     z = glm::round(futurePos.z);
                 }
                 // std::cout << "x "<< x << " z " << z << std::endl;
 
-                if (!matTerrain.isZero(-z,x)) // Si le perso n'est pas à l'ED
+                if (!matTerrain.isZero(-z, x)) // Si le perso n'est pas à l'ED
                 {
                     m_walkingRight = true;
                 }
@@ -203,10 +209,10 @@ void Character::checkState(int currentTileId)
         die();
     }
 
-    // if (currentTileId == TextureTypeId::FautSBaisser && isSquatting() == false)
-    // {
-    //     std::cout << "Mieux vaut être un nain vivant qu'un grand échalas succombant" << std::endl;
-    // }
+    if (currentTileId == TextureTypeId::FautSBaisser && isSquatting() == false)
+    {
+        std::cout << "Mieux vaut être un nain vivant qu'un grand échalas succombant" << std::endl;
+    }
 }
 
 void Character::reactToInputs()
@@ -334,7 +340,7 @@ bool Character::isDead()
     return m_dead;
 }
 
-bool Character::isSquating()
+bool Character::isSquatting()
 {
     return m_squating;
 }
