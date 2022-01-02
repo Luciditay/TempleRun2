@@ -49,7 +49,7 @@ int main(int argc, char **argv)
     P_Texture textureSol2(TextureTypeId::SOL2, "../assets/textures/triforce.png");
     P_Texture textureSol10(TextureTypeId::SOL10, "../assets/textures/pngwing.com.png");
     P_Texture textureTrou(TextureTypeId::TROU, "../assets/textures/boucheEgout.jpeg");
-    P_Texture textureFautSeBaisser(TextureTypeId::FautSBaisser, "../assets/texture/triforce.png");
+    P_Texture textureFautSeBaisser(TextureTypeId::FautSBaisser, "../assets/textures/triforce.png");
 
     listeTexture.push_back(textureSol);
     listeTexture.push_back(textureSol1);
