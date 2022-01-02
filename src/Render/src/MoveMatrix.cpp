@@ -15,6 +15,8 @@ void MoveMatrix::computeMVCharacter()
     glm::mat4 VChar = glm::translate(glm::mat4(), glm::vec3(0., m_char->getPos().y, 0.) + m_char->getCompenseScale());
     VChar = glm::scale(VChar, glm::vec3(0.1, 0.1, 0.1));
     VChar = glm::scale(VChar, m_char->getScale());
+    VChar = glm::rotate(VChar, glm::radians(float(180.)), glm::vec3(1.,0.,0.));
+    VChar = glm::rotate(VChar, glm::radians(float(90.)), glm::vec3(0.,1.,0.));
     m_MVMatrixCharacter = m_ViewMatrix * VChar;
 }
 
@@ -29,7 +31,8 @@ void MoveMatrix::computeMVWorld()
 void MoveMatrix::computeMVLight()
 {
     glm::mat4 VLight = glm::rotate(glm::mat4(), glm::radians(float(-m_char->getAngle())), glm::vec3(0., 1., 0.));
-    m_MVMatrixLight = m_ViewMatrix * VLight;
+    // m_MVMatrixLight = m_ViewMatrix * VLight;
+    m_MVMatrixLight =  VLight;
 }
 
 void MoveMatrix::computeMVEnemy()
