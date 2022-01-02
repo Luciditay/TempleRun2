@@ -38,6 +38,10 @@ void Collectible::collect() {
     }
 }
 
+void Collectible::reset() {
+    m_hidden = false;
+}
+
 const bool Collectible::isHidden() const {
     return m_hidden;
 }

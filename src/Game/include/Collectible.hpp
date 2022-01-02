@@ -24,6 +24,7 @@ class Collectible {
     void collect();
     float distanceToChar();
     const bool isHidden() const;
+    void reset();
     const std::string type() const; 
     const glm::vec3 position() const;
     const glm::vec3 scale() const;

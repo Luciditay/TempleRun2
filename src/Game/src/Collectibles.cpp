@@ -14,3 +14,8 @@ void Collectibles::draw(glm::mat4 ProjMatrix){
     }
 }
 
+void Collectibles::reset() {
+    for(auto it = std::begin(m_collectibles); it != std::end(m_collectibles); ++it) {
+        it->reset();
+    }
+}

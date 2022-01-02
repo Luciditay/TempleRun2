@@ -21,4 +21,5 @@ class Collectibles {
     Collectibles(ObjProgram* program, MoveMatrix* moveMatrix, Character* character, ScoreCounter* score);
     void addCollectible(glm::vec2 position, std::string type, bool flying);
     void draw(glm::mat4 ProjMatrix);
+    void reset();
 };

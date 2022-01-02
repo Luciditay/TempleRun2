@@ -185,6 +185,7 @@ void Render3D::catch_UI(SDL_Event e)
         {
             deadScreen.close();
             m_character.reset();
+            m_collectibles.reset();
             looser = false;
             pause = false;
             compteur = 0;

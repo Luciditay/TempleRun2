@@ -325,6 +325,7 @@ void Character::increaseSpeed()
 void Character::reset()
 {
     m_enemySpeed = 0.001;
+    m_speed = 0.05;
     m_distanceEnemy = 3;
     m_posChar = glm::vec3(1., 0., -4.);
     m_frontChar = glm::vec3(0., 0., 0.1);
