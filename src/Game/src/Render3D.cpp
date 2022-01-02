@@ -49,12 +49,13 @@ void Render3D::playGame(float largeur, float hauteur)
             
 
             // if (menu.ge)
-
-            m_character.reactToInputs();
-            m_character.checkState(currentTileId);
-            drawTerrain(largeur / hauteur);
-            enemyCalcul();
-
+            if (!pause) {
+                m_character.reactToInputs();
+                m_character.checkState(currentTileId);
+                drawTerrain(largeur / hauteur);
+                enemyCalcul();
+            }
+            
             // !!! UI must be drawn after everything else, because it's 2D !
             draw_Ui();
 
