@@ -13,11 +13,13 @@ class Light {
     void sendUniformVec(glm::vec3 vector);
     
     private:
-    const GLint m_uLightIntensity;
-    const GLint m_uLightVec; // direction or position
-    
-    const std::string m_type; //"Directional" or "Punctual"
+      const std::string m_type; //"Directional" or "Punctual"
     const int m_id; //to identify the light in the shader : name is type+id
 
     MoveMatrix* m_moveMatrix;
+    
+    const GLint m_uLightVec; // direction or position
+    const GLint m_uLightIntensity;
+
+  
 };

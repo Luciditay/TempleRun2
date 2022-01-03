@@ -63,7 +63,7 @@ int main(int argc, char **argv)
     TextureManager textureManager(listeTexture);
 
     Camera camera(-30., M_PI / 6., 0.);
-    Character Player(modelCharacterPath, applicationPath);
+    Character Player(modelCharacterPath);
 
     TTF_Init();
 
