@@ -12,11 +12,11 @@ class Skybox
 {
 public:
     std::vector<std::string> tabTex;
-    const void draw(glm::mat4 view, glm::mat4 proj);
+    void draw(glm::mat4 view, glm::mat4 proj);
 
 private:
-    const void fillSkyVao();
-    const void mapTexture();
+    void fillSkyVao();
+    void mapTexture();
     unsigned int loadCubemap(std::vector<std::string> faces);
     unsigned int cubemapTexture;
     glimac::Program _program;

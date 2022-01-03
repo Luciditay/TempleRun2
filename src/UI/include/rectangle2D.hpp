@@ -37,7 +37,7 @@ public:
     /// \param scaleH : scale (height)
     /// \param translateX : translate (X axis)
     /// \param translateY : translate (Y axis)
-    const void draw(const GLint &texture, const float &scaleW, const float &scaleH, const float &translateX, const float &translateY) const;
+    void draw(const GLint &texture, const float &scaleW, const float &scaleH, const float &translateX, const float &translateY) const;
 
 private:
     UniqueBuffer _vbo;        /*!<  VBO (Glint that handles to put OpenGL objects in vectors) */
@@ -48,11 +48,11 @@ private:
     GLint _locUTexture;       /*!< id of uniform variable, to send the texture */
 
     /// \brief fill all the 3 buffers
-    const void fillBuffers() const;
+    void fillBuffers() const;
     /// \brief fill VBO buffers
-    const void fillVBO() const;
+    void fillVBO() const;
     /// \brief fill IBO buffers
-    const void fillIBO() const;
+    void fillIBO() const;
     /// \brief fill Vertex Array Object
-    const void fillVAO() const;
+    void fillVAO() const;
 };
