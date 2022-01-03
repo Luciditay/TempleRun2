@@ -11,11 +11,11 @@
 class CollectibleRenderer
 {
 private:
-    Model m_modelCoin;
-    Model m_modelBonus;
     ObjProgram *m_program;
     MoveMatrix *m_moveMatrix;
-
+    Model m_modelCoin;
+    Model m_modelBonus;
+    
 public:
     CollectibleRenderer(ObjProgram *program, MoveMatrix *moveMatrix);
     void drawCollectible(const Collectible collectible, glm::mat4 ProjMatrix);
