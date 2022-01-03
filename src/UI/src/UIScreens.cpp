@@ -89,19 +89,6 @@ void Menu::draw()
 {
     if (_open)
     {
-        _clickListener.attach(_continue);
-        _clickListener.attach(_startAgain);
-        _clickListener.attach(_highScores);
-        _clickListener.attach(_save);
-        _clickListener.attach(_load);
-        _clickListener.attach(_quit);
-    }
-}
-
-void Menu::draw()
-{
-    if (_open)
-    {
         _background.draw();
         _continue.draw();
         _startAgain.draw();
