@@ -249,4 +249,24 @@ void Render3D::draw_Ui()
         score.resetItemsAndDistance();
         score.update();
     }
+
+    std::string whatToDo = menu.getSaveLoadString();
+    if (whatToDo == "Save1") {
+        std::cout << "on save dans le slot 1" << std::endl;
+    }
+    else if (whatToDo == "Save2") {
+        std::cout << "on save dans le slot 2"<< std::endl;
+    }
+    else if (whatToDo == "Save3") {
+        std::cout << "on save dans le slot 3"<< std::endl;
+    }
+    else if (whatToDo == "Load1") {
+        std::cout << "on load dans le slot 1"<< std::endl;
+    }
+    else if (whatToDo == "Load2") {
+        std::cout << "on load dans le slot 2"<< std::endl;
+    }
+    else if (whatToDo == "Load3") {
+        std::cout << "on load dans le slot 3"<< std::endl;
+    }
 }

@@ -68,7 +68,8 @@ Menu::Menu(const char* imagePath, const char* fontPath, const int& size, const g
     _startGameAgain(false),
     _highScoresMenu(imagePath, fontPath, size, filePath, windowWidth, windowHeight, _clickListener, this),
     _saveMenu(imagePath, fontPath, size, filePath, windowWidth, windowHeight, _clickListener, this, "Save"),
-    _loadMenu(imagePath, fontPath, size, filePath, windowWidth, windowHeight, _clickListener, this, "Load")
+    _loadMenu(imagePath, fontPath, size, filePath, windowWidth, windowHeight, _clickListener, this, "Load"),
+    _saveLoadString("doNothing")
     {
         _clickListener.attach(_continue);
         _clickListener.attach(_startAgain);
@@ -184,6 +185,16 @@ const bool Menu::shouldStartAgain() {
     return tmp;
 }
 
+const std::string Menu::getSaveLoadString() {
+    std::string tmp = _saveLoadString;
+    _saveLoadString.assign("nothing");
+    return tmp;
+}
+
+void Menu::setSaveLoadString(const std::string whatToDo) {
+    _saveLoadString = whatToDo;
+}
+
 SubMenu::SubMenu(const char* imagePath, const char* fontPath, const int& size, const glimac::FilePath& filePath, 
                 const uint& windowWidth, const uint& windowHeight, Subject &clickListener, Menu* menu) :
     _return(fontPath, size, filePath, windowWidth, windowHeight, windowWidth-size*4, windowHeight - size*2, true, menu),
@@ -255,9 +266,9 @@ SaveOrLoadMenu::SaveOrLoadMenu(const char* imagePath, const char* fontPath, cons
             const uint& windowWidth, const uint& windowHeight, Subject &clickListener, Menu* menu, std::string action) :
     SubMenu(imagePath, fontPath, size, filePath, windowWidth, windowHeight, clickListener, menu),
     _feedback("Select a memory slot.", {255,0,0}, fontPath, size, filePath, windowWidth, windowHeight, windowWidth/2., windowHeight/3, true),
-    _slot1(fontPath, size*1.5, filePath, windowWidth, windowHeight, windowWidth/4, windowHeight/2, true, 1, action, &_feedback),
-    _slot2(fontPath, size*1.5, filePath, windowWidth, windowHeight, (windowWidth/4)*2, windowHeight/2, true, 2, action, &_feedback),
-    _slot3(fontPath, size*1.5, filePath, windowWidth, windowHeight, (windowWidth/4)*3, windowHeight/2, true, 3, action, &_feedback),
+    _slot1(fontPath, size*1.5, filePath, windowWidth, windowHeight, windowWidth/4, windowHeight/2, true, 1, action, &_feedback, menu),
+    _slot2(fontPath, size*1.5, filePath, windowWidth, windowHeight, (windowWidth/4)*2, windowHeight/2, true, 2, action, &_feedback, menu),
+    _slot3(fontPath, size*1.5, filePath, windowWidth, windowHeight, (windowWidth/4)*3, windowHeight/2, true, 3, action, &_feedback, menu),
     _titre((action).c_str(), {255,0,0}, fontPath, size*1.5, filePath, windowWidth, windowHeight, windowWidth/2., windowHeight/4, true) {
         clickListener.attach(_slot1);
         clickListener.attach(_slot2);

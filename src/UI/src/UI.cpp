@@ -246,10 +246,12 @@ void ButtonSaveorLoadSlot::update() {
             texte = "Game saved : slot " + std::to_string(_slotNumber);
             std::cout << texte << std::endl;
             _feedback->update((texte).c_str());
+            _menu->setSaveLoadString("Save"+std::to_string(_slotNumber));
         } else if (_action == "Load") {
             texte = "Game loaded : slot " + std::to_string(_slotNumber);
             std::cout << texte << std::endl;
             _feedback->update((texte).c_str());
+            _menu->setSaveLoadString("Load"+std::to_string(_slotNumber));
         } else {
             std::cout << "Action non reconnue." << std::endl;
         }
@@ -258,11 +260,12 @@ void ButtonSaveorLoadSlot::update() {
 
 ButtonSaveorLoadSlot::ButtonSaveorLoadSlot(const char* fontPath, const int& size, 
             const glimac::FilePath& filePath, const uint& windowWidth, const uint& windowHeight, const int& positionXPixels, 
-            const int& positionYPixels, const bool& middle, const int& slotNumber, const std::string& action, Message* feedback) :
+            const int& positionYPixels, const bool& middle, const int& slotNumber, const std::string& action, Message* feedback, Menu* menu) :
             Button(("Slot "+std::to_string(slotNumber)).c_str(), fontPath, size, filePath, windowWidth, windowHeight,
             positionXPixels, positionYPixels, middle),
             _slotNumber(slotNumber),
             _action(action),
-            _feedback(feedback) {    
+            _feedback(feedback),
+            _menu(menu) {    
 }
 
