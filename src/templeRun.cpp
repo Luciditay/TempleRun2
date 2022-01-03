@@ -2,7 +2,6 @@
 #include "Matrice.hpp"
 #include "unistd.h"
 #include "Constants.hpp"
-#include "RandomWorld.hpp"
 
 using namespace glimac;
 
