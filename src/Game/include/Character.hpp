@@ -75,6 +75,8 @@ public:
     /// \brief react to action booleans changes, by modifying position value etc.
     void reactToInputs();
     /// \brief give the angle
+    void setAngle(int a);
+
     int getAngle();
     /// \brief give the scale
     glm::vec3 getLookDirection();
@@ -83,6 +85,13 @@ public:
     glm::vec3 getCompenseScale();
     /// \brief give character position
     glm::vec3 getPos();
+
+    void setPos(float x, float z);
+
+    glm::vec3 getVvue();
+
+    void setFront(float x,float y, float z);
+
     /// \brief give the distance enemy-character
     float getDistanceEnemy();
     /// \brief increase character speed and decrease the enemy speed

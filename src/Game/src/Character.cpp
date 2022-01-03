@@ -29,6 +29,16 @@ void Character::draw(glm::mat4 MVPMatrix, ObjProgram *program, glm::mat4 MVMatri
 {
     m_model.Draw(MVPMatrix, program, MVMatrix);
 }
+void Character::setPos(float x,float z){
+    m_posChar=glm::vec3(x,0.,z);
+}
+void Character::setFront(float x,float y, float z){
+    m_frontChar=glm::vec3(x,y,z);
+}
+void Character::setAngle(int a)
+{
+    m_angle=a;
+}
 
 void Character::squatAnimation()
 {
@@ -339,6 +349,10 @@ glm::vec3 Character::getPos()
 {
     return m_posChar;
 }
+glm::vec3 Character::getVvue(){
+    return m_frontChar;
+}
+
 
 float Character::getDistanceEnemy()
 {

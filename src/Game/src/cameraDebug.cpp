@@ -22,6 +22,7 @@ void cameraDebug::moveLeft(float t)
     m_Position += t * m_LeftVector;
 }
 
+
 void cameraDebug::moveFront(float t)
 {
     m_Position += t * m_FrontVector;

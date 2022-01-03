@@ -27,6 +27,11 @@ class ScoreCounter {
     const void draw() const;
      /// \brief give the total score (distance + items)
     const int getTotalScore();
+    const int getDist() ;
+    const int getItems() ;
+
+    void setDist(int dist);
+    void setItems(int items);
 
     private:
     int _distance; /*!< distance ran by the player */

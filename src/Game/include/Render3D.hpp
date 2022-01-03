@@ -90,6 +90,10 @@ public:
     void catch_UI(SDL_Event e);
     void enemyCalcul();
     void draw_Ui();
+    void save(int slot);
+    void load(int slot);
+    void loadAndSave(std::string str);
+
 
 private:
     Matrice m_MatriceTerrain;          // On va push des vecteurs de 3 (correspondant à chaque ligne du terrain

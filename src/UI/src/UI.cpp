@@ -35,7 +35,20 @@ const void ScoreCounter::draw() const {
 const int ScoreCounter::getTotalScore() {
     return _items+_distance;
 } 
+const int ScoreCounter::getDist() {
+    return _distance;
+} 
 
+const int ScoreCounter::getItems() {
+    return _items;
+}
+void ScoreCounter::setDist(int dist) {
+
+    _distance=dist;
+} 
+void ScoreCounter::setItems(int items) {
+    _items=items;
+}
 //Image arrière plan
 
 Background::Background(const char* imagePath, const glimac::FilePath& filePath) :
