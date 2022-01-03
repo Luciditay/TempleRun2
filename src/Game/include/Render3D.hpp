@@ -33,7 +33,7 @@ public:
           m_rotateTerrainLeft(false),
           m_rotateTerrainRight(false),
           m_Skybox(applicationPath),
-          m_character(modelPath, applicationPath),
+          m_character(modelPath),
           m_enemy(modelPathEnemy),
           m_moveMatrix(&m_camera, &m_character),
           m_objprogram(applicationPath),
@@ -62,13 +62,13 @@ public:
     {
         stbi_set_flip_vertically_on_load(false);
         m_enemy = Model(modelPathEnemy);
-        m_collectibles.addCollectible(glm::vec2(1.,-4.), "Bonus", true);
-        m_collectibles.addCollectible(glm::vec2(2.,-6.), "Coin", false);
-        m_collectibles.addCollectible(glm::vec2(0.,-10.), "Coin", false);
-        m_collectibles.addCollectible(glm::vec2(1.,-14.), "Bonus", false);
-        m_collectibles.addCollectible(glm::vec2(7.,-9.), "Coin", true);
-        m_collectibles.addCollectible(glm::vec2(8.,-7.), "Bonus", false);
-        m_collectibles.addCollectible(glm::vec2(9.,-13.), "Coin", false);
+        m_collectibles.addCollectible(glm::vec2(1., -4.), "Bonus", true);
+        m_collectibles.addCollectible(glm::vec2(2., -6.), "Coin", false);
+        m_collectibles.addCollectible(glm::vec2(0., -10.), "Coin", false);
+        m_collectibles.addCollectible(glm::vec2(1., -14.), "Bonus", false);
+        m_collectibles.addCollectible(glm::vec2(7., -9.), "Coin", true);
+        m_collectibles.addCollectible(glm::vec2(8., -7.), "Bonus", false);
+        m_collectibles.addCollectible(glm::vec2(9., -13.), "Coin", false);
     } // Default constructor of cam is fine
 
     void playGame(float largeur, float hauteur);
@@ -94,7 +94,6 @@ public:
     void load(int slot);
     void loadAndSave(std::string str);
 
-
 private:
     Matrice m_MatriceTerrain;          // On va push des vecteurs de 3 (correspondant à chaque ligne du terrain
     TileDrawer m_tileDrawer;           // Contient le vao, le vbo et une carré de 2x2 démarrant à (0, 0)
@@ -112,7 +111,7 @@ private:
     // Collectibles collectibles;
 
     Collectibles m_collectibles;
-    
+
     Light m_lightdir1;
     Light m_lightdir2;
 

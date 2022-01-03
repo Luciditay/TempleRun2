@@ -23,9 +23,6 @@ private:
     float m_distanceEnemy; /*!< distance character-enemy */
     float m_enemySpeed;    /*!< enemy speed */
 
-    // Position
-    int m_xAxisPosition; //-1 si le perso est à gauche, 1 a droite, 0 sinon
-
     // Jump
     bool m_jumping;    /*!< true if the character is jumping */
     float m_jumpIndex; /*!< abscissa of the height of the character in the parabola representing the jump */
@@ -44,18 +41,18 @@ private:
     float m_lateralStepRight; /*!< variation to the right */
     float m_lateralStepLeft;  /*!< variation to the left */
     // Fall
-    bool m_fall;        /*!< true if the character is falling */
+    bool m_fall;          /*!< true if the character is falling */
     float m_fallDistance; /*!< distance (y axis) travelled when falling */
 
     // State
     bool m_dead; /*!< true if the character is dead (RIP) */
 
-    //Turn
+    // Turn
     bool m_alreadyTurned;
 
 public:
     /// \brief constructor
-    Character(const std::string &modelPath, const glimac::FilePath &applicationPath);
+    Character(const std::string &modelPath);
     /// \brief change the action booleans according to the player inputs
     /// \param e : SDL_Event
 
@@ -90,20 +87,11 @@ public:
 
     glm::vec3 getVvue();
 
-    void setFront(float x,float y, float z);
+    void setFront(float x, float y, float z);
 
     /// \brief give the distance enemy-character
     float getDistanceEnemy();
     /// \brief increase character speed and decrease the enemy speed
-    float getxAxisPosition()
-    {
-        return m_xAxisPosition;
-    }
-
-    void setAxisPos(int axisPos)
-    {
-        m_xAxisPosition = axisPos;
-    }
 
     void setPosChar(const glm::vec3 &posChar)
     {

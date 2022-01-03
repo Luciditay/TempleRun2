@@ -14,9 +14,9 @@ std::vector<std::vector<int>> Matrice::getMatrice()
 void Matrice::toString()
 {
     std::cout << "STARTMATRIX" << std::endl;
-    for (int i = 0; i < m_Matrice.size(); i++)
+    for (unsigned int i = 0; i < m_Matrice.size(); i++)
     {
-        for (int j = 0; j < m_Matrice.at(i).size(); j++)
+        for (unsigned int j = 0; j < m_Matrice.at(i).size(); j++)
         {
             std::cout << m_Matrice.at(i).at(j) << " ";
         }
@@ -24,14 +24,15 @@ void Matrice::toString()
     }
 }
 
-bool Matrice::isZero(int i, int j) {
+bool Matrice::isZero(int i, int j)
+{
     std::cout << m_Matrice.at(i).at(j) << std::endl;
-    if (m_Matrice.at(i).at(j) == 0) {
+    if (m_Matrice.at(i).at(j) == 0)
+    {
         return true;
-    } 
-    return false;    
+    }
+    return false;
 }
-
 
 void Matrice::loadFromFile(const std::string &Path)
 {
@@ -45,7 +46,6 @@ void Matrice::loadFromFile(const std::string &Path)
     std::vector<int> ligneMatrice(12, 0);
     int number;
     int rowCount = 0;
-    int lineCount = 0;
 
     while (matFile >> number)
     {

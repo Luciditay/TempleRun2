@@ -54,8 +54,6 @@ void Render3D::playGame(float largeur, float hauteur)
             }
             loadAndSave(menu.getSaveLoadString());
 
-
-
             // !!! UI must be drawn after everything else, because it's 2D !
             draw_Ui();
 
@@ -93,10 +91,8 @@ void Render3D::drawTerrain(float ratio)
     glm::mat4 MMatrix;
     const glm::mat4 ProjMatrix = glm::perspective(glm::radians(70.f), ratio, 0.1f, 100.f);
 
-    float tailleCase = m_tileDrawer.getSizeTile();
-
     idTexture currentTex, textureMur;
-    int idCurrentCase, idLeftTile, idRightTile, idUpperTile, idLowerTile;
+    unsigned int idCurrentCase;
 
     const std::vector<std::vector<int>> terrain = m_MatriceTerrain.getMatrice();
 
@@ -105,9 +101,9 @@ void Render3D::drawTerrain(float ratio)
 
     const glm::mat4 worldMVMatrix = m_moveMatrix.getWorldMVMatrix();
 
-    for (int i = 0; i < terrain.size(); i++)
+    for (unsigned int i = 0; i < terrain.size(); i++)
     {
-        for (int j = 0; j < terrain.at(i).size(); j++)
+        for (unsigned int j = 0; j < terrain.at(i).size(); j++)
         {
             idCurrentCase = terrain.at(i).at(j);
 
@@ -123,7 +119,7 @@ void Render3D::drawTerrain(float ratio)
                     // textureMur = m_textureIDManager.getGLTextureMatchingName(TextureTypeId::FautSBaisser);
                 }
 
-                if (j - 1 < 0 || terrain.at(i).at(j - 1) == 0) // On dessine à gauche de toute les cases au bord du monde, un mur
+                if (j == 0 || terrain.at(i).at(j - 1) == 0) // On dessine à gauche de toute les cases au bord du monde, un mur
                 {
                     m_tileDrawer.drawMurVertical(ProjMatrix * worldMVMatrix, glm::vec3(j, 0, i), textureMur);
                 }
@@ -133,7 +129,7 @@ void Render3D::drawTerrain(float ratio)
                     m_tileDrawer.drawMurVertical(ProjMatrix * worldMVMatrix, glm::vec3(j + 1, 0, i), textureMur);
                 }
 
-                if (i - 1 < 0 || terrain.at(i - 1).at(j) == 0) // On dessine à gauche de toute les cases au bord du monde, un mur
+                if (i == 0 || terrain.at(i - 1).at(j) == 0) // On dessine à gauche de toute les cases au bord du monde, un mur
                 {
                     m_tileDrawer.drawMurHorizontal(ProjMatrix * worldMVMatrix, glm::vec3(j + 1, 0, i - 1), textureMur);
                 }
@@ -204,7 +200,6 @@ void Render3D::enemyCalcul()
         pause = true;
         menu.updateHighScores(score.getTotalScore());
         m_character.setPosChar(glm::vec3(1., 0., -4));
-        m_character.setAxisPos(0);
     }
 }
 
@@ -242,75 +237,78 @@ void Render3D::draw_Ui()
         score.resetItemsAndDistance();
         score.update();
     }
-
-   
 }
 
-void bn(std::ofstream &file){
-        file <<"\n";
+void bn(std::ofstream &file)
+{
+    file << "\n";
 }
 
-void Render3D::save(int slot){
-            std::string file;
-            file = "../saves/slot"+ std::to_string(slot)+".txt";
-            std::ofstream myfile;
-            myfile.open(file);
-            myfile <<score.getDist();
-            bn(myfile);
-            myfile <<score.getItems();
-            bn(myfile);
-            myfile <<m_character.getPos().x;
-            bn(myfile);
-            myfile <<m_character.getPos().z;
-            bn(myfile);
-            myfile <<m_character.getVvue().x;
-            bn(myfile);
-            myfile <<m_character.getVvue().y;
-            bn(myfile);
-            myfile <<m_character.getVvue().z;
-            bn(myfile);
-            myfile <<m_character.getAngle();
-            myfile.close();
-
+void Render3D::save(int slot)
+{
+    std::string file;
+    file = "../saves/slot" + std::to_string(slot) + ".txt";
+    std::ofstream myfile;
+    myfile.open(file);
+    myfile << score.getDist();
+    bn(myfile);
+    myfile << score.getItems();
+    bn(myfile);
+    myfile << m_character.getPos().x;
+    bn(myfile);
+    myfile << m_character.getPos().z;
+    bn(myfile);
+    myfile << m_character.getVvue().x;
+    bn(myfile);
+    myfile << m_character.getVvue().y;
+    bn(myfile);
+    myfile << m_character.getVvue().z;
+    bn(myfile);
+    myfile << m_character.getAngle();
+    myfile.close();
 }
 
-void Render3D::load(int slot){
-            std::string line;
-            std::string file;
-            file = "../saves/slot"+ std::to_string(slot)+".txt";
-            std::ifstream myfile(file);
-            getline(myfile,line);
-            double dist= std::stof(line);
-            getline(myfile,line);
-            double item= std::stof(line);
-            getline(myfile,line);
-            float x=std::stof(line);
-            getline(myfile,line);
-            float z=std::stof(line);
-            getline(myfile,line);
-            float x2=std::stof(line);
-            getline(myfile,line);
-            float y2=std::stof(line);
-            getline(myfile,line);
-            float z2=std::stof(line);
-            getline(myfile,line);
-            int angle=(int)std::stof(line);
+void Render3D::load(int slot)
+{
+    std::string line;
+    std::string file;
+    file = "../saves/slot" + std::to_string(slot) + ".txt";
+    std::ifstream myfile(file);
+    getline(myfile, line);
+    double dist = std::stof(line);
+    getline(myfile, line);
+    double item = std::stof(line);
+    getline(myfile, line);
+    float x = std::stof(line);
+    getline(myfile, line);
+    float z = std::stof(line);
+    getline(myfile, line);
+    float x2 = std::stof(line);
+    getline(myfile, line);
+    float y2 = std::stof(line);
+    getline(myfile, line);
+    float z2 = std::stof(line);
+    getline(myfile, line);
+    int angle = (int)std::stof(line);
 
-            myfile.close();
+    myfile.close();
 
-            m_character.setPos(x,z);
-            m_character.setFront(x2,y2,z2);
-            m_character.setAngle(angle);
-            score.setDist(dist);
-            score.setItems(item);
+    m_character.setPos(x, z);
+    m_character.setFront(x2, y2, z2);
+    m_character.setAngle(angle);
+    score.setDist(dist);
+    score.setItems(item);
 }
 
-
-void Render3D::loadAndSave(std::string str){
-            char tmp = str[4];
-            char chr = (char)str[0];
-            if(chr=='S') save((int)tmp-48);
-            else{
-                if(chr=='L') load((int)tmp-48);
-            }   
+void Render3D::loadAndSave(std::string str)
+{
+    char tmp = str[4];
+    char chr = (char)str[0];
+    if (chr == 'S')
+        save((int)tmp - 48);
+    else
+    {
+        if (chr == 'L')
+            load((int)tmp - 48);
+    }
 }

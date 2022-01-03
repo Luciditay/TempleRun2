@@ -8,7 +8,7 @@ TextureManager::TextureManager(std::vector<P_Texture> listeTextures)
 {
     int nomTexture;
     GLuint idTextureOpenGL;
-    for (int i = 0; i < listeTextures.size(); i++)
+    for (unsigned int i = 0; i < listeTextures.size(); i++)
     {
         nomTexture = listeTextures.at(i).getnomTexture();
         idTextureOpenGL = listeTextures.at(i).getIdTexture();

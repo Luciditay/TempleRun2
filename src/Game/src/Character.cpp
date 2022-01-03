@@ -3,15 +3,26 @@
 #include "Constants.hpp"
 #include <functional>
 
-Character::Character(const std::string &modelPath, const glimac::FilePath &applicationPath)
-    : m_posChar(1., 0., -4.), m_jumping(false), m_jumpIndex(-0.4), m_speed(0.05), m_distanceEnemy(3), m_enemySpeed(0.001),
-      m_scaleChar(1., 1., 1.), m_compenseScale(0., 0., 0.), m_squating(false), m_squatIndex(-0.3),
-      m_turn(false), m_turningLeft(false), m_turningRight(false), m_angle(0), m_variationAngle(0), m_alreadyTurned(false),
-      m_upChar(0., 1., 0.), m_frontChar({0., 0., 0.1}), m_dead(false),
-      m_walkingLeft(false), m_walkingRight(false),
-      m_lateralStepRight(0.), m_lateralStepLeft(0.), m_fall(false), m_fallDistance(0.),
+Character::Character(const std::string &modelPath)
+    : m_posChar(1., 0., -4.), m_upChar(0., 1., 0.), m_frontChar({0., 0., 0.1}),
+      m_scaleChar(1., 1., 1.), m_compenseScale(0., 0., 0.),
       m_model(modelPath),
-      m_xAxisPosition(0)
+
+      m_speed(0.05), m_distanceEnemy(3), m_enemySpeed(0.001),
+
+      m_jumping(false), m_jumpIndex(-0.4),
+      m_squating(false), m_squatIndex(-0.3),
+      m_turn(false), m_turningLeft(false), m_turningRight(false), m_angle(0), m_variationAngle(0),
+
+      m_walkingRight(false), m_walkingLeft(false),
+      m_lateralStepRight(0.), m_lateralStepLeft(0.),
+
+      m_fall(false), m_fallDistance(0.),
+
+      m_dead(false),
+
+      m_alreadyTurned(false)
+
 {
 }
 
@@ -19,15 +30,17 @@ void Character::draw(glm::mat4 MVPMatrix, ObjProgram *program, glm::mat4 MVMatri
 {
     m_model.Draw(MVPMatrix, program, MVMatrix);
 }
-void Character::setPos(float x,float z){
-    m_posChar=glm::vec3(x,0.,z);
+void Character::setPos(float x, float z)
+{
+    m_posChar = glm::vec3(x, 0., z);
 }
-void Character::setFront(float x,float y, float z){
-    m_frontChar=glm::vec3(x,y,z);
+void Character::setFront(float x, float y, float z)
+{
+    m_frontChar = glm::vec3(x, y, z);
 }
 void Character::setAngle(int a)
 {
-    m_angle=a;
+    m_angle = a;
 }
 
 void Character::squatAnimation()
@@ -63,7 +76,6 @@ void Character::lateralStepLeftAnimation()
     {
         m_lateralStepLeft = 0.;
         m_walkingLeft = false;
-        m_xAxisPosition--;
     }
 }
 
@@ -81,13 +93,13 @@ void Character::lateralStepRightAnimation()
     {
         m_lateralStepRight = 0.;
         m_walkingRight = false;
-        m_xAxisPosition++;
     }
 }
 
 void Character::handleSDLEvent(const SDL_Event &e, int currentTileID, Matrice &matTerrain)
 {
-    if(currentTileID != 20) {
+    if (currentTileID != 20)
+    {
         m_alreadyTurned = false;
     }
 
@@ -101,8 +113,8 @@ void Character::handleSDLEvent(const SDL_Event &e, int currentTileID, Matrice &m
 
         if (e.key.keysym.sym == SDLK_q)
         {
-            if (currentTileID == 10 || currentTileID == 30 && m_turn) // Left or double turning point
-            {                                                         // Lateral Mode
+            if ((currentTileID == 10 || currentTileID == 30) && m_turn) // Left or double turning point
+            {                                                           // Lateral Mode
                 m_turningLeft = true;
             }
             else
@@ -131,7 +143,7 @@ void Character::handleSDLEvent(const SDL_Event &e, int currentTileID, Matrice &m
         // Key D : RIGHT
         else if (e.key.keysym.sym == SDLK_d)
         {
-            if ((!m_alreadyTurned) && (currentTileID == 20 || currentTileID == 30 && m_turn))
+            if ((!m_alreadyTurned) && ((currentTileID == 20 || currentTileID == 30) && m_turn))
             { // Lateral move
                 m_alreadyTurned = true;
                 m_turningRight = true;
@@ -291,8 +303,8 @@ void Character::reactToInputs()
     // Fall
     if (m_fall)
     {
-        
-        m_fallDistance+= 0.1;
+
+        m_fallDistance += 0.1;
         m_posChar.y -= m_fallDistance;
         if (m_fallDistance > 1)
         {
@@ -325,10 +337,10 @@ glm::vec3 Character::getPos()
 {
     return m_posChar;
 }
-glm::vec3 Character::getVvue(){
+glm::vec3 Character::getVvue()
+{
     return m_frontChar;
 }
-
 
 float Character::getDistanceEnemy()
 {
