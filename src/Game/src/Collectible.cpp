@@ -32,7 +32,7 @@ float Collectible::distanceToChar() {
 }
 
 void Collectible::collect() {
-    if(distanceToChar() < 0.5 && (!m_hidden) && ((m_flying && m_char->isJumping()) || (!m_flying && !m_char->isJumping()))) {
+    if(distanceToChar() < 0.10 && (!m_hidden) && ((m_flying && m_char->isJumping()) || (!m_flying && !m_char->isJumping()))) {
         m_hidden = true;
         action();
     }

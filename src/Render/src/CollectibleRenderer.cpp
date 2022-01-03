@@ -15,9 +15,7 @@ void CollectibleRenderer::drawCollectible(const Collectible collectible, glm::ma
     if (!collectible.isHidden())
     {
         m_moveMatrix->computeMVCollectible(collectible.position());
-        // m_program->m_Program.use();
         glm::mat4 MVMatrixCollectible = m_moveMatrix->getCollectibleMVMatrix();
-        // m_program->sendMatrix(m_moveMatrix->getCollectibleMVMatrix(), );
         if (collectible.type() == "Coin")
         {
             m_modelCoin.Draw(ProjMatrix*MVMatrixCollectible, m_program, MVMatrixCollectible);

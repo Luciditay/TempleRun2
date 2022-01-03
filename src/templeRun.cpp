@@ -63,7 +63,6 @@ int main(int argc, char **argv)
 
     Camera camera(-30., M_PI / 6., 0.);
     Character Player(modelCharacterPath, applicationPath);
-    // Render3D game(matriceTerrain, textureManager, camera, applicationPath, VSPath, FSPath, modelCharacterPath, windowManager);
 
     TTF_Init();
 
@@ -75,48 +74,5 @@ int main(int argc, char **argv)
     SDL_EnableKeyRepeat(10, 10);
 
     game.playGame(largeur, hauteur);
-    // while (!done)
-    // {
-
-    //     // Nettoyage de la fenêtre
-    //     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-    //     // update current time
-    //     //  Event loop:
-    //     SDL_Event e;
-    //     while (windowManager.pollEvent(e))
-    //     {
-
-    //         camDebug.reactSDLEvents(e);
-
-    //         if (e.type == SDL_QUIT)
-    //         {
-    //             done = true; // Leave the loop after this iteration
-    //         }
-    //     }
-
-    //     /*********************************
-    //      * HERE SHOULD COME THE RENDERING CODE
-    //      *********************************/
-
-    //     game.drawTerrain(largeur / hauteur);
-
-    //     // Update the display
-    //     windowManager.swapBuffers();
-
-    //     // update previous time
-    // }
-
-    //     // Update the display
-    //     windowManager.swapBuffers();
-
-    //     // update previous time
-    // }
-
-    // TTF_Quit();
-
-    // Libération des ressources
-    // glDeleteTextures(1, &t1);
-
     return 0;
 }

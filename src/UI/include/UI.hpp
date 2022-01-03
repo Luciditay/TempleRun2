@@ -27,6 +27,11 @@ class ScoreCounter {
     const void draw() const;
      /// \brief give the total score (distance + items)
     const int getTotalScore();
+    const int getDist() ;
+    const int getItems() ;
+
+    void setDist(int dist);
+    void setItems(int items);
 
     private:
     int _distance; /*!< distance ran by the player */
@@ -275,12 +280,13 @@ class ButtonSaveorLoadSlot : public Button, public Observer {
     /// \param feedback : the button can modify the feedback message in the menu "save" or "load"
     ButtonSaveorLoadSlot(const char* fontPath, const int& size, 
             const glimac::FilePath& filePath, const uint& windowWidth, const uint& windowHeight, const int& positionXPixels, 
-            const int& positionYPixels, const bool& middle, const int& slotNumber, const std::string& action, Message* feedback);
+            const int& positionYPixels, const bool& middle, const int& slotNumber, const std::string& action, Message* feedback, Menu* menu);
     virtual void update() override;
 
     private:
     const int _slotNumber; /*!< number of the save file */
     const std::string _action; /*!< "Save" or "Load" */
     Message* _feedback; /*!< pointer to be able to change the message */
+    Menu* _menu; /*!reference to the main menu */
 };
 

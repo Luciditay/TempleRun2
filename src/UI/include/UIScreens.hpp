@@ -189,6 +189,8 @@ class Menu {
     void startAgainTrue();
     /// \return true if the player wants to start again
     const bool shouldStartAgain();
+    const std::string getSaveLoadString();
+    void setSaveLoadString(const std::string whatToDo);
 
     private:
     ButtonContinue _continue; /*!< button to quit the menu/pause */
@@ -205,4 +207,5 @@ class Menu {
     HighScoresMenu _highScoresMenu; /*!< submenu */
     SaveOrLoadMenu _saveMenu; /*!< submenu */
     SaveOrLoadMenu _loadMenu; /*!< submenu */
+    std::string _saveLoadString;
 };

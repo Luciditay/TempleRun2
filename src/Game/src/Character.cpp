@@ -3,16 +3,6 @@
 #include "Constants.hpp"
 #include <functional>
 
-// float jumpHight(float x)
-// {
-//     return -8 * x * x + 1.5;
-// };
-
-// float squatScale(float x)
-// {
-//     return 1 - (-5 * x * x + 0.5);
-// }
-
 Character::Character(const std::string &modelPath, const glimac::FilePath &applicationPath)
     : m_posChar(1., 0., -4.), m_jumping(false), m_jumpIndex(-0.4), m_speed(0.05), m_distanceEnemy(3), m_enemySpeed(0.001),
       m_scaleChar(1., 1., 1.), m_compenseScale(0., 0., 0.), m_squating(false), m_squatIndex(-0.3),
@@ -29,12 +19,19 @@ void Character::draw(glm::mat4 MVPMatrix, ObjProgram *program, glm::mat4 MVMatri
 {
     m_model.Draw(MVPMatrix, program, MVMatrix);
 }
+void Character::setPos(float x,float z){
+    m_posChar=glm::vec3(x,0.,z);
+}
+void Character::setFront(float x,float y, float z){
+    m_frontChar=glm::vec3(x,y,z);
+}
+void Character::setAngle(int a)
+{
+    m_angle=a;
+}
 
 void Character::squatAnimation()
 {
-    // m_scaleChar.y = squatScale(m_squatIndex);
-    // m_compenseScale.y = -1 + squatScale(m_squatIndex);
-    // m_squatIndex += 0.01;
 
     std::function<float(float x)> squatScale = [](float x)
     { return 1 - (-5 * x * x + 0.5); };
@@ -56,9 +53,6 @@ void Character::jumpAnimation()
 void Character::lateralStepLeftAnimation()
 {
     glm::vec3 m_stepRight = glm::normalize(glm::cross(m_frontChar, m_upChar));
-    // m_posChar += m_stepRight;
-    // m_lateralStepLeft = false;
-    // m_xAxisPosition--;
 
     if (m_lateralStepLeft < 0.25)
     {
@@ -76,9 +70,6 @@ void Character::lateralStepLeftAnimation()
 void Character::lateralStepRightAnimation()
 {
     glm::vec3 m_stepRight = glm::normalize(glm::cross(m_frontChar, m_upChar));
-    // m_posChar -= m_stepRight;
-    // m_lateralStepRight = false;
-    //   m_xAxisPosition++;
 
     if (m_lateralStepRight < 0.25)
     {
@@ -144,7 +135,6 @@ void Character::handleSDLEvent(const SDL_Event &e, int currentTileID, Matrice &m
             { // Lateral move
                 m_alreadyTurned = true;
                 m_turningRight = true;
-                std::cout << "already turn" << m_alreadyTurned << std::endl;
             }
             else
             {
@@ -205,20 +195,16 @@ void Character::checkState(int currentTileId)
 
     if (currentTileId == TextureTypeId::TROU && isJumping() == false)
     {
-        std::cout << "T'es mort" << std::endl;
         m_fall = true;
-        // die();
     }
 
     if (currentTileId == 0)
     {
-        std::cout << "Collision mur" << std::endl;
         die();
     }
 
     if (currentTileId == TextureTypeId::FautSBaisser && isSquatting() == false)
     {
-        std::cout << "Mieux vaut être un nain vivant qu'un grand échalas succombant" << std::endl;
         die();
     }
 }
@@ -339,6 +325,10 @@ glm::vec3 Character::getPos()
 {
     return m_posChar;
 }
+glm::vec3 Character::getVvue(){
+    return m_frontChar;
+}
+
 
 float Character::getDistanceEnemy()
 {

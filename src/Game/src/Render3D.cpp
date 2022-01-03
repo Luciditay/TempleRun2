@@ -52,6 +52,9 @@ void Render3D::playGame(float largeur, float hauteur)
                 drawTerrain(largeur / hauteur);
                 enemyCalcul();
             }
+            loadAndSave(menu.getSaveLoadString());
+
+
 
             // !!! UI must be drawn after everything else, because it's 2D !
             draw_Ui();
@@ -239,4 +242,75 @@ void Render3D::draw_Ui()
         score.resetItemsAndDistance();
         score.update();
     }
+
+   
+}
+
+void bn(std::ofstream &file){
+        file <<"\n";
+}
+
+void Render3D::save(int slot){
+            std::string file;
+            file = "../saves/slot"+ std::to_string(slot)+".txt";
+            std::ofstream myfile;
+            myfile.open(file);
+            myfile <<score.getDist();
+            bn(myfile);
+            myfile <<score.getItems();
+            bn(myfile);
+            myfile <<m_character.getPos().x;
+            bn(myfile);
+            myfile <<m_character.getPos().z;
+            bn(myfile);
+            myfile <<m_character.getVvue().x;
+            bn(myfile);
+            myfile <<m_character.getVvue().y;
+            bn(myfile);
+            myfile <<m_character.getVvue().z;
+            bn(myfile);
+            myfile <<m_character.getAngle();
+            myfile.close();
+
+}
+
+void Render3D::load(int slot){
+            std::string line;
+            std::string file;
+            file = "../saves/slot"+ std::to_string(slot)+".txt";
+            std::ifstream myfile(file);
+            getline(myfile,line);
+            double dist= std::stof(line);
+            getline(myfile,line);
+            double item= std::stof(line);
+            getline(myfile,line);
+            float x=std::stof(line);
+            getline(myfile,line);
+            float z=std::stof(line);
+            getline(myfile,line);
+            float x2=std::stof(line);
+            getline(myfile,line);
+            float y2=std::stof(line);
+            getline(myfile,line);
+            float z2=std::stof(line);
+            getline(myfile,line);
+            int angle=(int)std::stof(line);
+
+            myfile.close();
+
+            m_character.setPos(x,z);
+            m_character.setFront(x2,y2,z2);
+            m_character.setAngle(angle);
+            score.setDist(dist);
+            score.setItems(item);
+}
+
+
+void Render3D::loadAndSave(std::string str){
+            char tmp = str[4];
+            char chr = (char)str[0];
+            if(chr=='S') save((int)tmp-48);
+            else{
+                if(chr=='L') load((int)tmp-48);
+            }   
 }

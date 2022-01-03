@@ -18,7 +18,6 @@ const void HighScores::load() {
 			file >> data[i];
 		}
 		_highScores = data;
-		// std::cout << "Meilleurs Scores chargés" << std::endl;
 	} else {
 		std::cout << "Problème de chargement des Meilleurs Scores"<< std::endl;
 	}
@@ -33,7 +32,6 @@ const void HighScores::save() {
 		for (int i = 0; i<int(size); i++) {
 		file << _highScores[i] << std::endl;
 		}
-		// std::cout << "Meilleurs Scores sauvegardés"<< std::endl;
 	} else {
 		std::cout << "Problème de sauvegarde des Meilleurs Scores"<< std::endl;
 	}
