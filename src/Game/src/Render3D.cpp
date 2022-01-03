@@ -72,10 +72,6 @@ void Render3D::playGame(float largeur, float hauteur)
     TTF_Quit();
 }
 
-// void Render3D::WillCharacterDie(){
-//     glm::vec3 frontChar = m_character.
-// }
-
 void Render3D::sendLightsToProgram()
 {
     m_objprogram.m_Program.use();
@@ -84,10 +80,8 @@ void Render3D::sendLightsToProgram()
     m_lightdir1.sendUniformVec(glm::vec3(0., 1., -1.));
     m_lightdir2.sendUniformIntensity(glm::vec3(1., 1., 1.));
     m_lightdir2.sendUniformVec(glm::vec3(0., -1., 1.));
-    // glm::vec4 dirLight = glm::rotate(moveMatrix.getLightMVMatrix(), float(M_PI/4.), glm::vec3(0.,0.,1.))*glm::vec4(1.,1.,1.,0.);
     glm::vec4 dirLight = m_moveMatrix.getLightMVMatrix() * glm::vec4(0., 0., 1., 0.);
     glUniform3f(m_objprogram.uLightDir_vs, dirLight.x, dirLight.y, dirLight.z);
-    // glUniform3f(objProgram.uLightIntensity, 1.,1., 1.);
     glm::vec4 posLight = m_moveMatrix.getWorldMVMatrix() * glm::vec4(0., 0.02, 0., 1.);
     glUniform3f(m_objprogram.uLightPos_vs, posLight.x, posLight.y, posLight.z);
     glUniform3f(m_objprogram.uLightIntensityPos, 1., 0., 0.);
@@ -111,8 +105,6 @@ void Render3D::drawTerrain(float ratio)
 
     m_moveMatrix.computeAllMatrix();
     const glm::mat4 VMatrix = m_moveMatrix.getViewMatrix();
-    // const glm::mat4 MVPMatrix = ProjMatrix * MVMatrix;
-    // const glm::mat4 NormalMatrix = glm::transpose(glm::inverse(MVMatrix));
 
     const glm::mat4 MVMatrixPersonnage = m_moveMatrix.getCharMVMatrix();
    
@@ -121,7 +113,6 @@ void Render3D::drawTerrain(float ratio)
     m_character.draw(ProjMatrix * MVMatrixPersonnage, &m_objprogram, MVMatrixPersonnage);
 
     const glm::mat4 MVMatrixEnemy = m_moveMatrix.getEnemyMVMatrix();
-    // m_character.draw(ProjMatrix * MVMatrixEnemy, &m_objprogram, MVMatrixEnemy);
     m_enemy.Draw(ProjMatrix * MVMatrixEnemy, &m_objprogram, MVMatrixEnemy);
 
     m_collectibles.draw(ProjMatrix);
@@ -163,7 +154,6 @@ void Render3D::drawTerrain(float ratio)
                 }
             }
         }
-        // std::cout << std::endl;
     }
 
    
@@ -313,8 +303,6 @@ void Render3D::load(int slot){
             m_character.setAngle(angle);
             score.setDist(dist);
             score.setItems(item);
-
-            std::cout<<dist<<"\n"<<item<<"\n"<<x<<"\n"<<z<<std::endl;
 }
 
 

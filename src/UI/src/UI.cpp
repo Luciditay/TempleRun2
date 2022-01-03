@@ -57,7 +57,6 @@ Background::Background(const char* imagePath, const glimac::FilePath& filePath) 
     //Chargement image
     std::unique_ptr<glimac::Image> ptrImage = glimac::loadImage(imagePath);
     if(ptrImage){
-        std::cout << "ptrImage ok " << std::endl;
     }
     //Création texture objet
     glGenTextures(1, &_texture);
@@ -135,7 +134,6 @@ ButtonMenu::ButtonMenu(const char* text, const char* fontPath, const int& size,
 
 void ButtonContinue::update() {
     if(isHover() && _enable) {
-        std::cout << "On continue!" << std::endl;
         _menu->close();
     } 
 }
@@ -149,7 +147,6 @@ ButtonContinue::ButtonContinue(const char* fontPath, const int& size,
 
 void ButtonStartAgain::update() {
     if(isHover() && _enable) {
-        std::cout << "On recommence!" << std::endl;
         _menu->startAgainTrue();
         _menu->close();
     } 
@@ -165,7 +162,6 @@ ButtonStartAgain::ButtonStartAgain(const char* fontPath, const int& size,
 
 void ButtonHighScore::update() {
     if(isHover() && _enable) {
-        std::cout << "Voilà les meilleurs scores !" << std::endl;
         _menu->close();
         _menu->SubMenuOpen("Highscores");
     } 
@@ -181,7 +177,6 @@ ButtonHighScore::ButtonHighScore(const char* fontPath, const int& size,
 
 void ButtonSave::update() {
     if(isHover() && _enable) {
-        std::cout << "Sauvegardé !" << std::endl;
         _menu->close();
         _menu->SubMenuOpen("Save");
     } 
@@ -197,7 +192,6 @@ ButtonSave::ButtonSave(const char* fontPath, const int& size,
 
 void ButtonLoad::update() {
     if(isHover() && _enable) {
-        std::cout << "Charger une ancienne partie ?" << std::endl;
         _menu->close();
         _menu->SubMenuOpen("Load");
     } 
@@ -213,7 +207,6 @@ ButtonLoad::ButtonLoad(const char* fontPath, const int& size,
 
 void ButtonQuit::update() {
     if(isHover() && _enable) {
-        std::cout << "Ok bye !" << std::endl;
         stopGame();
     } 
 }
@@ -237,7 +230,6 @@ void ButtonQuit::stopGame() {
 
 void ButtonReturn::update() {
     if(isHover() && _enable) {
-        std::cout << "Retour au menu." << std::endl;
         _menu->open();
         _menu->allSubMenusClose();
 
@@ -257,17 +249,13 @@ void ButtonSaveorLoadSlot::update() {
         std::string texte;
         if(_action == "Save") {
             texte = "Game saved : slot " + std::to_string(_slotNumber);
-            std::cout << texte << std::endl;
             _feedback->update((texte).c_str());
             _menu->setSaveLoadString("Save"+std::to_string(_slotNumber));
         } else if (_action == "Load") {
             texte = "Game loaded : slot " + std::to_string(_slotNumber);
-            std::cout << texte << std::endl;
             _feedback->update((texte).c_str());
             _menu->setSaveLoadString("Load"+std::to_string(_slotNumber));
-        } else {
-            std::cout << "Action non reconnue." << std::endl;
-        }
+        } 
     } 
 }
 
