@@ -64,11 +64,12 @@ TileDrawer::TileDrawer(const FilePath &applicationPath, const std::string &pathV
     glBindVertexArray(0);
 }
 
-void TileDrawer::drawCase(const glm::mat4 &VPMatrix, const glm::vec3 &tileOffset, const glm::vec3 &rotation, int texture)
+void TileDrawer::drawCase(const glm::mat4 &VPMatrix, const glm::vec3 &tileOffset, const glm::vec3 &scale, int texture)
 {
     glm::mat4 MMatrix = glm::translate(glm::mat4{1.f}, glm::vec3(0, 0, 0));                                    // On se place devant la caméra, en ligne 0 à gauche (en 0 du monde décalé de -1, 0, 0)
-    MMatrix = glm::translate(MMatrix, glm::vec3(m_size * tileOffset.x, tileOffset.y, -tileOffset.z * m_size)); // On se translate dans la matrice
-    // MMatrix = glm::rotate(MMatrix, glm::radians(90.f), rotation);                                              // On récupère la vraie Mview matrice;
+    MMatrix = glm::translate(MMatrix, glm::vec3(m_size * tileOffset.x, tileOffset.y, -tileOffset.z * m_size)); // On se translate dans la matrice                                               // On récupère la vraie Mview matrice;
+    MMatrix = glm::scale(MMatrix, scale);
+
     m_formeProgramme.m_Program.use();
 
     glUniformMatrix4fv(m_formeProgramme.uMVPMatrix, 1, GL_FALSE, glm::value_ptr(VPMatrix * MMatrix));
@@ -101,9 +102,8 @@ void TileDrawer::drawCase(const glm::mat4 &VPMatrix, const glm::vec3 &tileOffset
 
 void TileDrawer::drawMurHorizontal(const glm::mat4 &VPMatrix, const glm::vec3 &offset, int TypeTextureID)
 {
-    // Séparer lA M matrix du code dessin ?
     glm::mat4 MMatrix = glm::translate(glm::mat4{1.f}, glm::vec3(0, 0, 0));
-    MMatrix = glm::translate(MMatrix, glm::vec3(-m_size / 2 + m_size * offset.x, m_size / 2, m_size * -offset.z));
+    MMatrix = glm::translate(MMatrix, glm::vec3(-m_size / 2 + m_size * offset.x, m_size / 2 + offset.y, m_size * -offset.z));
     MMatrix = glm::rotate(MMatrix, glm::radians(90.f), glm::vec3(1, 0, 0));
     MMatrix = glm::translate(MMatrix, glm::vec3(-m_size / 2, 0, -m_size / 2));
 
@@ -119,11 +119,32 @@ void TileDrawer::drawMurHorizontal(const glm::mat4 &VPMatrix, const glm::vec3 &o
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
 }
+
+void TileDrawer::drawMurHorizontal(const glm::mat4 &VPMatrix, const glm::vec3 &offset, const glm::vec3 &scale, int TypeTextureID)
+{
+    glm::mat4 MMatrix = glm::translate(glm::mat4{1.f}, glm::vec3(0, 0, 0));
+    MMatrix = glm::translate(MMatrix, glm::vec3(-m_size / 2 + m_size * offset.x, m_size / 2 + offset.y, m_size * -offset.z));
+    MMatrix = glm::rotate(MMatrix, glm::radians(90.f), glm::vec3(1, 0, 0));
+    MMatrix = glm::translate(MMatrix, glm::vec3(-m_size / 2, 0, -m_size / 2));
+    MMatrix = glm::scale(MMatrix, scale);
+
+    m_formeProgramme.m_Program.use();
+
+    glUniformMatrix4fv(m_formeProgramme.uMVPMatrix, 1, GL_FALSE, glm::value_ptr(VPMatrix * MMatrix));
+
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, TypeTextureID);
+    glUniform1i(m_formeProgramme.uTexture, 0);
+
+    glBindVertexArray(m_vao);
+    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+    glBindVertexArray(0);
+}
+
 void TileDrawer::drawMurVertical(const glm::mat4 &VPMatrix, const glm::vec3 &offset, int TypeTextureID)
 {
-    // Séparer lA M matrix du code dessin ?
     glm::mat4 MMatrix = glm::translate(glm::mat4{1.f}, glm::vec3(0, 0, 0));
-    MMatrix = glm::translate(MMatrix, glm::vec3(-m_size / 2 + m_size * offset.x, m_size / 2, m_size * -offset.z));
+    MMatrix = glm::translate(MMatrix, glm::vec3(-m_size / 2 + m_size * offset.x, m_size / 2 + offset.y, m_size * -offset.z));
     MMatrix = glm::rotate(MMatrix, glm::radians(90.f), glm::vec3(0, 0, 1));
     MMatrix = glm::rotate(MMatrix, glm::radians(90.f), glm::vec3(0, 1, 0));
     MMatrix = glm::translate(MMatrix, glm::vec3(-m_size / 2, 0, -m_size / 2));
@@ -139,4 +160,34 @@ void TileDrawer::drawMurVertical(const glm::mat4 &VPMatrix, const glm::vec3 &off
     glBindVertexArray(m_vao);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
+}
+
+void TileDrawer::drawMurVertical(const glm::mat4 &VPMatrix, const glm::vec3 &offset, const glm::vec3 &scale, int TypeTextureID)
+{
+    glm::mat4 MMatrix = glm::translate(glm::mat4{1.f}, glm::vec3(0, 0, 0));
+    MMatrix = glm::translate(MMatrix, glm::vec3(-m_size / 2 + m_size * offset.x, m_size / 2 + offset.y, m_size * -offset.z));
+    MMatrix = glm::rotate(MMatrix, glm::radians(90.f), glm::vec3(0, 0, 1));
+    MMatrix = glm::rotate(MMatrix, glm::radians(90.f), glm::vec3(0, 1, 0));
+    MMatrix = glm::translate(MMatrix, glm::vec3(-m_size / 2, 0, -m_size / 2));
+    MMatrix = glm::scale(MMatrix, scale);
+
+    m_formeProgramme.m_Program.use();
+
+    glUniformMatrix4fv(m_formeProgramme.uMVPMatrix, 1, GL_FALSE, glm::value_ptr(VPMatrix * MMatrix));
+
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, TypeTextureID);
+    glUniform1i(m_formeProgramme.uTexture, 0);
+
+    glBindVertexArray(m_vao);
+    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+    glBindVertexArray(0);
+}
+
+void TileDrawer::drawSquatCase(const glm::mat4 &VPMatrix, const glm::vec3 &offset, const glm::vec3 &scale, int texture)
+{
+    drawCase(VPMatrix, offset, texture);
+    drawCase(VPMatrix, offset + glm::vec3(0, 1, 0), texture);
+    drawMurHorizontal(VPMatrix, offset + glm::vec3(1, 0., -1), scale, texture);
+    drawMurHorizontal(VPMatrix, offset + glm::vec3(1, 0, 0), scale, texture);
 }

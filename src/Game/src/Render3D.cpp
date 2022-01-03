@@ -22,9 +22,8 @@ void Render3D::playGame(float largeur, float hauteur)
 
             // On récupère la position du personnage dans la matrice
             currentPos = getPosPersonnageInGame();
-            // std::cout << currentPos.x << currentPos.z << std::endl;
             currentTileId = m_MatriceTerrain.getMatrice().at(-currentPos.z).at(currentPos.x);
-            // std::cout << currentTileId << std::endl;
+
             //   Event loop:
             SDL_Event e;
 
@@ -38,7 +37,6 @@ void Render3D::playGame(float largeur, float hauteur)
 
                 if (e.type == SDL_QUIT)
                 {
-                    // A CODER : FONCTION LIBERATIONS DE MEMOIRES
                     exit(EXIT_SUCCESS); // Leave the loop after this iteration
                 }
             }
@@ -47,7 +45,6 @@ void Render3D::playGame(float largeur, float hauteur)
              * HERE SHOULD COME THE RENDERING CODE
              *********************************/
 
-            // if (menu.ge)
             if (!pause)
             {
                 m_character.reactToInputs();
@@ -69,10 +66,6 @@ void Render3D::playGame(float largeur, float hauteur)
     TTF_Quit();
 }
 
-// void Render3D::WillCharacterDie(){
-//     glm::vec3 frontChar = m_character.
-// }
-
 void Render3D::sendLightsToProgram()
 {
     m_objprogram.m_Program.use();
@@ -81,10 +74,8 @@ void Render3D::sendLightsToProgram()
     m_lightdir1.sendUniformVec(glm::vec3(0., 1., -1.));
     m_lightdir2.sendUniformIntensity(glm::vec3(1., 1., 1.));
     m_lightdir2.sendUniformVec(glm::vec3(0., -1., 1.));
-    // glm::vec4 dirLight = glm::rotate(moveMatrix.getLightMVMatrix(), float(M_PI/4.), glm::vec3(0.,0.,1.))*glm::vec4(1.,1.,1.,0.);
     glm::vec4 dirLight = m_moveMatrix.getLightMVMatrix() * glm::vec4(0., 0., 1., 0.);
     glUniform3f(m_objprogram.uLightDir_vs, dirLight.x, dirLight.y, dirLight.z);
-    // glUniform3f(objProgram.uLightIntensity, 1.,1., 1.);
     glm::vec4 posLight = m_moveMatrix.getWorldMVMatrix() * glm::vec4(0., 0.02, 0., 1.);
     glUniform3f(m_objprogram.uLightPos_vs, posLight.x, posLight.y, posLight.z);
     glUniform3f(m_objprogram.uLightIntensityPos, 1., 0., 0.);
@@ -101,17 +92,13 @@ void Render3D::drawTerrain(float ratio)
 
     float tailleCase = m_tileDrawer.getSizeTile();
 
-    idTexture currentTex;
+    idTexture currentTex, textureMur;
     int idCurrentCase, idLeftTile, idRightTile, idUpperTile, idLowerTile;
 
     const std::vector<std::vector<int>> terrain = m_MatriceTerrain.getMatrice();
 
     m_moveMatrix.computeAllMatrix();
     const glm::mat4 VMatrix = m_moveMatrix.getViewMatrix();
-    // const glm::mat4 MVPMatrix = ProjMatrix * MVMatrix;
-    // const glm::mat4 NormalMatrix = glm::transpose(glm::inverse(MVMatrix));
-
-   
 
     const glm::mat4 worldMVMatrix = m_moveMatrix.getWorldMVMatrix();
 
@@ -119,46 +106,50 @@ void Render3D::drawTerrain(float ratio)
     {
         for (int j = 0; j < terrain.at(i).size(); j++)
         {
-            // On texturise
             idCurrentCase = terrain.at(i).at(j);
 
             if (idCurrentCase != 0)
             {
                 currentTex = m_textureIDManager.getGLTextureMatchingName(idCurrentCase);
+                textureMur = m_textureIDManager.getGLTextureMatchingName(TextureTypeId::SOL2);
                 m_tileDrawer.drawCase(ProjMatrix * worldMVMatrix, glm::vec3(j, 0, i), currentTex);
+
+                if (idCurrentCase == TextureTypeId::FautSBaisser)
+                {
+                    m_tileDrawer.drawSquatCase(ProjMatrix * worldMVMatrix, glm::vec3(j, 0., i), glm::vec3(1., 1., 0.75), currentTex);
+                    // textureMur = m_textureIDManager.getGLTextureMatchingName(TextureTypeId::FautSBaisser);
+                }
 
                 if (j - 1 < 0 || terrain.at(i).at(j - 1) == 0) // On dessine à gauche de toute les cases au bord du monde, un mur
                 {
-                    m_tileDrawer.drawMurVertical(ProjMatrix * worldMVMatrix, glm::vec3(j, 0, i), m_textureIDManager.getGLTextureMatchingName(TextureTypeId::SOL2));
+                    m_tileDrawer.drawMurVertical(ProjMatrix * worldMVMatrix, glm::vec3(j, 0, i), textureMur);
                 }
 
                 if (j + 1 >= terrain.at(i).size() || terrain.at(i).at(j + 1) == 0) // On dessine à gauche de toute les cases au bord du monde, un mur
                 {
-                    m_tileDrawer.drawMurVertical(ProjMatrix * worldMVMatrix, glm::vec3(j + 1, 0, i), TextureTypeId::SOL2);
+                    m_tileDrawer.drawMurVertical(ProjMatrix * worldMVMatrix, glm::vec3(j + 1, 0, i), textureMur);
                 }
 
                 if (i - 1 < 0 || terrain.at(i - 1).at(j) == 0) // On dessine à gauche de toute les cases au bord du monde, un mur
                 {
-                    m_tileDrawer.drawMurHorizontal(ProjMatrix * worldMVMatrix, glm::vec3(j + 1, 0, i - 1), TextureTypeId::SOL2);
+                    m_tileDrawer.drawMurHorizontal(ProjMatrix * worldMVMatrix, glm::vec3(j + 1, 0, i - 1), textureMur);
                 }
 
                 if (i + 1 >= terrain.size() || terrain.at(i + 1).at(j) == 0) // On dessine à gauche de toute les cases au bord du monde, un mur
                 {
-                    m_tileDrawer.drawMurHorizontal(ProjMatrix * worldMVMatrix, glm::vec3(j + 1, 0, i), TextureTypeId::SOL2);
+                    m_tileDrawer.drawMurHorizontal(ProjMatrix * worldMVMatrix, glm::vec3(j + 1, 0, i), textureMur);
                 }
             }
         }
-        // std::cout << std::endl;
     }
 
     const glm::mat4 MVMatrixPersonnage = m_moveMatrix.getCharMVMatrix();
-   
+
     sendLightsToProgram();
 
     m_character.draw(ProjMatrix * MVMatrixPersonnage, &m_objprogram, MVMatrixPersonnage);
 
     const glm::mat4 MVMatrixEnemy = m_moveMatrix.getEnemyMVMatrix();
-    // m_character.draw(ProjMatrix * MVMatrixEnemy, &m_objprogram, MVMatrixEnemy);
     m_enemy.Draw(ProjMatrix * MVMatrixEnemy, &m_objprogram, MVMatrixEnemy);
 
     m_collectibles.draw(ProjMatrix);
@@ -172,7 +163,6 @@ Point2D<int> Render3D::getPosPersonnageInGame()
     int z = glm::round(m_character.getPos().z);
     return {x, z};
 }
-// CHANGER LA FIN AVEC LES IF IMBRIQUES ?
 
 // ui SCREEN
 
