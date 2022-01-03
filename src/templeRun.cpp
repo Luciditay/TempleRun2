@@ -63,16 +63,11 @@ int main(int argc, char **argv)
     TextureManager textureManager(listeTexture);
 
     Camera camera(-30., M_PI / 6., 0.);
-    Character Player(modelCharacterPath, applicationPath);
+    Character Player(modelCharacterPath);
 
     TTF_Init();
 
     Render3D game(matriceTerrain, textureManager, camera, applicationPath, VSPath, FSPath, modelCharacterPath, modelEnemyPath, windowManager, largeur, hauteur, "../assets/font/Roboto.ttf", "../assets/textures/background.png", "../assets/textures/pacman.jpg");
-
-    constexpr GLuint VERTEX_ATTR_POSITION = 0;
-    constexpr GLuint VERTEX_ATTR_TEXTURE = 2;
-
-    SDL_EnableKeyRepeat(10, 10);
 
     game.playGame(largeur, hauteur);
     return 0;
