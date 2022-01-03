@@ -143,7 +143,7 @@ void Character::handleSDLEvent(const SDL_Event &e, int currentTileID, Matrice &m
         // Key D : RIGHT
         else if (e.key.keysym.sym == SDLK_d)
         {
-            if ((!m_alreadyTurned) && ((currentTileID == 20 || currentTileID == 30) && m_turn))
+            if ((!m_alreadyTurned) && ((currentTileID == 20 || currentTileID == 30)))
             { // Lateral move
                 m_alreadyTurned = true;
                 m_turningRight = true;

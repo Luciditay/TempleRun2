@@ -22,6 +22,7 @@ int main(int argc, char **argv)
     // Active transparence
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    (void)argc;
 
     // //Initialisation shaders
     FilePath applicationPath(argv[0]);
@@ -61,13 +62,11 @@ int main(int argc, char **argv)
 
     Matrice matriceTerrain(matriceFile);
     TextureManager textureManager(listeTexture);
-
-    Camera camera(-30., M_PI / 6., 0.);
     Character Player(modelCharacterPath);
 
     TTF_Init();
 
-    Render3D game(matriceTerrain, textureManager, camera, applicationPath, VSPath, FSPath, modelCharacterPath, modelEnemyPath, windowManager, largeur, hauteur, "../assets/font/Roboto.ttf", "../assets/textures/background.png", "../assets/textures/pacman.jpg");
+    Render3D game(matriceTerrain, textureManager, applicationPath, VSPath, FSPath, modelCharacterPath, modelEnemyPath, windowManager, largeur, hauteur, "../assets/font/Roboto.ttf", "../assets/textures/background.png", "../assets/textures/pacman.jpg");
 
     game.playGame(largeur, hauteur);
     return 0;

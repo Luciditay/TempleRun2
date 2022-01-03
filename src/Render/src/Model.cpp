@@ -2,11 +2,11 @@
 
 void Model::Draw(glm::mat4 MVPMatrix, ObjProgram *program, glm::mat4 MVMatrix)
 {
-    program->m_Program.use(); 
+    program->m_Program.use();
     program->sendMatrix(MVPMatrix, MVMatrix);
     for (unsigned int i = 0; i < _meshes.size(); i++)
     {
-        _meshes[i].Draw(program->m_Program); 
+        _meshes[i].Draw(program->m_Program);
     }
 }
 
@@ -86,7 +86,7 @@ Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene)
     }
 
     // process material
-    if (mesh->mMaterialIndex >= 0)
+    if (mesh->mMaterialIndex != 0)
     {
         aiMaterial *material = scene->mMaterials[mesh->mMaterialIndex];
         std::vector<Texture> diffuseMaps = loadMaterialTextures(material,
@@ -113,7 +113,7 @@ unsigned int TextureFromFile(const char *path, const std::string &directory)
     unsigned char *data = stbi_load(filename.c_str(), &width, &height, &nrComponents, 0);
     if (data)
     {
-        GLenum format;
+        GLenum format = GL_RED;
         if (nrComponents == 1)
             format = GL_RED;
         else if (nrComponents == 3)

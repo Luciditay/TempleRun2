@@ -25,39 +25,43 @@
 class Render3D
 {
 public:
-    Render3D(const Matrice &m, const TextureManager &tm, Camera &cam, const FilePath &applicationPath, const std::string &VSPath, const std::string &FSPath, const std::string &modelPath, const std::string &modelPathEnemy, const glimac::SDLWindowManager &wm, float largeur, float hauteur, const char *fontpath, const char *image1, const char *image2)
+    Render3D(const Matrice &m, const TextureManager &tm, const FilePath &applicationPath, const std::string &VSPath, const std::string &FSPath, const std::string &modelPath, const std::string &modelPathEnemy, const glimac::SDLWindowManager &wm, float largeur, float hauteur, const char *fontpath, const char *image1, const char *image2)
         : m_MatriceTerrain(m),
           m_tileDrawer(applicationPath, VSPath, FSPath),
           m_textureIDManager(tm),
           m_camera(-2., M_PI / 6., 0.),
-          m_rotateTerrainLeft(false),
-          m_rotateTerrainRight(false),
           m_Skybox(applicationPath),
           m_character(modelPath),
-          m_enemy(modelPathEnemy),
+          m_windowManager(wm),
           m_moveMatrix(&m_camera, &m_character),
+          m_rotateTerrainLeft(false),
+          m_rotateTerrainRight(false),
           m_objprogram(applicationPath),
+          m_enemy(modelPathEnemy),
+
+          m_collectibles(&m_objprogram, &m_moveMatrix, &m_character, &score),
+
           m_lightdir1("Directional", 0, m_objprogram.m_Program, &m_moveMatrix),
           m_lightdir2("Directional", 1, m_objprogram.m_Program, &m_moveMatrix),
-          m_windowManager(wm),
 
           //////LAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
           // ui
-          compteur(0),
           fontPath(fontpath),
+          compteur(0),
           score(applicationPath, largeur, hauteur),
           imagePath(image1),
           imagePath2(image2),
+
           menu(imagePath, fontPath, 30, applicationPath, largeur, hauteur),
           titleScreen(imagePath2, fontPath, 100, applicationPath, largeur, hauteur),
           deadScreen(imagePath2, fontPath, 100, applicationPath, largeur, hauteur),
+
           done(false),
           gameStart(false),
           enemySpeed(0.1),
           distanceEnemy(100),
           looser(false),
-          pause(true),
-          m_collectibles(&m_objprogram, &m_moveMatrix, &m_character, &score)
+          pause(true)
 
     {
         stbi_set_flip_vertically_on_load(false);

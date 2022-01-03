@@ -4,7 +4,7 @@
 
 // Score
 
-ScoreCounter::ScoreCounter(const glimac::FilePath &filePath, const uint &windowWidth, const uint &windowHeight) : _distance(0), _items(0), _message("0", {255, 255, 255}, "../assets/font/Roboto.ttf",
+ScoreCounter::ScoreCounter(const glimac::FilePath &filePath, const uint &windowWidth, const uint &windowHeight) : _distance(0), _items(0), _message("0", {255, 255, 255, 255}, "../assets/font/Roboto.ttf",
                                                                                                                                                     20, filePath, windowWidth, windowHeight, 10, 10, false)
 {
 }
@@ -95,10 +95,11 @@ void Background::draw() const
 
 Button::Button(const char *text, const char *fontPath, const int &size,
                const glimac::FilePath &filePath, const uint &windowWidth, const uint &windowHeight,
-               const int &positionXPixels, const int &positionYPixels, const bool &middle) : _label(text, {255, 255, 255}, fontPath, size, filePath, windowWidth, windowHeight, positionXPixels, positionYPixels, middle),
-                                                                                             _currentLabel(&_label),
-                                                                                             _labelHover(text, {255, 0, 0}, fontPath, size * 1.5, filePath, windowWidth, windowHeight, positionXPixels, positionYPixels, middle),
-                                                                                             _enable(false)
+               const int &positionXPixels, const int &positionYPixels, const bool &middle)
+    : _currentLabel(&_label),
+      _label(text, {255, 255, 255, 255}, fontPath, size, filePath, windowWidth, windowHeight, positionXPixels, positionYPixels, middle),
+      _labelHover(text, {255, 0, 0, 255}, fontPath, size * 1.5, filePath, windowWidth, windowHeight, positionXPixels, positionYPixels, middle),
+      _enable(false)
 {
 }
 

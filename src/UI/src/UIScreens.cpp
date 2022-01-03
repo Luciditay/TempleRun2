@@ -1,10 +1,11 @@
 #include "UIScreens.hpp"
 
 // Ecran titre
-TitleScreen::TitleScreen(const char *imagePath, const char *fontPath, const int &size, const glimac::FilePath &filePath, const uint &windowWidth, const uint &windowHeight) : _title("GAME", {255, 255, 255}, fontPath, size, filePath, windowWidth, windowHeight, windowWidth / 2., windowHeight / 2., true),
-                                                                                                                                                                              _information("Click anywhere to play.", {180, 180, 180}, fontPath, size / 4, filePath, windowWidth, windowHeight, 20, 20, false),
-                                                                                                                                                                              _background(imagePath, filePath),
-                                                                                                                                                                              _open(true)
+TitleScreen::TitleScreen(const char *imagePath, const char *fontPath, const int &size, const glimac::FilePath &filePath, const uint &windowWidth, const uint &windowHeight)
+    : _title("GAME", {255, 255, 255, 255}, fontPath, size, filePath, windowWidth, windowHeight, windowWidth / 2., windowHeight / 2., true),
+      _information("Click anywhere to play.", {180, 180, 180, 255}, fontPath, size / 4, filePath, windowWidth, windowHeight, 20, 20, false),
+      _background(imagePath, filePath),
+      _open(true)
 {
 }
 
@@ -26,11 +27,12 @@ void TitleScreen::draw() const
 
 // Ecran fin
 
-DeadScreen::DeadScreen(const char *imagePath, const char *fontPath, const int &size, const glimac::FilePath &filePath, const uint &windowWidth, const uint &windowHeight) : _title("Dead. Sorry.", {255, 255, 255}, fontPath, size, filePath, windowWidth, windowHeight, windowWidth / 2., windowHeight / 2., true),
-                                                                                                                                                                            _score(("Score : " + std::to_string(0)).c_str(), {255, 255, 255}, fontPath, size / 2, filePath, windowWidth, windowHeight, windowWidth / 2., (2. * windowHeight) / 3., true),
-                                                                                                                                                                            _information("Click anywhere to play again.", {180, 180, 180}, fontPath, size / 4, filePath, windowWidth, windowHeight, 20, 20, false),
-                                                                                                                                                                            _background(imagePath, filePath),
-                                                                                                                                                                            _open(true)
+DeadScreen::DeadScreen(const char *imagePath, const char *fontPath, const int &size, const glimac::FilePath &filePath, const uint &windowWidth, const uint &windowHeight)
+    : _title("Dead. Sorry.", {255, 255, 255, 255}, fontPath, size, filePath, windowWidth, windowHeight, windowWidth / 2., windowHeight / 2., true),
+      _score(("Score : " + std::to_string(0)).c_str(), {255, 255, 255, 255}, fontPath, size / 2, filePath, windowWidth, windowHeight, windowWidth / 2., (2. * windowHeight) / 3., true),
+      _information("Click anywhere to play again.", {180, 180, 180, 255}, fontPath, size / 4, filePath, windowWidth, windowHeight, 20, 20, false),
+      _background(imagePath, filePath),
+      _open(true)
 {
 }
 
@@ -83,19 +85,6 @@ Menu::Menu(const char *imagePath, const char *fontPath, const int &size, const g
     _clickListener.attach(_save);
     _clickListener.attach(_load);
     _clickListener.attach(_quit);
-}
-
-void Menu::draw()
-{
-    if (_open)
-    {
-        _clickListener.attach(_continue);
-        _clickListener.attach(_startAgain);
-        _clickListener.attach(_highScores);
-        _clickListener.attach(_save);
-        _clickListener.attach(_load);
-        _clickListener.attach(_quit);
-    }
 }
 
 void Menu::draw()
@@ -245,10 +234,11 @@ void Menu::setSaveLoadString(const std::string whatToDo)
 }
 
 SubMenu::SubMenu(const char *imagePath, const char *fontPath, const int &size, const glimac::FilePath &filePath,
-                 const uint &windowWidth, const uint &windowHeight, Subject &clickListener, Menu *menu) : _return(fontPath, size, filePath, windowWidth, windowHeight, windowWidth - size * 4, windowHeight - size * 2, true, menu),
-                                                                                                          _background(imagePath, filePath),
-                                                                                                          _open(false),
-                                                                                                          _menu(menu)
+                 const uint &windowWidth, const uint &windowHeight, Subject &clickListener, Menu *menu)
+    : _menu(menu),
+      _background(imagePath, filePath),
+      _return(fontPath, size, filePath, windowWidth, windowHeight, windowWidth - size * 4, windowHeight - size * 2, true, menu),
+      _open(false)
 {
     clickListener.attach(_return);
 }
@@ -287,11 +277,11 @@ HighScoresMenu::HighScoresMenu(const char *imagePath, const char *fontPath, cons
                                const uint &windowWidth, const uint &windowHeight, Subject &clickListener, Menu *menu) : SubMenu(imagePath, fontPath, size, filePath, windowWidth, windowHeight, clickListener, menu),
                                                                                                                         _highscores(filePath)
 {
-    Message titre("High Scores", {255, 0, 0}, fontPath, size * 1.5, filePath, windowWidth, windowHeight, windowWidth / 2., (windowHeight / 12.), true);
+    Message titre("High Scores", {255, 0, 0, 255}, fontPath, size * 1.5, filePath, windowWidth, windowHeight, windowWidth / 2., (windowHeight / 12.), true);
     _messages.push_back(std::move(titre));
     for (int i = 0; i < _highscores.getSize(); i++)
     {
-        Message score(std::to_string(_highscores.getValue(i)).c_str(), {230, 230, 230}, fontPath, size, filePath,
+        Message score(std::to_string(_highscores.getValue(i)).c_str(), {230, 230, 230, 255}, fontPath, size, filePath,
                       windowWidth, windowHeight, windowWidth / 2., (windowHeight / 12.) * (i + 2), true);
         _messages.push_back(std::move(score));
     }
@@ -314,19 +304,21 @@ void HighScoresMenu::updateScore(const int valueScore)
 void HighScoresMenu::draw()
 {
     SubMenu::draw();
-    for (int i = 0; i < _messages.size(); i++)
+    for (unsigned int i = 0; i < _messages.size(); i++)
     {
         _messages[i].draw();
     }
 }
 
 SaveOrLoadMenu::SaveOrLoadMenu(const char *imagePath, const char *fontPath, const int &size, const glimac::FilePath &filePath,
-                               const uint &windowWidth, const uint &windowHeight, Subject &clickListener, Menu *menu, std::string action) : SubMenu(imagePath, fontPath, size, filePath, windowWidth, windowHeight, clickListener, menu),
-                                                                                                                                            _feedback("Select a memory slot.", {255, 0, 0}, fontPath, size, filePath, windowWidth, windowHeight, windowWidth / 2., windowHeight / 3, true),
-                                                                                                                                            _slot1(fontPath, size * 1.5, filePath, windowWidth, windowHeight, windowWidth / 4, windowHeight / 2, true, 1, action, &_feedback, menu),
-                                                                                                                                            _slot2(fontPath, size * 1.5, filePath, windowWidth, windowHeight, (windowWidth / 4) * 2, windowHeight / 2, true, 2, action, &_feedback, menu),
-                                                                                                                                            _slot3(fontPath, size * 1.5, filePath, windowWidth, windowHeight, (windowWidth / 4) * 3, windowHeight / 2, true, 3, action, &_feedback, menu),
-                                                                                                                                            _titre((action).c_str(), {255, 0, 0}, fontPath, size * 1.5, filePath, windowWidth, windowHeight, windowWidth / 2., windowHeight / 4, true)
+                               const uint &windowWidth, const uint &windowHeight, Subject &clickListener, Menu *menu, std::string action)
+    : SubMenu(imagePath, fontPath, size, filePath, windowWidth, windowHeight, clickListener, menu),
+      _slot1(fontPath, size * 1.5, filePath, windowWidth, windowHeight, windowWidth / 4, windowHeight / 2, true, 1, action, &_feedback, menu),
+      _slot2(fontPath, size * 1.5, filePath, windowWidth, windowHeight, (windowWidth / 4) * 2, windowHeight / 2, true, 2, action, &_feedback, menu),
+      _slot3(fontPath, size * 1.5, filePath, windowWidth, windowHeight, (windowWidth / 4) * 3, windowHeight / 2, true, 3, action, &_feedback, menu),
+      _titre((action).c_str(), {255, 0, 0, 255}, fontPath, size * 1.5, filePath, windowWidth, windowHeight, windowWidth / 2., windowHeight / 4, true),
+      _feedback("Select a memory slot.", {255, 0, 0, 255}, fontPath, size, filePath, windowWidth, windowHeight, windowWidth / 2., windowHeight / 3, true)
+
 {
     clickListener.attach(_slot1);
     clickListener.attach(_slot2);
