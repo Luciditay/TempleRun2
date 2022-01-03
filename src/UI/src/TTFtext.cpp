@@ -2,12 +2,12 @@
 
 Message::Message(const char *text, SDL_Color color, const char *fontPath, const int size,
                  const glimac::FilePath &filePath, uint windowWidth, uint windowHeight,
-                 int positionXPixels, int positionYPixels, bool middle) : _myMessage(text), _textColor(color), _fontPath(fontPath), _fontSize(size * 2.), _posXPixels(positionXPixels), _posYPixels(positionYPixels), _middle(middle)
+                 int positionXPixels, int positionYPixels, bool middle) : _myMessage(text), _textColor(color), _fontPath(fontPath), _fontSize(size * 2.), _posXPixels(positionXPixels), _posYPixels(positionYPixels), _middle(middle),
+                                                                          _messageBox(filePath),
+                                                                          _windowWidth(windowWidth), _windowHeight(windowHeight)
 {
-    _ messageBox(filePath),
-        _windowWidth(windowWidth), _windowHeight(windowHeight),
 
-        if (!text[0])
+    if (!text[0])
     { // Un message ne peut pas être vide.
         _myMessage = "/0";
     }
@@ -96,12 +96,12 @@ SDL_Surface *Message::renderText()
     return texte;
 }
 
-const void Message::draw() const
+void Message::draw() const
 {
     _messageBox.draw(*_texture, _width, _height, _posX, _posY);
 }
 
-const int Message::getPosXPixels() const
+int Message::getPosXPixels() const
 {
     if (_middle == false)
     {
@@ -113,7 +113,7 @@ const int Message::getPosXPixels() const
     }
 }
 
-const int Message::getPosYPixels() const
+int Message::getPosYPixels() const
 {
     if (_middle == false)
     {
@@ -125,12 +125,12 @@ const int Message::getPosYPixels() const
     }
 }
 
-const int Message::getWidthPixels() const
+int Message::getWidthPixels() const
 {
     return _width * _windowWidth;
 }
 
-const int Message::getHeightPixels() const
+int Message::getHeightPixels() const
 {
     return 0.7 * (_height * _windowHeight);
 }
