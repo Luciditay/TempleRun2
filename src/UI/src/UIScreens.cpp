@@ -8,16 +8,19 @@ TitleScreen::TitleScreen(const char *imagePath, const char *fontPath, const int 
 {
 }
 
-bool TitleScreen::close() {
-        _open = false;
-        return true;
+bool TitleScreen::close()
+{
+    _open = false;
+    return true;
 }
 
-void TitleScreen::draw() const {
-    if(_open) {
-     _background.draw();
-     _title.draw();
-    _information.draw();
+void TitleScreen::draw() const
+{
+    if (_open)
+    {
+        _background.draw();
+        _title.draw();
+        _information.draw();
     }
 }
 
@@ -31,25 +34,30 @@ DeadScreen::DeadScreen(const char *imagePath, const char *fontPath, const int &s
 {
 }
 
-void DeadScreen::close() {
-        _open = false;
+void DeadScreen::close()
+{
+    _open = false;
 }
 
-void DeadScreen::open() {
-        _open = true;
+void DeadScreen::open()
+{
+    _open = true;
 }
 
-void DeadScreen::draw() const {
-    if(_open) {
-     _background.draw();
-     _title.draw();
-     _score.draw();
-    _information.draw();
+void DeadScreen::draw() const
+{
+    if (_open)
+    {
+        _background.draw();
+        _title.draw();
+        _score.draw();
+        _information.draw();
     }
 }
 
-void DeadScreen::updateScore(const int valueScore) {
-    _score.update(("Score : "+std::to_string(valueScore)).c_str());
+void DeadScreen::updateScore(const int valueScore)
+{
+    _score.update(("Score : " + std::to_string(valueScore)).c_str());
 }
 
 // Menu
@@ -88,9 +96,12 @@ void Menu::draw()
         _clickListener.attach(_load);
         _clickListener.attach(_quit);
     }
+}
 
-void Menu::draw() {
-    if(_open) {
+void Menu::draw()
+{
+    if (_open)
+    {
         _background.draw();
         _continue.draw();
         _startAgain.draw();
@@ -113,8 +124,9 @@ void Menu::draw() {
     }
 }
 
-void Menu::open() {
-    SDL_EnableKeyRepeat(0,0);
+void Menu::open()
+{
+    SDL_EnableKeyRepeat(0, 0);
     _open = true;
     _continue.enable();
     _startAgain.enable();
@@ -125,8 +137,9 @@ void Menu::open() {
     SDL_EnableKeyRepeat(10, 10);
 }
 
-void Menu::close() {
-    SDL_EnableKeyRepeat(0,0);
+void Menu::close()
+{
+    SDL_EnableKeyRepeat(0, 0);
     _open = false;
     _continue.disable();
     _startAgain.disable();
@@ -137,20 +150,25 @@ void Menu::close() {
     SDL_EnableKeyRepeat(10, 10);
 }
 
-void Menu::setStop(bool* stopGame) {
+void Menu::setStop(bool *stopGame)
+{
     _quit.setStop(stopGame);
 }
 
-bool Menu::isOpen() const {
+bool Menu::isOpen() const
+{
     return _open;
 }
 
-bool Menu::someMenuIsOpen() const {
-    return (_open||_highScoresMenu.isOpen()||_saveMenu.isOpen()||_loadMenu.isOpen());
+bool Menu::someMenuIsOpen() const
+{
+    return (_open || _highScoresMenu.isOpen() || _saveMenu.isOpen() || _loadMenu.isOpen());
 }
 
-void Menu::SubMenuOpen(const std::string& subMenuType) {
-    if (subMenuType == "Highscores") {
+void Menu::SubMenuOpen(const std::string &subMenuType)
+{
+    if (subMenuType == "Highscores")
+    {
         _highScoresMenu.open();
     }
     if (subMenuType == "Save")
@@ -163,10 +181,11 @@ void Menu::SubMenuOpen(const std::string& subMenuType) {
     }
 }
 
-void Menu::allSubMenusClose() {
-     _highScoresMenu.close();
-     _saveMenu.close();
-     _loadMenu.close();
+void Menu::allSubMenusClose()
+{
+    _highScoresMenu.close();
+    _saveMenu.close();
+    _loadMenu.close();
 }
 
 void Menu::handleSDLEvent(const SDL_Event &e, bool gameStart)
@@ -196,7 +215,8 @@ void Menu::handleSDLEvent(const SDL_Event &e, bool gameStart)
     }
 }
 
-void Menu::updateHighScores(const int valueScore) {
+void Menu::updateHighScores(const int valueScore)
+{
     _highScoresMenu.updateScore(valueScore);
 }
 
@@ -205,7 +225,8 @@ void Menu::startAgainTrue()
     _startGameAgain = true;
 }
 
-bool Menu::shouldStartAgain() {
+bool Menu::shouldStartAgain()
+{
     bool tmp = _startGameAgain;
     _startGameAgain = false;
     return tmp;
@@ -232,29 +253,33 @@ SubMenu::SubMenu(const char *imagePath, const char *fontPath, const int &size, c
     clickListener.attach(_return);
 }
 
-void SubMenu::draw() {
-    if(_open) {
-    _background.draw();
-    _return.draw();
+void SubMenu::draw()
+{
+    if (_open)
+    {
+        _background.draw();
+        _return.draw();
     }
 }
 
-void SubMenu::open() {
-    SDL_EnableKeyRepeat(0,0);
+void SubMenu::open()
+{
+    SDL_EnableKeyRepeat(0, 0);
     _open = true;
     _return.enable();
     SDL_EnableKeyRepeat(10, 10);
 }
 
-
-void SubMenu::close() {
-    SDL_EnableKeyRepeat(0,0);
+void SubMenu::close()
+{
+    SDL_EnableKeyRepeat(0, 0);
     _open = false;
     _return.disable();
     SDL_EnableKeyRepeat(10, 10);
 }
 
-bool SubMenu::isOpen() const{
+bool SubMenu::isOpen() const
+{
     return _open;
 }
 
@@ -272,7 +297,8 @@ HighScoresMenu::HighScoresMenu(const char *imagePath, const char *fontPath, cons
     }
 }
 
-void HighScoresMenu::updateScore(const int valueScore) {
+void HighScoresMenu::updateScore(const int valueScore)
+{
     _highscores.newScore(valueScore);
     _highscores.save();
     _highscores.load();
@@ -285,7 +311,8 @@ void HighScoresMenu::updateScore(const int valueScore) {
     }
 }
 
-void HighScoresMenu::draw() {
+void HighScoresMenu::draw()
+{
     SubMenu::draw();
     for (int i = 0; i < _messages.size(); i++)
     {
@@ -306,7 +333,8 @@ SaveOrLoadMenu::SaveOrLoadMenu(const char *imagePath, const char *fontPath, cons
     clickListener.attach(_slot3);
 }
 
-void SaveOrLoadMenu::draw() {
+void SaveOrLoadMenu::draw()
+{
     SubMenu::draw();
     _slot1.draw();
     _slot2.draw();
@@ -315,7 +343,8 @@ void SaveOrLoadMenu::draw() {
     _feedback.draw();
 }
 
-void SaveOrLoadMenu::open() {
+void SaveOrLoadMenu::open()
+{
     SubMenu::open();
     SDL_EnableKeyRepeat(0, 0);
     _slot1.enable();
@@ -324,7 +353,8 @@ void SaveOrLoadMenu::open() {
     SDL_EnableKeyRepeat(10, 10);
 }
 
-void SaveOrLoadMenu::close() {
+void SaveOrLoadMenu::close()
+{
     SubMenu::close();
     SDL_EnableKeyRepeat(0, 0);
     _slot1.disable();
