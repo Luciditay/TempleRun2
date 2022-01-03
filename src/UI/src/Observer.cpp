@@ -8,7 +8,7 @@ void Subject::attach(Observer &o)
 
 void Subject::notify() const
 {
-    for (int o = 0; o < _observers.size(); o++)
+    for (unsigned int o = 0; o < _observers.size(); o++)
     {
         _observers[o]->update();
     }
