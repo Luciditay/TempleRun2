@@ -13,8 +13,6 @@ ObjProgram::ObjProgram(const glimac::FilePath &applicationPath) : m_Program(glim
     uLightPos_vs = glGetUniformLocation(m_Program.getGLId(), "uLightPos_vs");
     uLightIntensity = glGetUniformLocation(m_Program.getGLId(), "uLightIntensity");
     uLightIntensityPos = glGetUniformLocation(m_Program.getGLId(), "uLightIntensityPos");
-    // m_ProjMatrix rojMatrix = glm::perspective(glm::radians(70.f), float(largeur) / float(hauteur), 0.1f, 1000.f);
-    //                 objProgram.setProjMatrix(ProjMatrix);
 }
 
 void ObjProgram::setProjMatrix(glm::mat4 projMatrix)

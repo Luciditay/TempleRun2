@@ -11,7 +11,7 @@
 #include "Cameras.hpp"
 #include "MoveMatrix.hpp"
 #include "ObjProgram.hpp"
-#include "Lights.hpp"
+#include "Light.hpp"
 #include "Vertex3D.hpp"
 #include "Collectible.hpp"
 #include "Collectibles.hpp"
