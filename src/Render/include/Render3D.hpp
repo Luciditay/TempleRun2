@@ -120,7 +120,6 @@ private:
     Light m_lightdir2;
 
     // ui
-    //////LAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 
     const char *fontPath;
     int compteur;
